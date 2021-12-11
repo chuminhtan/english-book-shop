@@ -1,5 +1,5 @@
 package com.englishbookshop.entity;
-// Generated Dec 10, 2021, 9:04:36 PM by Hibernate Tools 5.2.12.Final
+// Generated Dec 10, 2021, 9:38:01 PM by Hibernate Tools 5.2.12.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -33,8 +33,8 @@ public class Customer implements java.io.Serializable {
 	private String zipcode;
 	private String password;
 	private Date registerDate;
-	private Set reviews = new HashSet(0);
-	private Set bookOrders = new HashSet(0);
+	private Set<Review> reviews = new HashSet<Review>(0);
+	private Set<BookOrder> bookOrders = new HashSet<BookOrder>(0);
 
 	public Customer() {
 	}
@@ -53,7 +53,7 @@ public class Customer implements java.io.Serializable {
 	}
 
 	public Customer(String email, String fullname, String address, String city, String country, String phone,
-			String zipcode, String password, Date registerDate, Set reviews, Set bookOrders) {
+			String zipcode, String password, Date registerDate, Set<Review> reviews, Set<BookOrder> bookOrders) {
 		this.email = email;
 		this.fullname = fullname;
 		this.address = address;
@@ -162,20 +162,20 @@ public class Customer implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set getReviews() {
+	public Set<Review> getReviews() {
 		return this.reviews;
 	}
 
-	public void setReviews(Set reviews) {
+	public void setReviews(Set<Review> reviews) {
 		this.reviews = reviews;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set getBookOrders() {
+	public Set<BookOrder> getBookOrders() {
 		return this.bookOrders;
 	}
 
-	public void setBookOrders(Set bookOrders) {
+	public void setBookOrders(Set<BookOrder> bookOrders) {
 		this.bookOrders = bookOrders;
 	}
 
