@@ -22,14 +22,14 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	}
 	
 	@Override
-	public Users get(Object obj) {
-		//TODO get
-		return null;
+	public Users get(Object userId) {
+		
+		return super.find(Users.class, userId);
 	}
 	
 	@Override
-	public void delete(Object obj) {
-		//TODO delete
+	public void delete(Object userId) {
+		super.delete(Users.class, userId);
 	}
 	
 	@Override
