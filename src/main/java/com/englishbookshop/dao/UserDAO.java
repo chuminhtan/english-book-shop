@@ -7,6 +7,9 @@ import java.util.List;
 
 public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	
+	public static final String USERS_FIND_ALL = "Users.findAll";
+	public static final String USERS_COUNT = "Users.count";
+	
 	public UserDAO(EntityManager entityManager) {
 		super(entityManager);
 	}
@@ -34,13 +37,11 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	
 	@Override
 	public List<Users> listAll(){
-		//TODO listAll
-		return null;
+		return super.findWithNamedQuery(USERS_FIND_ALL);
 	}
 	
 	@Override
 	public long count() {
-		//TODO count
-		return 0;
+		return super.countWithNamedQuery(USERS_COUNT);
 	}
 }

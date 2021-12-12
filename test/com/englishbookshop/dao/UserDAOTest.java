@@ -2,6 +2,8 @@ package com.englishbookshop.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
@@ -91,6 +93,26 @@ public class UserDAOTest {
 	public void testDeleteNonExistUsers() {
 		Integer userId = 54;
 		userDao.delete(userId);
+	}
+	
+	@Test
+	public void testListAllUsers() {
+		List<Users> listUser = userDao.listAll();
+		
+		if (listUser != null) {
+			for(Users u : listUser) {
+				System.out.println(u);
+			}
+		}
+		
+		assertTrue(listUser.size() > 0);
+	}
+	
+	@Test
+	public void testCountUsers() {
+		long count = userDao.count();
+		System.out.println(count);
+		assertTrue(count > 0);
 	}
 	
 	@AfterClass
