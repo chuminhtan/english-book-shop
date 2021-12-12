@@ -1,7 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>The English Book Shop</title>
+<jsp:include page="stylesheet.jsp" />
+</head>
+
+<!-- BODY & MAIN -->
 <jsp:include page="header.jsp"></jsp:include>
-
-<!-- MAIN -->
-
 	<!-- BEGIN NEW BOOKS -->
 	<div class="jumbotron">
 		<h1 class="display-4 text-info">New Books</h1>
@@ -287,4 +292,6 @@
 
 </div>
 <!-- END MAIN -->
+
+<!-- BEGIN FOOTER & SCRIPTS -->
 <jsp:include page="footer.jsp"></jsp:include>

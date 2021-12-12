@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>The English Book Shop</title>
+<jsp:include page="stylesheet.jsp" />
+</head>
 <jsp:include page="header.jsp"/>
 	            <div class="row justify-content-center">
                 <div class="col-md-6 col-sm-3">
