@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.englishbookshop.entity.Users;
+import com.englishbookshop.helper.PersistenceProjectInfo;
 
 public class UserDAOTest {
 	private static EntityManagerFactory entityManagerFactory; 
@@ -23,7 +24,7 @@ public class UserDAOTest {
 	
 	@BeforeClass
 	public static void setUpClass() {
-		entityManagerFactory = Persistence.createEntityManagerFactory("TheEnglishBookShop");
+		entityManagerFactory = Persistence.createEntityManagerFactory(PersistenceProjectInfo.PERSISTENCE_UNIT_NAME);
 		entityManager = entityManagerFactory.createEntityManager();	
 		userDao = new UserDAO(entityManager);
 	}
