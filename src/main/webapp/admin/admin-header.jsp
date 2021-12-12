@@ -14,10 +14,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active mx-1">
-                        <a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a class="nav-link" href=""><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                     </li>
                     <li class="nav-item active mx-1">
-                        <a class="nav-link" href="#"><i class="fas fa-user"></i> Users</a>
+                        <a class="nav-link" href="list-users"><i class="fas fa-user"></i> Users</a>
                     </li>
                     <li class="nav-item active mx-1">
                         <a class="nav-link" href="#"><i class="fas fa-align-right"></i> Categories</a>
