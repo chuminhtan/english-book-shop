@@ -39,6 +39,5 @@
         <!-- end nav bar -->
     </header>
     <!-- END HEADER -->
-
     <!-- MAIN -->
     <div class="container my-2">

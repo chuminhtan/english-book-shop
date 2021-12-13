@@ -11,9 +11,14 @@ import com.englishbookshop.dao.UserDAO;
 import com.englishbookshop.entity.Users;
 import com.englishbookshop.helper.JSPPathHelper;
 import com.englishbookshop.helper.PersistenceProjectInfo;
+import com.englishbookshop.helper.ServletHelper;
+import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 
@@ -114,6 +119,39 @@ public class UserServices {
 		request.setAttribute("USER", userById);
 		RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.USER_EDIT);
 		rd.forward(request, response);
+	}
+	
+	public void deleteUser() throws ServletException, IOException {
+		
+	    int userId = Integer.parseInt(request.getParameter("id"));
+	    
+	    Map<String,String> resultResponse = new HashMap<>();
+	    
+	    if (userId == 1) {
+		    resultResponse.put("result", ServletHelper.RESPONSE_FAIL);
+		    resultResponse.put("message", "The default admin user account cannot be deleted");
+	    } else {
+	    	
+		    Users user = userDAO.get(userId);
+	    
+		    if (user != null) {
+		    	userDAO.delete(userId);
+		    	
+			    resultResponse.put("result", ServletHelper.RESPONSE_OK);
+			    resultResponse.put("message", "The user with ID "+ userId +" has been deleted");
+		    
+		    } else {
+			    resultResponse.put("result", ServletHelper.RESPONSE_FAIL);
+			    resultResponse.put("message", "Could not delete the user with ID "+ userId +". The user does not exist");
+		    }
+	    }
+	    
+	    String jsonMap = new Gson().toJson(resultResponse );
+	    
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        out.print(jsonMap);
 	}
 
 }
