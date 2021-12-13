@@ -3,8 +3,8 @@
         <!-- nav bar -->
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-info">
             <a class="navbar-brand" href="#">
-                <img src="../images/icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                Admin
+                <img src="${pageContext.request.contextPath}/images/icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                The English Book Shop
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

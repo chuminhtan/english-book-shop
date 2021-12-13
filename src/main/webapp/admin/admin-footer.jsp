@@ -13,6 +13,7 @@
 	</div>
 </footer>
 <!-- SCRIPT -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
@@ -35,6 +36,19 @@
 		text : 'Thumbnail'
 	});
 </script>
+
+
+<script>
+	let message = '${MESSAGE}' 
+	if (message.length > 0) {
+	Swal.fire(message)
+	message=''
+	}
+</script>
+
+
+
+
 </body>
 
 </html>

@@ -19,7 +19,8 @@ import com.englishbookshop.dao.UserDAO;
 @Table(name = "users", catalog = "bookshopdb")
 @NamedQueries({
 	@NamedQuery(name=UserDAO.USERS_FIND_ALL, query = "SELECT u FROM Users u ORDER BY u.fullName"),
-	@NamedQuery(name=UserDAO.USERS_COUNT, query="SELECT COUNT(*) FROM Users")
+	@NamedQuery(name=UserDAO.USERS_COUNT, query="SELECT COUNT(*) FROM Users"),
+	@NamedQuery(name=UserDAO.USERS_FIND_BY_EMAIL, query="SELECT u FROM Users u WHERE u.email = :email")
 })
 public class Users implements java.io.Serializable {
 
@@ -35,6 +36,11 @@ public class Users implements java.io.Serializable {
 		this.email = email;
 		this.password = password;
 		this.fullName = fullName;
+	}
+	
+	public Users(Integer userId, String email, String password, String fullName) {
+		this(email, password, fullName);
+		this.userId = userId;
 	}
 
 	@Id

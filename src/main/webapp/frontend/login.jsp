@@ -25,7 +25,7 @@
                         </form>
                         <div class="alert alert-danger mt-3" role="alert">
                             Incorrect Email or Password
-                          </div>
+                         </div>
                     </div>
                 </div>
             </div>
