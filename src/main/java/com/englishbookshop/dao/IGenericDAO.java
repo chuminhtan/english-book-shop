@@ -2,16 +2,16 @@ package com.englishbookshop.dao;
 
 import java.util.List;
 
-public interface IGenericDAO<T> {
-	T create(T t);
+public interface IGenericDAO<E> {
+	E create(E t);
 	
-	T update(T t);
+	E update(E t);
 	
-	T get(Object obj);
+	E get(Object obj);
 	
 	void delete(Object obj);
 	
-	List<T> listAll();
+	List<E> listAll();
 	
 	long count();
 }

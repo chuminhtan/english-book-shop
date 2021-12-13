@@ -17,16 +17,19 @@ import org.junit.Test;
 import com.englishbookshop.entity.Users;
 import com.englishbookshop.helper.PersistenceProjectInfo;
 
-public class UserDAOTest {
-	private static EntityManagerFactory entityManagerFactory; 
-	private static EntityManager entityManager;
+public class UserDAOTest extends BaseDAOTest{
+
 	private static UserDAO userDao;
 	
 	@BeforeClass
-	public static void setUpClass() {
-		entityManagerFactory = Persistence.createEntityManagerFactory(PersistenceProjectInfo.PERSISTENCE_UNIT_NAME);
-		entityManager = entityManagerFactory.createEntityManager();	
+	public static void setUpBeforeClass() throws Exception {
+		BaseDAOTest.setUpBeforeClass();
 		userDao = new UserDAO(entityManager);
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		BaseDAOTest.tearDownAfterClass();
 	}
 	
 	@Test
@@ -131,11 +134,4 @@ public class UserDAOTest {
 		System.out.println(user);
 		assertNull(user);
 	}
-	
-	@AfterClass
-	public static void tearDownClass() {
-		entityManager.close();
-		entityManagerFactory.close();
-	}
-
 }

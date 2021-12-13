@@ -29,7 +29,6 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	
 	@Override
 	public Users get(Object userId) {
-		
 		return super.find(Users.class, userId);
 	}
 	
