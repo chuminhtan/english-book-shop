@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.englishbookshop.entity.Category;
-import com.englishbookshop.helper.PersistenceProjectInfo;
+import com.englishbookshop.helper.PersistenceProjectHelper;
 
 public class CategoryDAOTest extends BaseDAOTest{
 
@@ -82,6 +82,14 @@ public class CategoryDAOTest extends BaseDAOTest{
 		
 		System.out.println(actual);
 		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testFindByName() {
+		String name = "Complete IELTS 4-5";
+		Category cat = categoryDAO.findByName(name);
+		System.out.println(cat);
+		assertTrue(cat.getCategoryId() == 2);
 	}
 
 }

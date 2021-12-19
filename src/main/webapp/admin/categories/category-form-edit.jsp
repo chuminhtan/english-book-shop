@@ -8,7 +8,7 @@
 <!-- HEAD & STYLESHEET -->
 <jsp:include page="../stylesheet.jsp" />
 
-<title>Edit User</title>
+<title>Edit Category</title>
 </head>
 <body>
 	<!-- HEADER -->
@@ -17,41 +17,29 @@
 	<!-- BEGIN MAIN -->
 	<h2
 		class="text-success font-weight-bold text-uppercase text-center my-4">
-		<i class="fas fa-user"></i> Users Management
+		<i class="fas fa-user"></i> Categories Management
 	</h2>
 	<!-- LIST -->
 	<div class="jumbotron">
 		<a href="." class="btn btn-info mb-2"><i
 			class="fas fa-arrow-left"></i> Back</a>
-		<h5 class="display-4 text-info text-center">Edit User</h5>
+		<h5 class="display-4 text-info text-center">Edit Category</h5>
 		<!-- FORM -->
-		<form action="edit-user" method="post">
+		<form action="edit-category" method="post">
 			<div class="form-group">
-				<label for="user-id">ID: </label>
-				<span class="font-weight-bold">${USER.userId}</span>
+				<label for="category-id">ID: </label>
+				<span class="font-weight-bold">${CATEGORY.categoryId}</span>
 			</div>
 			<input type="text"
-					name="user-id" id="user-id"
-					value="${USER.userId }"
+					name="category-id" id="category-id"
+					value="${CATEGORY.categoryId }"
 					style="display:none;"
 					>
 			<div class="form-group">
-				<label for="fullname">Full Name</label> <input type="text"
-					name="full-name" class="form-control" id="full-name"
-					placeholder="Enter Full Name" minlength="4" maxlength="30" required
-					value="${USER.fullName }">
-			</div>
-			<div class="form-group">
-				<label for="email">Email address</label> <input type="email"
-					name="email" class="form-control" id="email"
-					aria-describedby="emailHelp" placeholder="Enter email"
-					minlength="6" maxlength="50" required value="${USER.email}">
-			</div>
-			<div class="form-group">
-				<label for="password">Password</label> <input type="password"
-					class="form-control" id="password" name="password"
-					placeholder="Password" minlength="6" maxlength="30" required
-					value="${USER.password }">
+				<label for="name">Name</label> <input type="text"
+					name="name" class="form-control" id="name"
+					placeholder="Enter Name" minlength="2" maxlength="30" required
+					value="${CATEGORY.name }">
 			</div>
 			<div class="d-flex justify-content-center">
 				<button type="submit" class="btn btn-success m-1">Submit</button>

@@ -7,18 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.englishbookshop.dao.UserDAO;
-import com.englishbookshop.helper.PersistenceProjectInfo;
+import com.englishbookshop.helper.PersistenceProjectHelper;
 
 public class BaseServices {
-	protected EntityManagerFactory entityManagerFactory;
 	protected EntityManager entityManager;
 	protected HttpServletRequest request;
 	protected HttpServletResponse response;
 	
-
-	protected BaseServices(HttpServletRequest request, HttpServletResponse response) {
-		entityManagerFactory = Persistence.createEntityManagerFactory(PersistenceProjectInfo.PERSISTENCE_UNIT_NAME);
-		entityManager = entityManagerFactory.createEntityManager();
+	protected BaseServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
+		this.entityManager = entityManager;
 		this.request = request;
 		this.response = response;
 	}

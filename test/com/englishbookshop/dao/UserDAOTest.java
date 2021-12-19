@@ -15,7 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.englishbookshop.entity.Users;
-import com.englishbookshop.helper.PersistenceProjectInfo;
+import com.englishbookshop.helper.PersistenceProjectHelper;
 
 public class UserDAOTest extends BaseDAOTest{
 

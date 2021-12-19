@@ -1,4 +1,4 @@
-package com.englishbookshop.controller.user;
+package com.englishbookshop.controller.category;
 
 import java.io.IOException;
 
@@ -11,24 +11,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.englishbookshop.controller.admin.BaseServlet;
 import com.englishbookshop.helper.JSPPathHelper;
-import com.englishbookshop.service.UserServices;
+import com.englishbookshop.service.CategoryServices;
 
-@WebServlet("/admin/users/edit-user")
-public class EditUserServlet extends BaseServlet {
+/**
+ * Servlet implementation class EditCategory
+ */
+@WebServlet("/admin/categories/edit-category")
+public class EditCategoryServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
-    public EditUserServlet() {
+    public EditCategoryServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserServices userServices = new UserServices(entityManager,request, response);
-		userServices.editUser();
+		CategoryServices catServices = new CategoryServices(entityManager,request, response);
+		catServices.editCategory();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserServices userServices = new UserServices(entityManager,request, response);
-		userServices.updateUser();
+		CategoryServices catServices = new CategoryServices(entityManager,request, response);
+		catServices.updateCategory();
 	}
-
 }

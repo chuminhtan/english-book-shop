@@ -1,5 +1,5 @@
 package com.englishbookshop.helper;
 
-public class PersistenceProjectInfo {
+public class PersistenceProjectHelper {
 	public static final String PERSISTENCE_UNIT_NAME = "TheEnglishBookShop";
 }

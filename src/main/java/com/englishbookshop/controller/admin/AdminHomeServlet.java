@@ -1,4 +1,4 @@
-package com.englishbookshop.controller.frontend;
+package com.englishbookshop.controller.admin;
 
 import java.io.IOException;
 
@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.englishbookshop.controller.admin.BaseServlet;
+import com.englishbookshop.helper.JSPPathHelper;
 
-@WebServlet("")
-public class HomeServlet extends BaseServlet {
+/**
+ * Servlet implementation class AdminHomeServlet
+ */
+@WebServlet("/admin/")
+public class AdminHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public HomeServlet() {
+
+    public AdminHomeServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String homePage = "frontend/index.jsp";
-		
-		RequestDispatcher rd = request.getRequestDispatcher(homePage);
+		RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.DASHBOARD);
 		rd.forward(request, response);
 	}
 

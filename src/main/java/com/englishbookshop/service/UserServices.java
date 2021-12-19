@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.englishbookshop.dao.UserDAO;
 import com.englishbookshop.entity.Users;
 import com.englishbookshop.helper.JSPPathHelper;
-import com.englishbookshop.helper.PersistenceProjectInfo;
+import com.englishbookshop.helper.PersistenceProjectHelper;
 import com.englishbookshop.helper.ServletHelper;
 import com.google.gson.Gson;
 
@@ -26,8 +26,8 @@ public class UserServices extends BaseServices{
 
 	private UserDAO userDAO;
 
-	public UserServices(HttpServletRequest request, HttpServletResponse response) {
-		super(request, response);
+	public UserServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
+		super(entityManager, request, response);
 		userDAO = new UserDAO(entityManager);
 	}
 

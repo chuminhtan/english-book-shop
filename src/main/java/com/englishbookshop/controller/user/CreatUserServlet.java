@@ -1,4 +1,4 @@
-package com.englishbookshop.controller.admin;
+package com.englishbookshop.controller.user;
 
 import java.io.IOException;
 
@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.englishbookshop.controller.admin.BaseServlet;
 import com.englishbookshop.helper.JSPPathHelper;
 import com.englishbookshop.service.UserServices;
 
 @WebServlet("/admin/users/create-user")
-public class CreatUserServlet extends HttpServlet {
+public class CreatUserServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     public CreatUserServlet() {
@@ -26,7 +27,7 @@ public class CreatUserServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserServices userServices = new UserServices(request, response);
+		UserServices userServices = new UserServices(entityManager,request, response);
 		userServices.createUser();
 	}
 

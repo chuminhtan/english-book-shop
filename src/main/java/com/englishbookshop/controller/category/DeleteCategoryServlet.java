@@ -1,33 +1,26 @@
-package com.englishbookshop.controller.user;
+package com.englishbookshop.controller.category;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.Map;
-import java.util.HashMap;
-
 import com.englishbookshop.controller.admin.BaseServlet;
-import com.englishbookshop.helper.ServletHelper;
-import com.englishbookshop.service.UserServices;
-import com.google.gson.Gson;
+import com.englishbookshop.service.CategoryServices;
 
-@WebServlet("/admin/users/delete-user")
-public class DeleteUserServlet extends BaseServlet {
+@WebServlet("/admin/categories/delete-category")
+public class DeleteCategoryServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-    public DeleteUserServlet() {
+       
+    public DeleteCategoryServlet() {
         super();
-
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserServices userServices = new  UserServices(entityManager,request, response);
-		userServices.deleteUser();
+			CategoryServices catServices = new CategoryServices(entityManager,request, response);
+			catServices.deleteCategory();
 	}
 
 }

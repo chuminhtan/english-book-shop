@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,8 @@ import com.google.gson.Gson;
 public class CategoryServices extends BaseServices{
 	private CategoryDAO categoryDAO;
 	
-	public CategoryServices(HttpServletRequest request, HttpServletResponse response) {
-		super(request, response);
+	public CategoryServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
+		super(entityManager, request, response);
 		categoryDAO = new CategoryDAO(super.entityManager);
 	}
 	
