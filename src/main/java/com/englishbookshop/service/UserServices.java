@@ -22,19 +22,13 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
-public class UserServices {
-	private EntityManagerFactory entityManagerFactory;
-	private EntityManager entityManager;
+public class UserServices extends BaseServices{
+
 	private UserDAO userDAO;
-	private HttpServletRequest request;
-	private HttpServletResponse response;
 
 	public UserServices(HttpServletRequest request, HttpServletResponse response) {
-		entityManagerFactory = Persistence.createEntityManagerFactory(PersistenceProjectInfo.PERSISTENCE_UNIT_NAME);
-		entityManager = entityManagerFactory.createEntityManager();
+		super(request, response);
 		userDAO = new UserDAO(entityManager);
-		this.request = request;
-		this.response = response;
 	}
 
 	public void listAll(String message) throws ServletException, IOException {
@@ -44,7 +38,6 @@ public class UserServices {
 
 		if (message != null) {
 			request.setAttribute("MESSAGE", message);
-//			response.sendRedirect(request.getContextPath() + "/admin/users/list-users");
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.USER_LIST);

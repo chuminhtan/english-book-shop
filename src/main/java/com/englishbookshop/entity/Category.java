@@ -25,6 +25,7 @@ import com.englishbookshop.dao.UserDAO;
 @NamedQueries({
 	@NamedQuery(name=CategoryDAO.CATEGORY_LIST_ALL, query="SELECT cat FROM Category cat ORDER BY cat.name"),
 	@NamedQuery(name=CategoryDAO.CATEGORY_COUNT, query="SELECT COUNT(*) FROM Category"),
+	@NamedQuery(name=CategoryDAO.CATEGORY_FIND_BY_NAME, query = "SELECT cat FROM Category cat WHERE name = :name")
 })
 public class Category implements java.io.Serializable {
 
