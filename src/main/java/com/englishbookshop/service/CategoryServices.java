@@ -49,7 +49,7 @@ public class CategoryServices extends BaseServices{
 		if (existCategory != null) {
 			String message = "The category already exists";
 			
-			request.setAttribute(ServletHelper.MESSAGE_ERROR, message);	
+			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);	
 			
 		} else {			
 			Category cat = new Category(name);
@@ -101,7 +101,7 @@ public class CategoryServices extends BaseServices{
 			
 		} else {
 			String message="Could not update category. The name already exist";
-			request.setAttribute(ServletHelper.MESSAGE_ERROR, message);
+			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);
 		}
 		
 		request.setAttribute("CATEGORY", catById);

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <body>
 	<div class="container-fluid">
 		<!-- BEGIN HEADER -->
@@ -22,10 +23,6 @@
 						<li class="nav-item active mx-1"><a class="nav-link" href="#"><i
 								class="fas fa-align-justify"></i> All Books</a></li>
 						<li class="nav-item active mx-1"><a class="nav-link" href="#"><i
-								class="fas fa-book"></i> TOEIC Books</a></li>
-						<li class="nav-item active mx-1"><a class="nav-link" href="#"><i
-								class="fas fa-book"></i> IELTS Books</a></li>
-						<li class="nav-item active mx-1"><a class="nav-link" href="#"><i
 								class="fas fa-baby-carriage"></i> Cart</a></li>
 					</ul>
 					<a class="btn btn-warning m-1" href="#" tabindex="-1"
@@ -41,4 +38,12 @@
 			<!-- end nav bar -->
 		</header>
 		<!-- END HEADER -->
+		<div class="container my-5">
+			<h4 class="text-center my-5">Book Categories</h4>
+			<div class="row d-flex justify-content-center">
+				<c:forEach items="${LIST_CATEGORIES}" var="category">	
+					<a href="view-category?id=${category.categoryId }" class="btn btn-outline-dark m-1">${category.name } Book</a>
+				</c:forEach>
+			</div>
+		</div>
 		<div class="my-3 container">

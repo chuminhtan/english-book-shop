@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.englishbookshop.controller.admin.BaseServlet;
+import com.englishbookshop.controller.BaseServlet;
 import com.englishbookshop.helper.JSPPathHelper;
 import com.englishbookshop.service.UserServices;
 

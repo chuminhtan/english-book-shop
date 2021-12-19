@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.HashMap;
 
-import com.englishbookshop.controller.admin.BaseServlet;
+import com.englishbookshop.controller.BaseServlet;
 import com.englishbookshop.helper.ServletHelper;
 import com.englishbookshop.service.UserServices;
 import com.google.gson.Gson;
