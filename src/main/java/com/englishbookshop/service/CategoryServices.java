@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.englishbookshop.dao.CategoryDAO;
 import com.englishbookshop.entity.Category;
 import com.englishbookshop.entity.Users;
-import com.englishbookshop.helper.JSPPathHelper;
+import com.englishbookshop.helper.JspPathHelper;
 import com.englishbookshop.helper.ServletHelper;
 import com.google.gson.Gson;
 
@@ -36,7 +36,7 @@ public class CategoryServices extends BaseServices{
 			request.setAttribute(ServletHelper.MESSAGE, message);
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.CATEGORY_LIST);
+		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.CATEGORY_LIST);
 		rd.forward(request, response);
 	}
 
@@ -58,7 +58,7 @@ public class CategoryServices extends BaseServices{
 			String message = "The category was created";
 			request.setAttribute(ServletHelper.MESSAGE, message);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.CATEGORY_CREATE);
+		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.CATEGORY_CREATE);
 		rd.forward(request, response);
 	}
 
@@ -69,7 +69,7 @@ public class CategoryServices extends BaseServices{
 		
 		if (cat!=null) {
 			request.setAttribute("CATEGORY", cat);
-			RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.CATEGORY_FORM_EDIT);
+			RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.CATEGORY_FORM_EDIT);
 			rd.forward(request, response);	
 		} else {
 			listAll("Could not find the category with ID " + categoryId);

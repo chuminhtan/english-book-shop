@@ -20,7 +20,7 @@
 	<div class="jumbotron">
 		<h1 class="display-4 text-info">Quick Actions</h1>
 		<div>
-			<a href="#" class="btn btn-success">New User</a> <a href="#"
+			<a href="users/create-user" class="btn btn-success">New User</a> <a href="#"
 				class="btn btn-success">New Category</a> <a href="#"
 				class="btn btn-success">New Book</a> <a href="#"
 				class="btn btn-success">New Customer</a>

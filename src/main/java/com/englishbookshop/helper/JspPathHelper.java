@@ -1,7 +1,10 @@
 package com.englishbookshop.helper;
 
-public class JSPPathHelper {
+public class JspPathHelper {
 	
+	public static final String ADMIN_LOGIN = "admin-login.jsp";
+	
+	public static final String ADMIN_HOME = "dashboard.jsp";
 	public static final String DASHBOARD = "dashboard.jsp";
 	
 	public static final String USER_LIST = "user-list.jsp";

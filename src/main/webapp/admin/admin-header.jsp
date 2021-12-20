@@ -1,3 +1,4 @@
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <!-- BEGIN HEADER -->
     <header>
         <!-- nav bar -->
@@ -32,8 +33,8 @@
                         <a class="nav-link" href="#"><i class="fas fa-sticky-note"></i> Orders</a>
                     </li>
                 </ul>
-                <span>User: Chu Minh Tan</span>
-                <a class="btn btn-dark mx-2" href="#" tabindex="-1" aria-disabled="true">Logout</a>
+                <span class="text-white">Welcome, <c:out value="${sessionScope.USER_EMAIL}" /></span>
+                <a class="btn btn-dark mx-2" href="${pageContext.request.contextPath}/admin/logout" tabindex="-1" aria-disabled="true">Logout</a>
             </div>
         </nav>
         <!-- end nav bar -->

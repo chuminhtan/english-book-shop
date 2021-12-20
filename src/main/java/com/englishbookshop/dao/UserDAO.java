@@ -1,6 +1,8 @@
 package com.englishbookshop.dao;
 import javax.persistence.EntityManager;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.englishbookshop.entity.Users;
 
 import java.util.HashMap;
@@ -20,6 +22,8 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	
 	@Override
 	public Users create(Users user) {
+		String hashPass = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+		user.setPassword(hashPass);
 		return super.create(user);
 	}
 	
@@ -63,13 +67,20 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	public boolean checkLogin(String email, String password) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("email", email);
-		parameters.put("password", password);
-		List<Users> listUsers = super.findWithNamedQuery(USERS_CHECK_LOGIN, parameters);
+		List<Users> listUsers = super.findWithNamedQuery(USERS_FIND_BY_EMAIL, parameters);
+		if (listUsers.size() != 1) {
+			return false;
+		}
 		
-		if (listUsers.size() == 1) {
+		Users user = listUsers.get(0);
+		System.out.println("User from Db: " + user);
+		String hashPass = user.getPassword();
+		boolean isCorrect = BCrypt.checkpw(password, hashPass);
+		System.out.println("isCorrect: " + isCorrect);
+		if (isCorrect) {
 			return true;
 		}
 		
-		return false;
+		return false;		
 	}
 }

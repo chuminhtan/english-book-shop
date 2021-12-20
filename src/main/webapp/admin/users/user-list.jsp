@@ -25,8 +25,8 @@
 			class="fas fa-plus"></i> Create User</a>
 		<h5 class="display-4 text-info text-center">List Of Users</h5>
 		<div class="table-responsive">
-			<table class="table table-hover">
-				<thead class="thead-light">
+			<table class="table table-hover table-striped">
+				<thead class="thead-dark">
 					<tr>
 						<th scope="col">Index</th>
 						<th scope="col">ID</th>

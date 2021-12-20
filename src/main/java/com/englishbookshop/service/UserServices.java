@@ -6,10 +6,13 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import com.englishbookshop.dao.UserDAO;
 import com.englishbookshop.entity.Users;
-import com.englishbookshop.helper.JSPPathHelper;
+import com.englishbookshop.helper.JspPathHelper;
 import com.englishbookshop.helper.PersistenceProjectHelper;
 import com.englishbookshop.helper.ServletHelper;
 import com.google.gson.Gson;
@@ -40,7 +43,7 @@ public class UserServices extends BaseServices{
 			request.setAttribute("MESSAGE", message);
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.USER_LIST);
+		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.USER_LIST);
 		rd.forward(request, response);
 
 	}
@@ -57,15 +60,14 @@ public class UserServices extends BaseServices{
 			
 			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);	
 			
-		} else {			
+		} else {		
 			Users user = new Users(email, password, fullName);
 			userDAO.create(user);
 			
 			String message = "The user was created successfully";
 			request.setAttribute("MESSAGE", message);
-
 		}
-		RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.USER_CREATE);
+		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.USER_CREATE);
 		rd.forward(request, response);
 	}
 
@@ -76,7 +78,7 @@ public class UserServices extends BaseServices{
 		
 		request.setAttribute("USER", user);
 		
-		RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.USER_EDIT);
+		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.USER_EDIT);
 		rd.forward(request, response);
 	}
 
@@ -136,7 +138,7 @@ public class UserServices extends BaseServices{
 		    	userDAO.delete(userId);
 		    	
 			    resultResponse.put("result", ServletHelper.RESPONSE_OK);
-			    resultResponse.put("message", "The user with ID "+ userId +" has been deleted");
+			    resultResponse.put("MESSAGE", "The user with ID "+ userId +" has been deleted");
 		    
 		    } else {
 			    resultResponse.put("result", ServletHelper.RESPONSE_FAIL);
@@ -150,6 +152,31 @@ public class UserServices extends BaseServices{
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         out.print(jsonMap);
+	}
+	
+	public void login() throws ServletException, IOException{
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		boolean loginResult = userDAO.checkLogin(email, password);
+		
+		if (loginResult) {
+			HttpSession session = request.getSession();
+			session.setAttribute(ServletHelper.SESSION_USER_EMAIL, email);
+			
+			response.sendRedirect(request.getContextPath() + "/admin");
+		} else {
+			String message = "Login failed";
+			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);
+			
+			RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.ADMIN_LOGIN);
+			rd.forward(request, response);
+		}
+	}
+
+	public void logout() throws IOException {
+		request.getSession().removeAttribute(ServletHelper.SESSION_USER_EMAIL);
+		response.sendRedirect(request.getContextPath() + "/admin/login");
 	}
 
 }

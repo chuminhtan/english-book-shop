@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.englishbookshop.controller.BaseServlet;
 import com.englishbookshop.entity.Users;
-import com.englishbookshop.helper.JSPPathHelper;
+import com.englishbookshop.helper.JspPathHelper;
 import com.englishbookshop.service.UserServices;
 
 @WebServlet("/admin/users/")

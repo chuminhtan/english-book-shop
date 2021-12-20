@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
 			<div class="jumbotron">
 				<h3 class="text-info">Admin Login</h3>
 				<hr class="my-4">
-				<form action="login">
+				<form action="login" method="post">
 					<div class="form-group">
 						<label for="email">Email address</label> <input type="email"
 							name="email" class="form-control" id="email"
@@ -23,8 +24,11 @@
 					</div>
 					<button type="submit" class="btn btn-success">Submit</button>
 				</form>
-				<div class="alert alert-danger mt-3" role="alert">Incorrect
-					Email or Password</div>
+				<c:if test="${ERROR_MESSAGE != null}">
+					<div class="alert alert-danger mt-3" role="alert">
+						<c:out value="${ERROR_MESSAGE}" />
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
