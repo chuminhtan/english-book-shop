@@ -20,7 +20,8 @@ import com.englishbookshop.dao.UserDAO;
 @NamedQueries({
 	@NamedQuery(name=UserDAO.USERS_FIND_ALL, query = "SELECT u FROM Users u ORDER BY u.fullName"),
 	@NamedQuery(name=UserDAO.USERS_COUNT, query="SELECT COUNT(*) FROM Users"),
-	@NamedQuery(name=UserDAO.USERS_FIND_BY_EMAIL, query="SELECT u FROM Users u WHERE u.email = :email")
+	@NamedQuery(name=UserDAO.USERS_FIND_BY_EMAIL, query="SELECT u FROM Users u WHERE u.email = :email"),
+	@NamedQuery(name=UserDAO.USERS_CHECK_LOGIN, query="SELECT u FROM Users u WHERE u.email= :email AND u.password = :password")
 })
 public class Users implements java.io.Serializable {
 

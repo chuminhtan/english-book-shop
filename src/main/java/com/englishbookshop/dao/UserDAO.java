@@ -12,6 +12,7 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	public static final String USERS_FIND_ALL = "Users.findAll";
 	public static final String USERS_COUNT = "Users.count";
 	public static final String USERS_FIND_BY_EMAIL ="Users.findByEmail";
+	public static final String USERS_CHECK_LOGIN ="Users.checkLogin";
 	
 	public UserDAO(EntityManager entityManager) {
 		super(entityManager);
@@ -57,5 +58,18 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 		}
 		
 		return null;
+	}
+	
+	public boolean checkLogin(String email, String password) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("email", email);
+		parameters.put("password", password);
+		List<Users> listUsers = super.findWithNamedQuery(USERS_CHECK_LOGIN, parameters);
+		
+		if (listUsers.size() == 1) {
+			return true;
+		}
+		
+		return false;
 	}
 }
