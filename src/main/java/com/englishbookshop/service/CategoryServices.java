@@ -90,23 +90,25 @@ public class CategoryServices extends BaseServices{
 		
 		Category catByName = categoryDAO.findByName(name);
 		
+		String message="";
 		if ((catByName != null && catByName.getCategoryId() == categoryId) || catByName == null) {
 			Category catUpdated = new Category(name);
 			catUpdated.setCategoryId(categoryId);
 			
 			catById = categoryDAO.update(catUpdated);
 			
-			String message="The category was updated";
+			message="The category was updated successfully";
 			request.setAttribute(ServletHelper.MESSAGE, message);
 			
 		} else {
-			String message="Could not update category. The name already exist";
+			message="Could not update category. The name already exist";
 			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);
 		}
 		
-		request.setAttribute("CATEGORY", catById);
-		RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.CATEGORY_FORM_EDIT);
-		rd.forward(request, response);
+		//request.setAttribute("CATEGORY", catById);
+		//RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.CATEGORY_FORM_EDIT);
+		//rd.forward(request, response);
+		listAll(message);
 	}
 
 	public void deleteCategory() throws IOException {

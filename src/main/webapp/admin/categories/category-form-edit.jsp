@@ -46,9 +46,9 @@
 				<a href="." class="btn btn-warning m-1">Cancel</a>
 			</div>
 		</form>
-		<c:if test="${MESSAGE_ERROR != null}">
+		<c:if test="${ERROR_MESSAGE != null}">
 			<div class="alert alert-danger mt-3" role="alert">
-				<c:out value="${MESSAGE_ERROR }"></c:out>
+				<c:out value="${ERROR_MESSAGE}"></c:out>
 			</div>
 		</c:if>
 	</div>

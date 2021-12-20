@@ -46,7 +46,7 @@
 			</div>
 		</form>
 		<c:if test="${ERROR_MESSAGE != null}">
-			<div class="alert alert-danger mt-3" role="alert"> <c:out value="${MESSAGE_ERROR }"></c:out></div>	
+			<div class="alert alert-danger mt-3" role="alert"> <c:out value="${ERROR_MESSAGE}"></c:out></div>	
 		</c:if>
 	</div>
 	<!-- END LIST -->

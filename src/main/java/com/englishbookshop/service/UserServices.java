@@ -55,13 +55,13 @@ public class UserServices extends BaseServices{
 		if (existUser != null) {
 			String message = "The email already exists";
 			
-			request.setAttribute("MESSAGE_ERROR", message);	
+			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);	
 			
 		} else {			
 			Users user = new Users(email, password, fullName);
 			userDAO.create(user);
 			
-			String message = "The user was created";
+			String message = "The user was created successfully";
 			request.setAttribute("MESSAGE", message);
 
 		}
@@ -96,22 +96,27 @@ public class UserServices extends BaseServices{
 		
 		Users userByEmail = userDAO.findByEmail(email);
 		
+		String message ="";
+		
 		if (userByEmail == null || userId==userByEmail.getUserId()) {
 			
 			Users userUpdated = new Users(userId, email, password, fullName);
 			userById = userDAO.update(userUpdated);
 			
-			String message="The user was updated";
+			message="The user was updated successfully";
 			request.setAttribute("MESSAGE", message);
 			
 		} else {
-			String message="Could not update user. The email already exist";
-			request.setAttribute("MESSAGE_ERROR", message);
+			message="Could not update user. The email already exist";
+			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);
 		}
 		
-		request.setAttribute("USER", userById);
-		RequestDispatcher rd = request.getRequestDispatcher(JSPPathHelper.USER_EDIT);
-		rd.forward(request, response);
+		/*
+		 * request.setAttribute("USER", userById); RequestDispatcher rd =
+		 * request.getRequestDispatcher(JSPPathHelper.USER_EDIT); rd.forward(request,
+		 * response);
+		 */
+		listAll(message);
 	}
 	
 	public void deleteUser() throws ServletException, IOException {
