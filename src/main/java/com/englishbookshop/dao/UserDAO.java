@@ -55,6 +55,7 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	public Users findByEmail(String email) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("email", email);
+		
 		List<Users> listUsers = super.findWithNamedQuery(USERS_FIND_BY_EMAIL, parameters);
 		
 		if (listUsers != null && listUsers.size() > 0) {
@@ -67,16 +68,17 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	public boolean checkLogin(String email, String password) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("email", email);
+		
 		List<Users> listUsers = super.findWithNamedQuery(USERS_FIND_BY_EMAIL, parameters);
+		
 		if (listUsers.size() != 1) {
 			return false;
 		}
 		
 		Users user = listUsers.get(0);
-		System.out.println("User from Db: " + user);
 		String hashPass = user.getPassword();
 		boolean isCorrect = BCrypt.checkpw(password, hashPass);
-		System.out.println("isCorrect: " + isCorrect);
+
 		if (isCorrect) {
 			return true;
 		}
