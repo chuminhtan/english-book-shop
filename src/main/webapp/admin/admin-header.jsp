@@ -18,13 +18,13 @@
                         <a class="nav-link" href="${pageContext.request.contextPath}/admin"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                     </li>
                     <li class="nav-item active mx-1">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/users"><i class="fas fa-user"></i> Users</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/users/"><i class="fas fa-user"></i> Users</a>
                     </li>
                     <li class="nav-item active mx-1">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/categories"><i class="fas fa-align-right"></i> Categories</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/categories/"><i class="fas fa-align-right"></i> Categories</a>
                     </li>
                     <li class="nav-item active mx-1">
-                        <a class="nav-link" href="#"><i class="fas fa-book"></i> Books</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/books/"><i class="fas fa-book"></i> Books</a>
                     </li>
                     <li class="nav-item active mx-1">
                         <a class="nav-link" href="#"><i class="fas fa-star"></i> Reviews</a>

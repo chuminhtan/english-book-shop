@@ -14,4 +14,8 @@ public class JspPathHelper {
 	public static final String CATEGORY_LIST = "category-list.jsp";
 	public static final String CATEGORY_CREATE = "category-form-create.jsp";
 	public static final String CATEGORY_FORM_EDIT = "category-form-edit.jsp";
+	
+	public static final String BOOK_LIST = "book-list.jsp";
+	public static final String BOOK_CREATE = "book-form-create.jsp";
+	
 }
