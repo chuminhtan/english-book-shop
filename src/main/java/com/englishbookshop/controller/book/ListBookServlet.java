@@ -18,7 +18,7 @@ public class ListBookServlet extends BaseServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BookServices bookServices = new BookServices(entityManager, request, response);
-		bookServices.listBooks();
+		bookServices.listBooks(null,null);
 	}
 
 }

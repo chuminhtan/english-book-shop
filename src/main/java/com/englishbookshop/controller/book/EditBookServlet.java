@@ -1,39 +1,37 @@
 package com.englishbookshop.controller.book;
 
-import com.englishbookshop.controller.BaseServlet;
-import com.englishbookshop.helper.JspPathHelper;
-import com.englishbookshop.service.BookServices;
-
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/books/create-book")
+import com.englishbookshop.controller.BaseServlet;
+import com.englishbookshop.service.BookServices;
+
+@WebServlet("/admin/books/edit-book")
 @MultipartConfig(
 		fileSizeThreshold = 1024*10,
 		maxFileSize = 1024*300,
 		maxRequestSize = 1024*1024
 )
-public class CreateBookServlet extends BaseServlet {
+public class EditBookServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
-    public CreateBookServlet() {
-
+    public EditBookServlet() {
+        super();
     }
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BookServices bookServices = new BookServices(entityManager, request, response);
-		bookServices.showCreateForm();
+		bookServices.showEditForm();
 	}
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BookServices bookServices = new BookServices(entityManager, request, response);
-		bookServices.createBook();
+		bookServices.updateBook();
 	}
 
 }

@@ -17,5 +17,6 @@ public class JspPathHelper {
 	
 	public static final String BOOK_LIST = "book-list.jsp";
 	public static final String BOOK_CREATE = "book-form-create.jsp";
+	public static final String BOOK_EDIT_FORM = "book-form-edit.jsp";
 	
 }

@@ -20,8 +20,8 @@
 	<div class="jumbotron">
 		<h1 class="display-4 text-info">Quick Actions</h1>
 		<div>
-			<a href="users/create-user" class="btn btn-success">New User</a> <a href="#"
-				class="btn btn-success">New Category</a> <a href="#"
+			<a href="${pageContext.request.contextPath }/admin/users/create-user" class="btn btn-success">New User</a> <a href="${pageContext.request.contextPath }/admin/categories/create-category"
+				class="btn btn-success">New Category</a> <a href="${pageContext.request.contextPath }/admin/books/create-book"
 				class="btn btn-success">New Book</a> <a href="#"
 				class="btn btn-success">New Customer</a>
 		</div>
