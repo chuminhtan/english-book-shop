@@ -11,6 +11,7 @@ public class ServletHelper {
 	public static final String MESSAGE_CREATE_EXIST = " already exists";
 	public static final String MESSAGE_DOES_NOT_EXIST = " does not exist";
 	public static final String MESSAGE_UPDATE_SUCCESSFULLY = " has been updated sucessfully";
+	public static final String MESSAGE_COULD_NOT_DELETE_DEFAULT = "Could not delete default ID";
 	
 	public static final String SESSION_USER_EMAIL = "USER_EMAIL";
 }

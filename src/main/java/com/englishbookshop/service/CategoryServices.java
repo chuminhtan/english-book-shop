@@ -116,17 +116,16 @@ public class CategoryServices extends BaseServices{
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		Category cat = categoryDAO.get(catId);
-		
-		if (cat == null) {
-			result.put(ServletHelper.RESULT, ServletHelper.RESPONSE_FAIL);
-			result.put(ServletHelper.MESSAGE,"The default category cannot be deleted");
+
+		if (catId == 1) {
+			result.put(ServletHelper.MESSAGE, ServletHelper.MESSAGE_COULD_NOT_DELETE_DEFAULT);
+		} else if (cat == null) {
+			result.put(ServletHelper.MESSAGE, ServletHelper.MESSAGE_DOES_NOT_EXIST);
 		} else {
 			categoryDAO.delete(catId);
-			result.put(ServletHelper.RESULT, ServletHelper.RESPONSE_OK);
 			result.put(ServletHelper.MESSAGE, "The category with ID "+ catId +" has been deleted");
 		}
-		
-		
+	
 		String resultJson = new Gson().toJson(result);
 		
         PrintWriter out = response.getWriter();

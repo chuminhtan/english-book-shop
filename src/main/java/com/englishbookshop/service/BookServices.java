@@ -2,11 +2,14 @@ package com.englishbookshop.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -22,6 +25,7 @@ import com.englishbookshop.entity.Book;
 import com.englishbookshop.entity.Category;
 import com.englishbookshop.helper.JspPathHelper;
 import com.englishbookshop.helper.ServletHelper;
+import com.google.gson.Gson;
 
 public class BookServices extends BaseServices {
 	private BookDAO bookDao;
@@ -77,7 +81,6 @@ public class BookServices extends BaseServices {
 		}
 	}
 	
-	//TODO
 	public void updateBook() throws IOException, ServletException {
 		int bookId = Integer.parseInt(request.getParameter("book-id"));	
 		String title = request.getParameter("title"); 
@@ -174,4 +177,26 @@ public class BookServices extends BaseServices {
 		}
 	}
 
+	public void deleteBook() throws IOException {
+		int bookId = Integer.parseInt(request.getParameter("id"));
+		
+		Book bookWithId = bookDao.get(bookId);
+		Map<String,Object> result = new HashMap<>();
+		
+		if (bookId == 1) {
+			result.put(ServletHelper.MESSAGE, ServletHelper.MESSAGE_COULD_NOT_DELETE_DEFAULT);
+		} else if (bookWithId == null) {
+			result.put(ServletHelper.MESSAGE, ServletHelper.MESSAGE_DOES_NOT_EXIST);
+		} else {
+			bookDao.delete(bookId);
+			result.put(ServletHelper.MESSAGE, "The book with ID "+ bookId +" has been deleted");
+		}
+		
+		String resultJson = new Gson().toJson(result);
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		out.print(resultJson);
+	}
 }
