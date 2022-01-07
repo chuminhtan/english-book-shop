@@ -94,3 +94,4 @@
 	</div>
 	<!-- Copyright -->
 </footer>
+<jsp:include page="../js/scripts.jsp" ></jsp:include>

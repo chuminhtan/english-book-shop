@@ -83,8 +83,7 @@
 	<!-- Copyright -->
 	<div class="text-center p-4 m-2"
 		style="background-color: rgba(0, 0, 0, 0.05);">
-		© 2021 Developed by <a class="text-reset fw-bold"
-			href="https://mdbootstrap.com/">Mr. Taan</a> <a
+		© 2021 Developed by <strong>Mr. Taan</strong> <a
 			href="https://www.facebook.com/chiuminhton/"
 			class="me-4 text-reset mx-2" target="_blank"> <i
 			class="fab fa-facebook-f"></i>
@@ -97,5 +96,4 @@
 	</div>
 	<!-- Copyright -->
 </footer>
-</div>
-<jsp:include page="scripts.jsp" ></jsp:include>
+<jsp:include page="../js/scripts.jsp" ></jsp:include>

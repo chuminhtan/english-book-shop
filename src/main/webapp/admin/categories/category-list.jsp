@@ -5,25 +5,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- HEAD & STYLESHEET -->
-<jsp:include page="../stylesheet.jsp" />
-
+<jsp:include page="../../css/styles.jsp" />
 <title>Categories Management</title>
 </head>
 <body>
-	<!-- HEADER -->
-	<jsp:include page="../admin-header.jsp"></jsp:include>
+	<div class="container-fluid">
+		<jsp:include page="../admin-header.jsp"></jsp:include>
+		<jsp:include page="category-management-title.jsp"></jsp:include>
 
-	<!-- BEGIN MAIN -->
-	<h2
-		class="text-success font-weight-bold text-uppercase text-center my-4">
-		<i class="fas fa-category"></i> Categories Management
-	</h2>
-	<!-- LIST -->
+		<!-- Main -->
 	<div class="jumbotron">
-		<a href="create-category" class="btn btn-success"><i
+		<a href="create-category" class="btn btn-outline-info"><i
 			class="fas fa-plus"></i> Create Category</a>
-		<h5 class="display-4 text-info text-center">List Of Categories</h5>
+			
+		<h2 class="text-info my-4 text-center">List Of Categories</h2>
 		<div class="table-responsive">
 			<table class="table table-hover table-striped">
 				<thead class="thead-dark">
@@ -53,6 +48,8 @@
 			</table>
 		</div>
 	</div>
-	<!-- END LIST -->
-	<!-- FOOTER & SCRIPTS -->
-	<jsp:include page="../admin-footer.jsp" />
+		<!-- End Main -->
+		<jsp:include page="../admin-footer.jsp"></jsp:include>
+	</div>
+</body>
+</html>

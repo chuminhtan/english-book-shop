@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>The English Book Shop</title>
-<jsp:include page="stylesheet.jsp" />
+<jsp:include page="../css/styles.jsp" />
 </head>
 <jsp:include page="header.jsp"/>
 	            <div class="row justify-content-center">

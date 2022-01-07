@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>${CATEGORY.name }</title>
-<jsp:include page="stylesheet.jsp" />
+<jsp:include page="../css/styles.jsp" />
 
 </head>
 <body>
@@ -185,8 +185,8 @@
 				</div>
 			</div>
 		</div>
+		<!-- BEGIN FOOTER & SCRIPTS -->
+		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
-	<!-- BEGIN FOOTER & SCRIPTS -->
-	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

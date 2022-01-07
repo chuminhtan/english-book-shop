@@ -5,64 +5,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- HEAD & STYLESHEET -->
-<jsp:include page="../stylesheet.jsp" />
-
+<jsp:include page="../../css/styles.jsp" />
 <title>Books Management</title>
 </head>
 <body>
-	<!-- HEADER -->
-	<jsp:include page="../admin-header.jsp"></jsp:include>
+	<div class="container-fluid">
+		<jsp:include page="../admin-header.jsp"></jsp:include>
+		<jsp:include page="book-management-title.jsp"></jsp:include>
 
-	<!-- BEGIN MAIN -->
-	<jsp:include page="book-management-title.jsp" />
-	<!-- LIST -->
-	<div class="jumbotron">
-		<a href="create-book" class="btn btn-outline-info"><i
-			class="fas fa-plus"></i> Create Book</a>
-		<h2 class="text-info mt-5">List Of Books</h2>
-		<div class="table-responsive">
-			<table class="table table-hover table-striped">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">Index</th>
-						<th scope="col">ID</th>
-						<th scope="col">Image</th>
-						<th scope="col">Title</th>
-						<th scope="col">Author</th>
-						<th scope="col">Category</th>
-						<th scope="col">Price</th>
-						<th scope="col">Last Updated</th>
-						<th scope="col">Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="book" items="${LIST_BOOKS}" varStatus="status">
+		<!-- Main -->
+		<div class="jumbotron">
+			<a href="create-book" class="btn btn-outline-info"><i
+				class="fas fa-plus"></i> Create Book</a>
+
+			<h3 class="text-info mt-5">List Of Books</h3>
+			<div class="table-responsive">
+				<table class="table table-hover table-striped">
+					<thead class="thead-dark">
 						<tr>
-							<th scope="row">${status.index + 1}</th>
-							<td>${book.bookId }</td>
-							<td><img src="data:image/png; base64, ${book.imageBase64 }"
-								alt="${book.title }" width="80" /></td>
-							<td>${book.title }</td>
-							<td>${book.author }</td>
-							<td>${book.category.name }</td>
-							<td>${book.price }$</td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd H:m"
-									value="${book.lastUpdateTime }" /></td>
-							<td><a href="edit-book?id=${book.bookId }"
-								class="btn btn-warning m-1"><i class="fas fa-edit"
-									data-toggle="tooltip" title="Edit"></i></a> <a
-								href="javascript:confirmDelete('book',${book.bookId },'delete-book')"
-								class="btn btn-danger m-1" data-toggle="tooltip" title="Delete"><i
-									class="fas fa-trash-alt"></i></a></td>
+							<th scope="col">Index</th>
+							<th scope="col">ID</th>
+							<th scope="col">Image</th>
+							<th scope="col">Title</th>
+							<th scope="col">Author</th>
+							<th scope="col">Category</th>
+							<th scope="col">Price</th>
+							<th scope="col">Last Updated</th>
+							<th scope="col">Actions</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:forEach var="book" items="${LIST_BOOKS}" varStatus="status">
+							<tr>
+								<th scope="row">${status.index + 1}</th>
+								<td>${book.bookId }</td>
+								<td><img src="data:image/png; base64, ${book.imageBase64 }"
+									alt="${book.title }" width="80" /></td>
+								<td>${book.title }</td>
+								<td>${book.author }</td>
+								<td>${book.category.name }</td>
+								<td>${book.price }$</td>
+								<td><fmt:formatDate pattern="yyyy-MM-dd H:m"
+										value="${book.lastUpdateTime }" /></td>
+								<td><a href="edit-book?id=${book.bookId }"
+									class="btn btn-warning m-1"><i class="fas fa-edit"
+										data-toggle="tooltip" title="Edit"></i></a> <a
+									href="javascript:confirmDelete('book',${book.bookId },'delete-book')"
+									class="btn btn-danger m-1" data-toggle="tooltip" title="Delete"><i
+										class="fas fa-trash-alt"></i></a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
+		<!-- End Main -->
+		<jsp:include page="../admin-footer.jsp"></jsp:include>
 	</div>
-	<!-- END LIST -->
-	<!-- FOOTER -->
-	<jsp:include page="../admin-footer.jsp" />
-	<jsp:include
-		page="${pageContext.request.contextPath}/admin/scripts.jsp" />
+</body>
+</html>
