@@ -4,17 +4,11 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.englishbookshop.entity.Category;
-import com.englishbookshop.helper.PersistenceProjectHelper;
 
 public class CategoryDAOTest extends BaseDAOTest{
 

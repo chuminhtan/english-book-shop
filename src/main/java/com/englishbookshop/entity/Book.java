@@ -32,7 +32,9 @@ import com.englishbookshop.dao.BookDAO;
 @NamedQueries({
 	@NamedQuery(name = BookDAO.BOOK_LIST_ALL, query = "SELECT b FROM Book b"),
 	@NamedQuery(name = BookDAO.BOOK_FIND_BY_TITLE, query = "SELECT b FROM Book b WHERE b.title = :title"),
-	@NamedQuery(name = BookDAO.BOOK_COUNT, query="SELECT COUNT(b.bookId) FROM Book b")
+	@NamedQuery(name = BookDAO.BOOK_COUNT, query="SELECT COUNT(b.bookId) FROM Book b"),
+	@NamedQuery(name = BookDAO.BOOK_FIND_BY_CATEGORY, query="SELECT b FROM Book b JOIN Category c ON b.category.categoryId = c.categoryId"
+			+ " WHERE c.categoryId = :categoryId")
 })
 public class Book implements java.io.Serializable {
 

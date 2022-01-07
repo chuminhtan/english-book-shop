@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -198,5 +199,25 @@ public class BookServices extends BaseServices {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		out.print(resultJson);
+	}
+	
+	public void listBooksByCategory() throws ServletException, IOException {
+		int categoryId = Integer.parseInt(request.getParameter("id"));
+		
+//		List<Book> listBooks = bookDao.findByCategory(categoryId);
+		Category category = catDao.get(categoryId);
+		List<Book> listBooks = new ArrayList<>(category.getBooks());
+		
+		for (Book b : listBooks) {
+			System.out.println(b);
+		}
+		
+//		response.getWriter().print(categoryId);
+//		response.getWriter().print(listBooks);
+//		response.getWriter().print(category.getBooks());
+		request.setAttribute("LIST_BOOKS", listBooks);
+		request.setAttribute("CATEGORY", category);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOKS_LIST_BY_CATEGORY);
+		dispatcher.forward(request, response);
 	}
 }

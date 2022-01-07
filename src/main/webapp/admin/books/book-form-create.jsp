@@ -13,16 +13,12 @@
 <body>
 	<!-- HEADER -->
 	<jsp:include page="../admin-header.jsp"></jsp:include>
-
-	<!-- BEGIN MAIN -->
-	<h2 class="text-info font-weight-bold text-uppercase text-center my-4">
-		<i class="fas fa-user"></i> Books Management
-	</h2>
+	<jsp:include page="book-management-title.jsp" />
+	
 	<!-- FORM CREATE -->
 	<div class="jumbotron">
-		<a href="." class="btn btn-info mb-2"><i class="fas fa-arrow-left"></i>
-			Back</a>
-		<h5 class="display-4 text-success text-center">Create Book</h5>
+		<a href="." class="btn btn-outline-info"><i class="fas fa-arrow-left"></i> Back</a>
+		<h2 class="text-info mt-5">Create Book</h2>
 		<!-- FORM -->
 		<form action="create-book" method="post" enctype="multipart/form-data">
 			<div class="form-group">
@@ -53,7 +49,7 @@
 			<div class="form-group">
 				<label for="publish-date">Publish Date</label> <input
 					class="form-control" type="date" name="publish-date"
-					placeholder="dd-mm-yyyy" value="2021-12-31" min="1997-01-01"
+					placeholder="dd-mm-yyyy" value="2021-12-31" min="1800-01-01"
 					max="2021-12-31">
 			</div>
 			<div class="form-group">
@@ -64,7 +60,7 @@
 			<div class="form-group">
 				<label for="price">Price</label> <input type="number"
 					class="form-control" id="price" name="price"
-					placeholder="Enter Price" minlength="1" maxlength="100" required>
+					placeholder="Enter Price" minlength="1" maxlength="100" step="any" required >
 			</div>
 			<div class="form-group">
 				<label for="description">Description</label>

@@ -2,9 +2,9 @@
     <!-- BEGIN HEADER -->
     <header>
         <!-- nav bar -->
-        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-info">
+        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary text-white">
             <a class="navbar-brand" href="#">
-                <img src="${pageContext.request.contextPath}/images/icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                <img src="${pageContext.request.contextPath}/images/smiling-sun.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 The English Book Shop
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

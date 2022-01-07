@@ -14,16 +14,12 @@
 <body>
 	<!-- HEADER -->
 	<jsp:include page="../admin-header.jsp"></jsp:include>
-
-	<!-- BEGIN MAIN -->
-	<h2 class="text-info font-weight-bold text-uppercase text-center my-4">
-		<i class="fas fa-user"></i> Books Management
-	</h2>
+	<jsp:include page="book-management-title.jsp" />
 	<!-- FORM EDIT BOOK -->
 	<div class="jumbotron">
-		<a href="javascript:history.back()" class="btn btn-info mb-2"><i
-			class="fas fa-arrow-left"></i> Back</a>
-		<h5 class="display-4 text-success text-center">Edit Book</h5>
+		<a href="javascript:history.back()" class="btn btn-outline-info"><i class="fas fa-arrow-left"></i> Back</a>
+		<h2 class="text-info mt-5">Edit Book</h2>
+		
 		<!-- FORM -->
 		<form action="edit-book" method="post" enctype="multipart/form-data">
 			<div class="form-group">

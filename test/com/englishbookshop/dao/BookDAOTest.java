@@ -150,4 +150,19 @@ public class BookDAOTest extends BaseDAOTest{
 		System.out.println(count);
 		assertTrue(count > 0);
 	}
+	
+	@Test
+	public void testFindByCategory() {
+		int categoryId = 2;
+		List<Book> listBooks = bookDao.findByCategory(categoryId);
+		
+		if (listBooks != null) {
+			for (Book book : listBooks) {
+				System.out.println(book);
+			}
+		}
+		
+		assertNotNull(listBooks);
+	}
+	
 }

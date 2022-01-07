@@ -1,11 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <!-- BEGIN HEADER -->
 <header>
 	<!-- nav bar -->
-	<nav class="navbar navbar-expand-lg navbar navbar-light bg-warning">
-		<a class="navbar-brand" href="${pageContext.request.contextPath }"> <img src="${pageContext.request.contextPath }/images/icon.png"
+	<nav class="navbar navbar-expand-lg navbar navbar-light bg-light">
+		<a class="navbar-brand" href="${pageContext.request.contextPath }"> <img src="${pageContext.request.contextPath }/images/smiling-sun.png"
 			width="30" height="30" class="d-inline-block align-top" alt="">
 			The English Book Shop
 		</a>
@@ -25,8 +24,8 @@
 				<li class="nav-item active mx-1"><a class="nav-link" href="#"><i
 						class="fas fa-baby-carriage"></i> Cart</a></li>
 			</ul>
-			<a class="btn btn-warning m-1" href="#" tabindex="-1"
-				aria-disabled="true">Sign In</a> <a class="btn btn-success m-1"
+			<a class="btn btn-warning m-1 text-white" href="#" tabindex="-1"
+				aria-disabled="true">Sign In</a> <a class="btn btn-success m-1 text-white"
 				href="#" tabindex="-1" aria-disabled="true">Register</a>
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="search"

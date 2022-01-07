@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,15 +15,12 @@
 	<jsp:include page="../admin-header.jsp"></jsp:include>
 
 	<!-- BEGIN MAIN -->
-	<h2
-		class="text-info font-weight-bold text-uppercase text-center my-4">
-		<i class="fas fa-user"></i> Books Management
-	</h2>
+	<jsp:include page="book-management-title.jsp" />
 	<!-- LIST -->
 	<div class="jumbotron">
-		<a href="create-book" class="btn btn-success"><i
+		<a href="create-book" class="btn btn-outline-info"><i
 			class="fas fa-plus"></i> Create Book</a>
-		<h5 class="display-4 text-success text-center">List Of Books</h5>
+		<h2 class="text-info mt-5">List Of Books</h2>
 		<div class="table-responsive">
 			<table class="table table-hover table-striped">
 				<thead class="thead-dark">
@@ -44,14 +41,14 @@
 						<tr>
 							<th scope="row">${status.index + 1}</th>
 							<td>${book.bookId }</td>
-							<td><img src="data:image/png; base64, ${book.imageBase64 }" alt="${book.title }" width="80"/></td>
+							<td><img src="data:image/png; base64, ${book.imageBase64 }"
+								alt="${book.title }" width="80" /></td>
 							<td>${book.title }</td>
 							<td>${book.author }</td>
 							<td>${book.category.name }</td>
 							<td>${book.price }$</td>
-							<td>
-								<fmt:formatDate pattern = "yyyy-MM-dd H:m" value = "${book.lastUpdateTime }" />
-							</td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd H:m"
+									value="${book.lastUpdateTime }" /></td>
 							<td><a href="edit-book?id=${book.bookId }"
 								class="btn btn-warning m-1"><i class="fas fa-edit"
 									data-toggle="tooltip" title="Edit"></i></a> <a
@@ -65,5 +62,7 @@
 		</div>
 	</div>
 	<!-- END LIST -->
-	<!-- FOOTER & SCRIPTS -->
+	<!-- FOOTER -->
 	<jsp:include page="../admin-footer.jsp" />
+	<jsp:include
+		page="${pageContext.request.contextPath}/admin/scripts.jsp" />
