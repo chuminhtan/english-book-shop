@@ -81,8 +81,7 @@
 	<!-- Section: Links  -->
 
 	<!-- Copyright -->
-	<div class="text-center p-4 m-2"
-		style="background-color: rgba(0, 0, 0, 0.05);">
+	<div class="text-center p-4 m-2">
 		© 2021 Developed by <strong>Mr. Taan</strong> <a
 			href="https://www.facebook.com/chiuminhton/"
 			class="me-4 text-reset mx-2" target="_blank"> <i

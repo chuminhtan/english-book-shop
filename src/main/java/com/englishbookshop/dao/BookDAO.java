@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.englishbookshop.entity.Book;
 
@@ -14,6 +15,8 @@ public class BookDAO extends JpaDAO<Book> implements IGenericDAO<Book> {
 	public static final String BOOK_FIND_BY_TITLE = "Book.findByTitle";
 	public static final String BOOK_COUNT = "Book.count";
 	public static final String BOOK_FIND_BY_CATEGORY = "Book.findByCategory";
+	public static final String BOOK_LIST_NEW_BOOKS = "Book.listNewBooks";
+	public static final String BOOK_SEARCH = "Book.search";
 	
 	public BookDAO(EntityManager entityManager) {
 		super(entityManager);
@@ -69,6 +72,21 @@ public class BookDAO extends JpaDAO<Book> implements IGenericDAO<Book> {
 		parameters.put("categoryId", categoryId);
 		
 		return super.findWithNamedQuery(BOOK_FIND_BY_CATEGORY, parameters);
+	}
+	
+	public List<Book> listNewBooks(){
+		Query query = entityManager.createNamedQuery(BOOK_LIST_NEW_BOOKS);
+		query.setFirstResult(0);
+		query.setMaxResults(4);
+		
+		return query.getResultList();
+	}
+	
+	public List<Book> search(String keyword) {
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("keyword", keyword);
+		return super.findWithNamedQuery(BOOK_SEARCH, parameters);
+		
 	}
 
 }

@@ -15,9 +15,9 @@
 
 		<!-- Main -->
 		<div class="jumbotron">
-			<a href="javascript:history.go(-1)" class="btn btn-outline-info mb-2"><i
+			<a href="javascript:history.go(-1)" class="btn btn-primary mb-2"><i
 				class="fas fa-arrow-left"></i> Back</a>
-			<h2 class="text-info my-4 text-center">Edit User</h2>
+			<h2 class="text-primary my-4 text-center">Edit User</h2>
 			<!-- FORM -->
 			<form action="edit-user" method="post">
 				<div class="form-group">

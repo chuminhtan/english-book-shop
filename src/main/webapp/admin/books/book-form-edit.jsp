@@ -16,7 +16,7 @@
 		<jsp:include page="book-management-title.jsp" />
 
 		<div class="jumbotron">
-			<a href="javascript:history.back()" class="btn btn-outline-info"><i
+			<a href="javascript:history.back()" class="btn btn-primary"><i
 				class="fas fa-arrow-left"></i> Back</a>
 			<h2 class="text-info mt-5">Edit Book</h2>
 

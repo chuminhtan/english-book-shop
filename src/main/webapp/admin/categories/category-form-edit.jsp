@@ -16,9 +16,9 @@
 		<!-- Main -->
 		<!-- LIST -->
 		<div class="jumbotron">
-			<a href="." class="btn btn-outline-info"><i
+			<a href="." class="btn btn-primary"><i
 				class="fas fa-arrow-left"></i> Back</a>
-			<h2 class="text-info mt-5">Edit Category</h2>
+			<h2 class="text-primary my-4 text-center">Edit Category</h2>
 			<!-- FORM -->
 			<form action="edit-category" method="post">
 				<div class="form-group">

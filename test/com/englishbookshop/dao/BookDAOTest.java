@@ -46,11 +46,11 @@ public class BookDAOTest extends BaseDAOTest{
 		book.setCategory(category);
 		book.setTitle("Core");
 		book.setAuthor("Joshua Bloch");
-		book.setDescription("Are you looking for a deeper understanding of the Java™ programming language so that you can write code that is clearer, more correct, more robust, and more reusable? Look no further! Effective Java™, Second Edition, brings together seventy-eight indispensable programmer’s rules of thumb: working, best-practice solutions for the programming challenges you encounter every day.\r\n" + 
+		book.setDescription("Are you looking for a deeper understanding of the Javaï¿½ programming language so that you can write code that is clearer, more correct, more robust, and more reusable? Look no further! Effective Javaï¿½, Second Edition, brings together seventy-eight indispensable programmerï¿½s rules of thumb: working, best-practice solutions for the programming challenges you encounter every day.\r\n" + 
 				" \r\n" + 
 				"This highly anticipated new edition of the classic, Jolt Award-winning work has been thoroughly updated to cover Java SE 5 and Java SE 6 features introduced since the first edition. Bloch explores new design patterns and language idioms, showing you how to make the most of features ranging from generics to enums, annotations to autoboxing.\r\n" + 
 				" \r\n" + 
-				"Each chapter in the book consists of several “items” presented in the form of a short, standalone essay that provides specific advice, insight into Java platform subtleties, and outstanding code examples. The comprehensive descriptions and explanations for each item illuminate what to do, what not to do, and why.");
+				"Each chapter in the book consists of several ï¿½itemsï¿½ presented in the form of a short, standalone essay that provides specific advice, insight into Java platform subtleties, and outstanding code examples. The comprehensive descriptions and explanations for each item illuminate what to do, what not to do, and why.");
 		book.setIsbn("0321356683");
 		book.setPrice(38.87f);
 		
@@ -79,11 +79,11 @@ public class BookDAOTest extends BaseDAOTest{
 		book.setCategory(category);
 		book.setTitle("Java Core");
 		book.setAuthor("Chu Minh Tan");
-		book.setDescription("Are you looking for a deeper understanding of the Java™ programming language so that you can write code that is clearer, more correct, more robust, and more reusable? Look no further! Effective Java™, Second Edition, brings together seventy-eight indispensable programmer’s rules of thumb: working, best-practice solutions for the programming challenges you encounter every day.\r\n" + 
+		book.setDescription("Are you looking for a deeper understanding of the Javaï¿½ programming language so that you can write code that is clearer, more correct, more robust, and more reusable? Look no further! Effective Javaï¿½, Second Edition, brings together seventy-eight indispensable programmerï¿½s rules of thumb: working, best-practice solutions for the programming challenges you encounter every day.\r\n" + 
 				" \r\n" + 
 				"This highly anticipated new edition of the classic, Jolt Award-winning work has been thoroughly updated to cover Java SE 5 and Java SE 6 features introduced since the first edition. Bloch explores new design patterns and language idioms, showing you how to make the most of features ranging from generics to enums, annotations to autoboxing.\r\n" + 
 				" \r\n" + 
-				"Each chapter in the book consists of several “items” presented in the form of a short, standalone essay that provides specific advice, insight into Java platform subtleties, and outstanding code examples. The comprehensive descriptions and explanations for each item illuminate what to do, what not to do, and why.");
+				"Each chapter in the book consists of several ï¿½itemsï¿½ presented in the form of a short, standalone essay that provides specific advice, insight into Java platform subtleties, and outstanding code examples. The comprehensive descriptions and explanations for each item illuminate what to do, what not to do, and why.");
 		book.setIsbn("0321356683");
 		book.setPrice(38.87f);
 		
@@ -165,4 +165,42 @@ public class BookDAOTest extends BaseDAOTest{
 		assertNotNull(listBooks);
 	}
 	
+	@Test
+	public void testListNewBooks() {
+		List<Book> listBooks = bookDao.listNewBooks();
+		for (Book b:listBooks) {
+			System.out.println(b);
+		}
+		assertTrue(listBooks.size() == 4);
+	}
+	
+	@Test
+	public void testSearchBookByTitle() {
+		List<Book> listBooks = bookDao.search("java");
+		for (Book b: listBooks) {
+			System.out.println(b);
+		}
+		
+		assertTrue(listBooks.size() > 0);
+	}
+	
+	@Test
+	public void testSearchBookByAuthor() {
+		List<Book> listBooks = bookDao.search("jashua");
+		for (Book b: listBooks) {
+			System.out.println(b);
+		}
+		
+		assertTrue(listBooks.size() > 0);
+	}
+	
+	@Test
+	public void testSearchBookByDescription() {
+		List<Book> listBooks = bookDao.search("tests");
+		for (Book b: listBooks) {
+			System.out.println(b);
+		}
+		
+		assertTrue(listBooks.size() > 0);
+	}
 }

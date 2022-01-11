@@ -1,38 +1,78 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<header>
-	<nav class="navbar navbar-expand-lg navbar navbar-light bg-light">
-		<a class="navbar-brand text-primary"
-			href="${pageContext.request.contextPath }"> <img
-			src="${pageContext.request.contextPath }/images/smiling-sun.png"
-			width="30" height="30" class="d-inline-block align-top" alt="">
-			<strong>The English Book Shop</strong>
-		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+<header class="section-header">
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active mx-1"><a class="nav-link"
-					href="${pageContext.request.contextPath }"><i
-						class="fas fa-home"></i> Home</a></li>
-				<li class="nav-item active mx-1"><a class="nav-link" href="#"><i
-						class="fas fa-align-justify"></i> All Books</a></li>
-				<li class="nav-item active mx-1"><a class="nav-link" href="#"><i
-						class="fas fa-baby-carriage"></i> Cart</a></li>
-			</ul>
-			<a class="btn btn-warning m-1 text-white" href="#" tabindex="-1"
-				aria-disabled="true">Sign In</a> <a
-				class="btn btn-success m-1 text-white" href="#" tabindex="-1"
-				aria-disabled="true">Register</a>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-			</form>
+	<section class="header-main border-bottom">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-3 col-sm-4 col-12">
+					<a href="${pageContext.request.contextPath }" class="brand-wrap"> <img
+						class="logo" src="${pageContext.request.contextPath}/images/smiling-sun.png">
+						<span><strong>English Book Shop</strong></span>
+					</a>
+					<!-- brand-wrap.// -->
+				</div>
+				<div class="col-lg-4 col-xl-5 col-sm-8 col-12">
+					<form action="search" class="search" method="get">
+						<div class="input-group w-100">
+							<input type="text" name="keyword"class="form-control" style="width: 55%;"
+								placeholder="Search">
+							<div class="input-group-append">
+								<button class="btn btn-primary" type="submit">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+					<!-- search-wrap .end// -->
+				</div>
+				<!-- col.// -->
+				<div class="col-lg-5 col-xl-4 col-sm-12">
+					<div class="d-flex widgets-wrap float-md-right align-items-center">
+						<a href="#" class="badge badge-light text-dark p-2 mr-4 d-flex justify-content-center align-items-center">
+							Cart<i class="fa fa-shopping-cart mr-2 ml-2" style="font-size:21px;"></i>
+							<span class="badge badge-danger" style="font-size:14px;">91</span>
+						</a>
+						<div class="widget-header dropdown">
+							<a href="#" data-toggle="dropdown" data-offset="20,10">
+								<div class="icontext ">
+									<div class="icon">
+										<i class="icon-sm rounded-circle border fa fa-user"></i>
+									</div>
+									<div class="text">
+										<small class="text-muted">Sign in | Join</small>
+										<div>
+											My account <i class="fa fa-caret-down"></i>
+										</div>
+									</div>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<form class="px-4 py-3">
+									<div class="form-group">
+										<label>Email address</label> <input type="email"
+											class="form-control" placeholder="email@example.com">
+									</div>
+									<div class="form-group">
+										<label>Password</label> <input type="password"
+											class="form-control" placeholder="Password">
+									</div>
+									<button type="submit" class="btn btn-primary">Sign in</button>
+								</form>
+								<hr class="dropdown-divider">
+								<a class="dropdown-item" href="#">Have account? Sign up</a> <a
+									class="dropdown-item" href="#">Forgot password?</a>
+							</div>
+							<!--  dropdown-menu .// -->
+						</div>
+						<!-- widget-header .// -->
+					</div>
+					<!-- widgets-wrap.// -->
+				</div>
+				<!-- col.// -->
+			</div>
+			<!-- row.// -->
 		</div>
-	</nav>
+		<!-- container.// -->
+	</section>
+	<!-- header-main .// -->
 </header>

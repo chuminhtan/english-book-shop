@@ -15,10 +15,10 @@
 
 		<!-- Main -->
 	<div class="jumbotron">
-		<a href="create-category" class="btn btn-outline-info"><i
+		<a href="create-category" class="btn btn-primary"><i
 			class="fas fa-plus"></i> Create Category</a>
 			
-		<h2 class="text-info my-4 text-center">List Of Categories</h2>
+		<h2 class="text-primary my-4 text-center">List Of Categories</h2>
 		<div class="table-responsive">
 			<table class="table table-hover table-striped">
 				<thead class="thead-dark">

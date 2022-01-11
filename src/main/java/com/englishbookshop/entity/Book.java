@@ -34,7 +34,11 @@ import com.englishbookshop.dao.BookDAO;
 	@NamedQuery(name = BookDAO.BOOK_FIND_BY_TITLE, query = "SELECT b FROM Book b WHERE b.title = :title"),
 	@NamedQuery(name = BookDAO.BOOK_COUNT, query="SELECT COUNT(b.bookId) FROM Book b"),
 	@NamedQuery(name = BookDAO.BOOK_FIND_BY_CATEGORY, query="SELECT b FROM Book b JOIN Category c ON b.category.categoryId = c.categoryId"
-			+ " WHERE c.categoryId = :categoryId")
+			+ " WHERE c.categoryId = :categoryId"),
+	@NamedQuery(name = BookDAO.BOOK_LIST_NEW_BOOKS, query="SELECT b FROM Book b ORDER BY b.publishDate DESC"),
+	@NamedQuery(name = BookDAO.BOOK_SEARCH, query="SELECT b FROM Book b WHERE b.title LIKE '%' || :keyword || '%' "
+			+ "OR b.author LIKE '%' || :keyword || '%'"
+			+ "OR b.description LIKE '%' || :keyword || '%'")
 })
 public class Book implements java.io.Serializable {
 
@@ -44,6 +48,7 @@ public class Book implements java.io.Serializable {
 	private String title;
 	private String author;
 	private String description;
+	private String shortDescription;
 	private String isbn;
 	private byte[] image;
 	private String imageBase64;
@@ -52,6 +57,11 @@ public class Book implements java.io.Serializable {
 	private Date lastUpdateTime;
 	private Set<Review> reviews = new HashSet<Review>(0);
 	private Set<OrderDetail> orderDetails = new HashSet<OrderDetail>(0);
+	
+	@Transient
+	public String getShortDescription() {
+		return description.substring(0, 150) + "...";
+	}
 	
 	@Transient
 	public String getImageBase64() {

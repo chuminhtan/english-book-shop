@@ -15,7 +15,7 @@
 
 		<!-- Main -->
 		<div class="jumbotron">
-			<a href="." class="btn btn-outline-info"><i
+			<a href="." class="btn btn-outline-primary"><i
 				class="fas fa-arrow-left"></i> Back</a>
 			<h2 class="text-info mt-5">Create Book</h2>
 			<!-- FORM -->

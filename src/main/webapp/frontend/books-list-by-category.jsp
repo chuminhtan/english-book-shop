@@ -14,178 +14,95 @@
 	<div class="container-fluid">
 		<jsp:include page="header.jsp"></jsp:include>
 		<jsp:include page="categories.jsp"></jsp:include>
-		${LIST_BOOKS }
-		<div class="container d-flex justify-content-center mt-50 mb-50">
-			<div class="row">
-				<div class="col-md-10">
-					<div class="card card-body">
-						<div
-							class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
-							<div class="mr-2 mb-3 mb-lg-0">
-								<img src="https://i.imgur.com/5Aqgz7o.jpg" width="150"
-									height="150" alt="">
-							</div>
-							<div class="media-body">
-								<h6 class="media-title font-weight-semibold">
-									<a href="#" data-abc="true">Apple iPhone XR (Red, 128 GB)</a>
-								</h6>
-								<ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
-									<li class="list-inline-item"><a href="#"
-										class="text-muted" data-abc="true">Phones</a></li>
-									<li class="list-inline-item"><a href="#"
-										class="text-muted" data-abc="true">Mobiles</a></li>
-								</ul>
-								<p class="mb-3">128 GB ROM | 15.49 cm (6.1 inch) Display
-									12MP Rear Camera | 7MP Front Camera A12 Bionic Chip Processor |
-									Gorilla Glass with high quality display</p>
-								<ul class="list-inline list-inline-dotted mb-0">
-									<li class="list-inline-item">All items from <a href="#"
-										data-abc="true">Mobile point</a></li>
-									<li class="list-inline-item">Add to <a href="#"
-										data-abc="true">wishlist</a></li>
-								</ul>
-							</div>
-							<div class="mt-3 mt-lg-0 ml-lg-3 text-center">
-								<h3 class="mb-0 font-weight-semibold">$459.99</h3>
-								<div>
-									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-										class="fa fa-star"></i> <i class="fa fa-star"></i>
-								</div>
-								<div class="text-muted">1985 reviews</div>
-								<button type="button" class="btn btn-warning mt-4 text-white">
-									<i class="icon-cart-add mr-2"></i> Add to cart
-								</button>
+
+		<p class="display-4 text-center text-primary">
+			<strong>${CATEGORY.name }</strong>
+		</p>
+
+		<!-- Main -->
+		<section class="section-content padding-y bg">
+			<div class="container">
+				<div class="row d-flex justify-content-center">
+					<main class="col-md-10">
+
+						<!----------------- Breadcrumb ----------------->
+						<div class="card mb-2">
+							<div class="card-body d-flex align-items-center">
+								<nav class="flex-fill">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="#">Home</a></li>
+										<li class="breadcrumb-item"><a href="#">${CATEGORY.name }</a></li>
+									</ol>
+								</nav>
 							</div>
 						</div>
-					</div>
-					<div class="card card-body mt-3">
-						<div
-							class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
-							<div class="mr-2 mb-3 mb-lg-0">
-								<img src="https://i.imgur.com/Aj0L4Wa.jpg" width="150"
-									height="150" alt="">
-							</div>
-							<div class="media-body">
-								<h6 class="media-title font-weight-semibold">
-									<a href="#" data-abc="true">Apple iPhone XS Max (Gold, 64
-										GB)</a>
-								</h6>
-								<ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
-									<li class="list-inline-item"><a href="#"
-										class="text-muted" data-abc="true">Phones</a></li>
-									<li class="list-inline-item"><a href="#"
-										class="text-muted" data-abc="true">Mobiles</a></li>
-								</ul>
-								<p class="mb-3">256 GB ROM | 15.49 cm (6.1 inch) Display
-									12MP Rear Camera | 15MP Front Camera A12 Bionic Chip Processor
-									| Gorilla Glass with high quality display</p>
-								<ul class="list-inline list-inline-dotted mb-0">
-									<li class="list-inline-item">All items from <a href="#"
-										data-abc="true">Mobile junction</a></li>
-									<li class="list-inline-item">Add to <a href="#"
-										data-abc="true">wishlist</a></li>
-								</ul>
-							</div>
-							<div class="mt-3 mt-lg-0 ml-lg-3 text-center">
-								<h3 class="mb-0 font-weight-semibold">$612.99</h3>
-								<div>
-									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-										class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-										class="fa fa-star"></i>
+						<!-- End Breadcrumb -->
+
+						<!-- ============================ COMPONENT ================================= -->
+						<c:forEach var="book" items="${LIST_BOOKS }">
+							<article class="card card-product-list my-3">
+								<div class="row no-gutters">
+									<aside class="col-md-3">
+										<a href="view-book?id=${book.bookId }" class="img-wrap"> <img
+											src="data:image/png; base64, ${book.imageBase64 }"
+											alt="${book.title }">
+										</a>
+									</aside>
+									<!-- col.// -->
+									<div class="col-md-6">
+										<div class="info-main">
+											<a href="view-book?id=${book.bookId }" class="h5 title"><strong
+												class="content-justify">${book.title }</strong></a>
+											<p class="content-justify">${book.shortDescription}</p>
+										</div>
+										<!-- info-main.// -->
+									</div>
+									<!-- col.// -->
+									<aside class="col-sm-3">
+										<div class="info-aside">
+											<div class="price-wrap">
+												<span class="price h5"><strong>$${book.price
+														}</strong></span>
+											</div>
+											<div class="rating-wrap mb-3">
+												<ul class="rating-stars">
+													<li style="width: 80%" class="stars-active"><i
+														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i></li>
+													<li><i class="fa fa-star"></i> <i class="fa fa-star"></i>
+														<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i></li>
+												</ul>
+												<div class="label-rating">7/10</div>
+											</div>
+											<!-- rating-wrap.// -->
+											<br>
+											<p>
+												<a href="#" class="btn btn-outline-primary btn-block"> <span
+													class="text">Detail</span>
+												</a> <a href="#" class="btn btn-primary btn-block"><i
+													class="fas fa-shopping-cart"></i> Add To Cart </a>
+											</p>
+										</div>
+										<!-- info-aside.// -->
+									</aside>
+									<!-- col.// -->
 								</div>
-								<div class="text-muted">2349 reviews</div>
-								<button type="button" class="btn btn-warning mt-4 text-white">
-									<i class="icon-cart-add mr-2"></i> Add to cart
-								</button>
-							</div>
-						</div>
-					</div>
-					<div class="card card-body mt-3">
-						<div
-							class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
-							<div class="mr-2 mb-3 mb-lg-0">
-								<img src="https://i.imgur.com/5Aqgz7o.jpg" width="150"
-									height="150" alt="">
-							</div>
-							<div class="media-body">
-								<h6 class="media-title font-weight-semibold">
-									<a href="#" data-abc="true">Apple iPhone XR (Red, 128 GB)</a>
-								</h6>
-								<ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
-									<li class="list-inline-item"><a href="#"
-										class="text-muted" data-abc="true">Phones</a></li>
-									<li class="list-inline-item"><a href="#"
-										class="text-muted" data-abc="true">Mobiles</a></li>
-								</ul>
-								<p class="mb-3">128 GB ROM | 15.49 cm (6.1 inch) Display
-									12MP Rear Camera | 7MP Front Camera A12 Bionic Chip Processor |
-									Gorilla Glass with high quality display</p>
-								<ul class="list-inline list-inline-dotted mb-0">
-									<li class="list-inline-item">All items from <a href="#"
-										data-abc="true">Mobile point</a></li>
-									<li class="list-inline-item">Add to <a href="#"
-										data-abc="true">wishlist</a></li>
-								</ul>
-							</div>
-							<div class="mt-3 mt-lg-0 ml-lg-3 text-center">
-								<h3 class="mb-0 font-weight-semibold">$459.99</h3>
-								<div>
-									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-										class="fa fa-star"></i> <i class="fa fa-star"></i>
-								</div>
-								<div class="text-muted">1985 reviews</div>
-								<button type="button" class="btn btn-warning mt-4 text-white">
-									<i class="icon-cart-add mr-2"></i> Add to cart
-								</button>
-							</div>
-						</div>
-					</div>
-					<div class="card card-body mt-3">
-						<div
-							class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
-							<div class="mr-2 mb-3 mb-lg-0">
-								<img src="https://i.imgur.com/Aj0L4Wa.jpg" width="150"
-									height="150" alt="">
-							</div>
-							<div class="media-body">
-								<h6 class="media-title font-weight-semibold">
-									<a href="#" data-abc="true">Apple iPhone XS Max (Gold, 64
-										GB)</a>
-								</h6>
-								<ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
-									<li class="list-inline-item"><a href="#"
-										class="text-muted" data-abc="true">Phones</a></li>
-									<li class="list-inline-item"><a href="#"
-										class="text-muted" data-abc="true">Mobiles</a></li>
-								</ul>
-								<p class="mb-3">256 GB ROM | 15.49 cm (6.1 inch) Display
-									12MP Rear Camera | 15MP Front Camera A12 Bionic Chip Processor
-									| Gorilla Glass with high quality display</p>
-								<ul class="list-inline list-inline-dotted mb-0">
-									<li class="list-inline-item">All items from <a href="#"
-										data-abc="true">Mobile junction</a></li>
-									<li class="list-inline-item">Add to <a href="#"
-										data-abc="true">wishlist</a></li>
-								</ul>
-							</div>
-							<div class="mt-3 mt-lg-0 ml-lg-3 text-center">
-								<h3 class="mb-0 font-weight-semibold">$612.99</h3>
-								<div>
-									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-										class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-										class="fa fa-star"></i>
-								</div>
-								<div class="text-muted">2349 reviews</div>
-								<button type="button" class="btn btn-warning mt-4 text-white">
-									<i class="icon-cart-add mr-2"></i> Add to cart
-								</button>
-							</div>
-						</div>
-					</div>
+								<!-- row.// -->
+							</article>
+						</c:forEach>
+
+
+						<!-- card-product .// -->
+						<!-- ============================ COMPONENT 3 .//END ================================= -->
+					</main>
 				</div>
+				<!-- row.// -->
 			</div>
-		</div>
-		<!-- BEGIN FOOTER & SCRIPTS -->
+			<!-- container .//  -->
+		</section>
+		<!-- End Main -->
 		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
 </body>

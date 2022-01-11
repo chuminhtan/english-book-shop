@@ -212,12 +212,45 @@ public class BookServices extends BaseServices {
 			System.out.println(b);
 		}
 		
-//		response.getWriter().print(categoryId);
-//		response.getWriter().print(listBooks);
-//		response.getWriter().print(category.getBooks());
+		List<Category> listCategories = catDao.listAll();
+
+		request.setAttribute("LIST_CATEGORIES", listCategories);
 		request.setAttribute("LIST_BOOKS", listBooks);
 		request.setAttribute("CATEGORY", category);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOKS_LIST_BY_CATEGORY);
+		dispatcher.forward(request, response);
+	}
+
+	public void viewBookDetail() throws IOException, ServletException{
+		int bookId = Integer.parseInt(request.getParameter("id"));
+		
+		Book book = bookDao.get(bookId);
+		List<Category> listCategories = catDao.listAll();
+		
+		request.setAttribute("BOOK", book);
+		request.setAttribute("LIST_CATEGORIES", listCategories);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOK_DETAIL);
+		dispatcher.forward(request, response);
+	}
+
+	public void search() throws ServletException, IOException {
+		String keyword = request.getParameter("keyword");
+		List<Book> listBooks = null;
+		
+		if (keyword.isEmpty()) {
+			listBooks = bookDao.listAll();
+		} else {
+			listBooks = bookDao.search(keyword);			
+		}
+		
+		List<Category> listCategories = catDao.listAll();
+		
+		request.setAttribute("KEYWORD", keyword);
+		request.setAttribute("LIST_CATEGORIES", listCategories);
+		request.setAttribute("LIST_BOOKS", listBooks);			
+	
+		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOK_SEARCH);
 		dispatcher.forward(request, response);
 	}
 }

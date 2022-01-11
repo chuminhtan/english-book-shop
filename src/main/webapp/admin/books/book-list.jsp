@@ -15,7 +15,7 @@
 
 		<!-- Main -->
 		<div class="jumbotron">
-			<a href="create-book" class="btn btn-outline-info"><i
+			<a href="create-book" class="btn btn-primary"><i
 				class="fas fa-plus"></i> Create Book</a>
 
 			<h3 class="text-info mt-5">List Of Books</h3>

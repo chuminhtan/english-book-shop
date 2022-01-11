@@ -5,7 +5,7 @@
 	<div class="row d-flex justify-content-center">
 		<c:forEach items="${LIST_CATEGORIES}" var="category">
 			<a href="view-category?id=${category.categoryId }"
-				class="btn btn-primary m-1">${category.name } Book</a>
+				class="btn btn-outline-primary m-1">${category.name } Book</a>
 		</c:forEach>
 	</div>
 </div>
