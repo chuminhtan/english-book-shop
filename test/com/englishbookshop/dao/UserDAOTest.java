@@ -17,19 +17,18 @@ import org.junit.Test;
 import com.englishbookshop.entity.Users;
 import com.englishbookshop.helper.PersistenceProjectHelper;
 
-public class UserDAOTest extends BaseDAOTest{
+public class UserDAOTest{
 
 	private static UserDAO userDao;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		BaseDAOTest.setUpBeforeClass();
-		userDao = new UserDAO(entityManager);
+		userDao = new UserDAO();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		BaseDAOTest.tearDownAfterClass();
+		userDao.close();
 	}
 	
 	@Test

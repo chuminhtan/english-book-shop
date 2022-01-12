@@ -32,10 +32,10 @@ public class BookServices extends BaseServices {
 	private BookDAO bookDao;
 	private CategoryDAO catDao;
 
-	public BookServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
-		super(entityManager, request, response);
-		bookDao = new BookDAO(entityManager);
-		catDao = new CategoryDAO(entityManager);
+	public BookServices(HttpServletRequest request, HttpServletResponse response) {
+		super(request, response);
+		bookDao = new BookDAO();
+		catDao = new CategoryDAO();
 	}
 
 	public void listBooks(String typeMsg,String msg) throws IOException, ServletException {

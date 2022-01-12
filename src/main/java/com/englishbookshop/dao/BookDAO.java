@@ -18,8 +18,7 @@ public class BookDAO extends JpaDAO<Book> implements IGenericDAO<Book> {
 	public static final String BOOK_LIST_NEW_BOOKS = "Book.listNewBooks";
 	public static final String BOOK_SEARCH = "Book.search";
 	
-	public BookDAO(EntityManager entityManager) {
-		super(entityManager);
+	public BookDAO() {
 	}
 
 	@Override
@@ -75,11 +74,7 @@ public class BookDAO extends JpaDAO<Book> implements IGenericDAO<Book> {
 	}
 	
 	public List<Book> listNewBooks(){
-		Query query = entityManager.createNamedQuery(BOOK_LIST_NEW_BOOKS);
-		query.setFirstResult(0);
-		query.setMaxResults(4);
-		
-		return query.getResultList();
+		return super.findWithNamedQuery(BOOK_LIST_NEW_BOOKS, 0, 4);
 	}
 	
 	public List<Book> search(String keyword) {

@@ -16,8 +16,7 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	public static final String USERS_FIND_BY_EMAIL ="Users.findByEmail";
 	public static final String USERS_CHECK_LOGIN ="Users.checkLogin";
 	
-	public UserDAO(EntityManager entityManager) {
-		super(entityManager);
+	public UserDAO() {
 	}
 	
 	@Override

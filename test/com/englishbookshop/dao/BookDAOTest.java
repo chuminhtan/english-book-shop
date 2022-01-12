@@ -20,19 +20,18 @@ import com.englishbookshop.entity.Category;
 
 import junit.runner.BaseTestRunner;
 
-public class BookDAOTest extends BaseDAOTest{
+public class BookDAOTest{
 
 	private static BookDAO bookDao;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		BaseDAOTest.setUpBeforeClass();
-		bookDao = new BookDAO(entityManager);
+		bookDao = new BookDAO();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		BaseDAOTest.tearDownAfterClass();
+		bookDao.close();
 	}
 
 	@Test
@@ -112,7 +111,7 @@ public class BookDAOTest extends BaseDAOTest{
 	
 	@Test
 	public void testGetBook() {
-		Book book = bookDao.get(2);
+		Book book = bookDao.get(1);
 		
 		assertNotNull(book);
 	}

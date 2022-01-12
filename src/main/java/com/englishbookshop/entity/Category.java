@@ -66,7 +66,7 @@ public class Category implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
 	public Set<Book> getBooks() {
 		return this.books;
 	}

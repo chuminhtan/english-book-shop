@@ -7,12 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.englishbookshop.controller.BaseServlet;
 import com.englishbookshop.service.CategoryServices;
 
 
 @WebServlet("/admin/categories/")
-public class ListCategoryServlet extends BaseServlet {
+public class ListCategoryServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
        
     public ListCategoryServlet() {
@@ -20,7 +19,7 @@ public class ListCategoryServlet extends BaseServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CategoryServices categoryServices = new CategoryServices(entityManager,request, response);
+		CategoryServices categoryServices = new CategoryServices(request, response);
 		categoryServices.listAll(null);
 	}
 

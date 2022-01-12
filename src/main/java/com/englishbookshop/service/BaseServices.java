@@ -10,12 +10,10 @@ import com.englishbookshop.dao.UserDAO;
 import com.englishbookshop.helper.PersistenceProjectHelper;
 
 public class BaseServices {
-	protected EntityManager entityManager;
 	protected HttpServletRequest request;
 	protected HttpServletResponse response;
 	
-	protected BaseServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
-		this.entityManager = entityManager;
+	protected BaseServices( HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
 	}

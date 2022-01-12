@@ -13,9 +13,7 @@ public class CategoryDAO extends JpaDAO<Category> implements IGenericDAO<Categor
 	public static final String CATEGORY_COUNT = "CategoryDAO.count";
 	public static final String CATEGORY_FIND_BY_NAME = "CategoryDAO.findByName";
 	
-	public CategoryDAO(EntityManager entityManager) {
-		super(entityManager);
-		
+	public CategoryDAO() {	
 	}
 	
 	@Override

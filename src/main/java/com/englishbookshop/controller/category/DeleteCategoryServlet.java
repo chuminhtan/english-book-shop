@@ -7,11 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.englishbookshop.controller.BaseServlet;
 import com.englishbookshop.service.CategoryServices;
 
 @WebServlet("/admin/categories/delete-category")
-public class DeleteCategoryServlet extends BaseServlet {
+public class DeleteCategoryServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
        
     public DeleteCategoryServlet() {
@@ -19,7 +18,7 @@ public class DeleteCategoryServlet extends BaseServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			CategoryServices catServices = new CategoryServices(entityManager,request, response);
+			CategoryServices catServices = new CategoryServices(request, response);
 			catServices.deleteCategory();
 	}
 

@@ -22,9 +22,9 @@ import com.google.gson.Gson;
 public class CategoryServices extends BaseServices{
 	private CategoryDAO categoryDAO;
 	
-	public CategoryServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
-		super(entityManager, request, response);
-		categoryDAO = new CategoryDAO(super.entityManager);
+	public CategoryServices(HttpServletRequest request, HttpServletResponse response) {
+		super(request, response);
+		categoryDAO = new CategoryDAO();
 	}
 	
 	public void listAll(String message) throws ServletException, IOException {

@@ -12,13 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.HashMap;
 
-import com.englishbookshop.controller.BaseServlet;
 import com.englishbookshop.helper.ServletHelper;
 import com.englishbookshop.service.UserServices;
 import com.google.gson.Gson;
 
 @WebServlet("/admin/users/delete-user")
-public class DeleteUserServlet extends BaseServlet {
+public class DeleteUserServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     public DeleteUserServlet() {
         super();
@@ -26,7 +25,7 @@ public class DeleteUserServlet extends BaseServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserServices userServices = new  UserServices(entityManager,request, response);
+		UserServices userServices = new  UserServices(request, response);
 		userServices.deleteUser();
 	}
 
