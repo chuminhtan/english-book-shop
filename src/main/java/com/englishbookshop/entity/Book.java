@@ -38,7 +38,8 @@ import com.englishbookshop.dao.BookDAO;
 	@NamedQuery(name = BookDAO.BOOK_LIST_NEW_BOOKS, query="SELECT b FROM Book b ORDER BY b.publishDate DESC"),
 	@NamedQuery(name = BookDAO.BOOK_SEARCH, query="SELECT b FROM Book b WHERE b.title LIKE '%' || :keyword || '%' "
 			+ "OR b.author LIKE '%' || :keyword || '%'"
-			+ "OR b.description LIKE '%' || :keyword || '%'")
+			+ "OR b.description LIKE '%' || :keyword || '%'"),
+	@NamedQuery(name = BookDAO.BOOK_COUNT_BY_CATEGORY, query="SELECT COUNT(b.bookId) FROM Book b WHERE b.category.categoryId = :categoryId")
 })
 public class Book implements java.io.Serializable {
 
@@ -60,7 +61,23 @@ public class Book implements java.io.Serializable {
 	
 	@Transient
 	public String getShortDescription() {
-		return description.substring(0, 150) + "...";
+		StringBuilder strBuilder = new StringBuilder(description);
+		
+		int start = -1;
+		int end = -1;
+		
+		while (true) {
+			start = strBuilder.indexOf("<");
+			end = strBuilder.indexOf(">");
+			
+			if (start == -1 || end == -1) {
+				break;
+			}
+			
+			strBuilder.delete(start, end + 1);
+		}
+		
+		return strBuilder.substring(0, 150).toString() + "...";
 	}
 	
 	@Transient

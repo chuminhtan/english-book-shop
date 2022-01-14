@@ -83,6 +83,7 @@ public class UserServices extends BaseServices{
 	}
 
 	public void updateUser() throws ServletException, IOException{
+		
 		int userId = Integer.parseInt(request.getParameter("user-id"));
 		String email = request.getParameter("email");
 		String fullName = request.getParameter("full-name");
@@ -103,9 +104,14 @@ public class UserServices extends BaseServices{
 		if (userByEmail == null || userId==userByEmail.getUserId()) {
 			
 			Users userUpdated = new Users(userId, email, password, fullName);
-			userById = userDAO.update(userUpdated);
 			
-			message="The user was updated successfully";
+			if (password == null) {
+				userDAO.updateNoPassword(userUpdated);
+			} else {
+				userDAO.update(userUpdated);				
+			}
+			
+			message="The user has updated successfully";
 			request.setAttribute("MESSAGE", message);
 			
 		} else {
@@ -113,11 +119,6 @@ public class UserServices extends BaseServices{
 			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);
 		}
 		
-		/*
-		 * request.setAttribute("USER", userById); RequestDispatcher rd =
-		 * request.getRequestDispatcher(JSPPathHelper.USER_EDIT); rd.forward(request,
-		 * response);
-		 */
 		listAll(message);
 	}
 	
@@ -167,7 +168,7 @@ public class UserServices extends BaseServices{
 			response.sendRedirect(request.getContextPath() + "/admin");
 		} else {
 			String message = "Login failed";
-			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);
+			request.setAttribute(ServletHelper.MESSAGE, message);
 			
 			RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.ADMIN_LOGIN);
 			rd.forward(request, response);

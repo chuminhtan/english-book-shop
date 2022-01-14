@@ -112,7 +112,8 @@ public class BookDAOTest{
 	@Test
 	public void testGetBook() {
 		Book book = bookDao.get(1);
-		
+		String shortDescription = book.getShortDescription();
+		System.out.println(shortDescription);
 		assertNotNull(book);
 	}
 	
@@ -148,6 +149,13 @@ public class BookDAOTest{
 		long count = bookDao.count();
 		System.out.println(count);
 		assertTrue(count > 0);
+	}
+	
+	@Test
+	public void testCountByCategory() {
+		long numberOfBooks = bookDao.countByCategory(7);
+		
+		assertTrue(numberOfBooks == 4);
 	}
 	
 	@Test

@@ -53,10 +53,10 @@ public class UserDAOTest{
 	@Test
 	public void testUpdateUsers() {
 		Users user = new Users();
-		user.setUserId(12);
-		user.setFullName("Hello Update");
-		user.setEmail("helloupdate@gmail.com");
-		user.setPassword("4444");
+		user.setUserId(61);
+		user.setFullName("Chu Minh Tan");
+		user.setEmail("chuminhtan@gmail.com");
+		user.setPassword("09101995");
 		
 		Users userUpdated = userDao.update(user);
 		
@@ -64,6 +64,17 @@ public class UserDAOTest{
 		assertEquals(user.getFullName(), userUpdated.getFullName());
 		assertEquals(user.getEmail(), userUpdated.getEmail());
 		assertEquals(user.getPassword(), userUpdated.getPassword());	
+	}
+	
+	@Test
+	public void testUpdateNoPassword() {
+		Users user = new Users();
+		user.setUserId(61);
+		user.setFullName("Nguyen Thi Le");
+		user.setEmail("NguyenThiLe@gmail.com");
+		
+		int numUpdated = userDao.updateNoPassword(user);
+		assertEquals(numUpdated,1);
 	}
 	
 	@Test
@@ -136,11 +147,11 @@ public class UserDAOTest{
 	
 	@Test
 	public void testUserLoginSuccess() {
-		String email = "chuminhtan@gmail.com";
-		String password ="123456";
+		String email = "admin2@gmail.com";
+		String password ="hello";
 		
 		boolean result = userDao.checkLogin(email, password);
-		
+		System.out.println(result);
 		assertTrue(result);
 	}
 	
@@ -153,4 +164,5 @@ public class UserDAOTest{
 		
 		assertFalse(result);
 	}
+	
 }

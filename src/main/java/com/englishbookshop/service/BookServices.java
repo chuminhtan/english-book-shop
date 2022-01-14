@@ -53,9 +53,7 @@ public class BookServices extends BaseServices {
 
 	public void showCreateForm() throws ServletException, IOException {
 		List<Category> listCategories = catDao.listAll();
-
 		request.setAttribute("LIST_CATEGORIES", listCategories);
-
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOK_CREATE);
 		dispatcher.forward(request, response);
 
@@ -64,11 +62,11 @@ public class BookServices extends BaseServices {
 	public void createBook() throws ServletException, IOException {
 
 		String title = request.getParameter("title"); 
-
+		
 		Book existBook = bookDao.findByTitle(title);
 		
 		if (existBook != null) {
-			listBooks(ServletHelper.MESSAGE, title + ServletHelper.MESSAGE_CREATE_EXIST);
+			listBooks(ServletHelper.MESSAGE, title + ServletHelper.MESSAGE_ALREADY_EXIST);
 			return;
 		}
 			
@@ -89,7 +87,7 @@ public class BookServices extends BaseServices {
 		Book bookWithTitle = bookDao.findByTitle(title);
 		
 		if (bookWithTitle != null && bookWithTitle.getBookId() != bookId) {
-			listBooks(ServletHelper.MESSAGE, "The book with title " + title + ServletHelper.MESSAGE_CREATE_EXIST);
+			listBooks(ServletHelper.MESSAGE, "The book with title " + title + ServletHelper.MESSAGE_ALREADY_EXIST);
 			return;
 		}
 		
@@ -123,9 +121,7 @@ public class BookServices extends BaseServices {
 			listBooks(ServletHelper.MESSAGE, "The book with id " + bookId + ServletHelper.MESSAGE_DOES_NOT_EXIST);
 			return;
 		}
-		
 		List<Category> listCategories = catDao.listAll();
-
 		request.setAttribute("LIST_CATEGORIES", listCategories);
 		request.setAttribute("BOOK", existBook);
 		
@@ -140,14 +136,16 @@ public class BookServices extends BaseServices {
 		String isbn = request.getParameter("isbn");
 		String description = request.getParameter("description");
 		Float price = Float.parseFloat(request.getParameter("price"));
-
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		String publishDateRequest = request.getParameter("publish-date");
+		System.out.println("publishDate: " + publishDateRequest);
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date publishDate;
 		try {
 			publishDate = dateFormat.parse(request.getParameter("publish-date"));
 		} catch (ParseException e) {
 			e.printStackTrace();
-			throw new ServletException("Error parsing publish date dd/mm/yyyy");
+			throw new ServletException("Error parsing publish date dd/MM/yyyy");
 		}
 		
 		Category category = new Category();
@@ -212,9 +210,6 @@ public class BookServices extends BaseServices {
 			System.out.println(b);
 		}
 		
-		List<Category> listCategories = catDao.listAll();
-
-		request.setAttribute("LIST_CATEGORIES", listCategories);
 		request.setAttribute("LIST_BOOKS", listBooks);
 		request.setAttribute("CATEGORY", category);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOKS_LIST_BY_CATEGORY);
@@ -222,13 +217,10 @@ public class BookServices extends BaseServices {
 	}
 
 	public void viewBookDetail() throws IOException, ServletException{
-		int bookId = Integer.parseInt(request.getParameter("id"));
-		
-		Book book = bookDao.get(bookId);
-		List<Category> listCategories = catDao.listAll();
+		int bookId = Integer.parseInt(request.getParameter("id"));		
+		Book book = bookDao.get(bookId);	
 		
 		request.setAttribute("BOOK", book);
-		request.setAttribute("LIST_CATEGORIES", listCategories);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOK_DETAIL);
 		dispatcher.forward(request, response);
@@ -243,11 +235,8 @@ public class BookServices extends BaseServices {
 		} else {
 			listBooks = bookDao.search(keyword);			
 		}
-		
-		List<Category> listCategories = catDao.listAll();
-		
+
 		request.setAttribute("KEYWORD", keyword);
-		request.setAttribute("LIST_CATEGORIES", listCategories);
 		request.setAttribute("LIST_BOOKS", listBooks);			
 	
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOK_SEARCH);

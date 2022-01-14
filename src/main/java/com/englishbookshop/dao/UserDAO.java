@@ -15,6 +15,7 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	public static final String USERS_COUNT = "Users.count";
 	public static final String USERS_FIND_BY_EMAIL ="Users.findByEmail";
 	public static final String USERS_CHECK_LOGIN ="Users.checkLogin";
+	public static final String USERS_UPDATE_NO_PASSWORD = "Users.doNotUpdatePassword";
 	
 	public UserDAO() {
 	}
@@ -28,6 +29,9 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 	
 	@Override
 	public Users update(Users user) {
+		String hashedPass = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+		user.setPassword(hashedPass);
+		System.out.println("======= Hashed Pass: " + hashedPass);
 		return super.update(user);
 	}
 	
@@ -83,5 +87,13 @@ public class UserDAO extends JpaDAO<Users> implements IGenericDAO<Users> {
 		}
 		
 		return false;		
+	}
+	
+	public int updateNoPassword(Users user) {
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("email", user.getEmail());
+		parameters.put("fullName", user.getFullName());
+		parameters.put("userId", user.getUserId());	
+		return super.updateWithNamedQuery(USERS_UPDATE_NO_PASSWORD, parameters);
 	}
 }

@@ -30,8 +30,8 @@
 							<div class="card-body d-flex align-items-center">
 								<nav class="flex-fill">
 									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="#">Home</a></li>
-										<li class="breadcrumb-item"><a href="#">${CATEGORY.name }</a></li>
+										<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
+										<li class="breadcrumb-item"><a href="view-category?id=${CATEGORY.categoryId }">${CATEGORY.name }</a></li>
 									</ol>
 								</nav>
 							</div>
@@ -79,7 +79,7 @@
 											<!-- rating-wrap.// -->
 											<br>
 											<p>
-												<a href="#" class="btn btn-outline-primary btn-block"> <span
+												<a href="view-book?id=${book.bookId }" class="btn btn-outline-primary btn-block"> <span
 													class="text">Detail</span>
 												</a> <a href="#" class="btn btn-primary btn-block"><i
 													class="fas fa-shopping-cart"></i> Add To Cart </a>

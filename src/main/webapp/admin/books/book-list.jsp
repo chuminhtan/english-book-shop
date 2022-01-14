@@ -18,7 +18,7 @@
 			<a href="create-book" class="btn btn-primary"><i
 				class="fas fa-plus"></i> Create Book</a>
 
-			<h3 class="text-info mt-5">List Of Books</h3>
+			<h2 class="text-primary my-4 text-center">List Of Books</h2>
 			<div class="table-responsive">
 				<table class="table table-hover table-striped">
 					<thead class="thead-dark">

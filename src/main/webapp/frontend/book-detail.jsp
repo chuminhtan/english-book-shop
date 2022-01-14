@@ -25,8 +25,8 @@
 					<div class="card-body">
 
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item"><a href="#">${BOOK.category.name }</a></li>
+							<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
+							<li class="breadcrumb-item"><a href="view-category?id=${BOOK.category.categoryId }">${BOOK.category.name }</a></li>
 							<li class="breadcrumb-item active">${BOOK.title }</li>
 						</ol>
 

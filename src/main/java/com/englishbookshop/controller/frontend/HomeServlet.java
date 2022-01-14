@@ -25,12 +25,9 @@ public class HomeServlet extends HttpServlet{
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BookDAO bookDao = new BookDAO();
-		CategoryDAO catDAO = new CategoryDAO();
 		
-		List<Category> listCategories = catDAO.listAll();
 		List<Book> listNewBooks = bookDao.listNewBooks();
 		
-		request.setAttribute("LIST_CATEGORIES", listCategories);
 		request.setAttribute("LIST_NEW_BOOKS", listNewBooks);
 		
 		String homePage = "frontend/index.jsp";

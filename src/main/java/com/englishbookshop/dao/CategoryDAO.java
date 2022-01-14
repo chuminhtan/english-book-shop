@@ -3,9 +3,6 @@ package com.englishbookshop.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.persistence.EntityManager;
-
 import com.englishbookshop.entity.Category;
 
 public class CategoryDAO extends JpaDAO<Category> implements IGenericDAO<Category>{

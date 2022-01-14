@@ -38,10 +38,13 @@
 						minlength="6" maxlength="50" required value="${USER.email}">
 				</div>
 				<div class="form-group">
+					<input type="checkbox" id="check-change-password" />&nbsp;Change Password		
+				</div>
+				<div class="form-group">
 					<label for="password">Password</label> <input type="password"
 						class="form-control" id="password" name="password"
 						placeholder="Password" minlength="6" maxlength="30" required
-						value="${USER.password }">
+						value="" disabled>
 				</div>
 				<div class="d-flex justify-content-center">
 					<button type="submit" class="btn btn-success m-1">Submit</button>
@@ -58,4 +61,16 @@
 		<jsp:include page="../admin-footer.jsp"></jsp:include>
 	</div>
 </body>
+<script>
+	const password = document.getElementById("password");
+	const checkedChangePassword = document.getElementById("check-change-password");
+	checkedChangePassword.addEventListener("change", (e) => {
+		if (event.currentTarget.checked) {
+			password.disabled = false;
+			} 
+		else {
+			password.disabled = true;
+		}
+	});
+</script>
 </html>

@@ -21,7 +21,8 @@ import com.englishbookshop.dao.UserDAO;
 	@NamedQuery(name=UserDAO.USERS_FIND_ALL, query = "SELECT u FROM Users u ORDER BY u.fullName"),
 	@NamedQuery(name=UserDAO.USERS_COUNT, query="SELECT COUNT(*) FROM Users"),
 	@NamedQuery(name=UserDAO.USERS_FIND_BY_EMAIL, query="SELECT u FROM Users u WHERE u.email = :email"),
-	@NamedQuery(name=UserDAO.USERS_CHECK_LOGIN, query="SELECT u FROM Users u WHERE u.email= :email AND u.password = :password")
+	@NamedQuery(name=UserDAO.USERS_CHECK_LOGIN, query="SELECT u FROM Users u WHERE u.email= :email AND u.password = :password"),
+	@NamedQuery(name=UserDAO.USERS_UPDATE_NO_PASSWORD, query="UPDATE Users u SET u.email= :email, u.fullName= :fullName WHERE u.userId = :userId")
 })
 public class Users implements java.io.Serializable {
 

@@ -65,7 +65,7 @@
 											<!-- rating-wrap.// -->
 											<br>
 											<p>
-												<a href="#" class="btn btn-outline-primary btn-block"> <span
+												<a href="view-book?id=${book.bookId }" class="btn btn-outline-primary btn-block"> <span
 													class="text">Detail</span>
 												</a> <a href="#" class="btn btn-primary btn-block"><i
 													class="fas fa-shopping-cart"></i> Add To Cart </a>

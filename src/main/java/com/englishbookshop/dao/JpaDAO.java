@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
 import com.englishbookshop.helper.PersistenceProjectHelper;
 
 public class JpaDAO<E> {
@@ -40,7 +39,7 @@ public class JpaDAO<E> {
 		entityManager.getTransaction().begin();
 		entity = entityManager.merge(entity);
 		entityManager.getTransaction().commit();
-		
+
 		entityManager.close();
 
 		return entity;
@@ -72,6 +71,7 @@ public class JpaDAO<E> {
 		entityManager.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<E> findWithNamedQuery(String queryName) {
 		entityManager = entityManagerFactory.createEntityManager();
 
@@ -81,19 +81,21 @@ public class JpaDAO<E> {
 
 		return list;
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public List<E> findWithNamedQuery(String queryName, int startPosition, int maxResult) {
 		entityManager = entityManagerFactory.createEntityManager();
 
 		Query query = entityManager.createNamedQuery(queryName);
 		query.setFirstResult(startPosition);
 		query.setMaxResults(maxResult);
-		
+
 		List<E> list = query.getResultList();
 		entityManager.close();
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<E> findWithNamedQuery(String queryName, Map<String, Object> parameters) {
 		entityManager = entityManagerFactory.createEntityManager();
 
@@ -102,7 +104,7 @@ public class JpaDAO<E> {
 		for (Map.Entry<String, Object> entry : parameters.entrySet()) {
 			query.setParameter(entry.getKey(), entry.getValue());
 		}
-		
+
 		List<E> result = query.getResultList();
 		entityManager.close();
 
@@ -114,11 +116,44 @@ public class JpaDAO<E> {
 
 		Query query = entityManager.createNamedQuery(queryNamed);
 		long result = (long) query.getSingleResult();
-		
+
 		entityManager.close();
 		return result;
 	}
 	
+	public long countWithNamedQuery(String queryNamed, Map<String, Object> parameters) {
+		entityManager = entityManagerFactory.createEntityManager();
+		
+		Query query = entityManager.createNamedQuery(queryNamed);
+		
+		for (Map.Entry<String, Object> entry : parameters.entrySet()) {
+			query.setParameter(entry.getKey(), entry.getValue());
+		}
+		
+		long result = (long) query.getSingleResult();
+		entityManager.close();
+		
+		return result;
+	}
+
+	
+	public int updateWithNamedQuery(String queryName, Map<String, Object> parameters) {
+		entityManager = entityManagerFactory.createEntityManager();
+		entityManager.getTransaction().begin();
+
+		Query query = entityManager.createNamedQuery(queryName);
+
+		for (Map.Entry<String, Object> entry : parameters.entrySet()) {
+			query.setParameter(entry.getKey(), entry.getValue());
+		}
+
+		int numUpdated = query.executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		
+		return numUpdated;
+	}
+
 	public void close() {
 		if (entityManagerFactory != null) {
 			entityManagerFactory.close();
