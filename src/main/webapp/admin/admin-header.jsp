@@ -32,6 +32,9 @@
 						class="fas fa-star"></i> Reviews</a></li>
 				<li class="nav-item active mx-1"><a class="nav-link" href="#"><i
 						class="fas fa-sticky-note"></i> Orders</a></li>
+				<li class="nav-item active mx-1"><a class="nav-link" href="${pageContext.request.contextPath}/admin/customers"><i
+						class="fas fa-id-card-alt"></i> Customers
+				</a></li>
 			</ul>
 			<a class="btn btn-warning mx-2"
 				href="${pageContext.request.contextPath}/admin/logout" tabindex="-1"
