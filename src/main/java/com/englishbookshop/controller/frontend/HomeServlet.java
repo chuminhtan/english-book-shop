@@ -14,6 +14,8 @@ import com.englishbookshop.dao.BookDAO;
 import com.englishbookshop.dao.CategoryDAO;
 import com.englishbookshop.entity.Book;
 import com.englishbookshop.entity.Category;
+import com.englishbookshop.helper.JspPathHelper;
+import com.englishbookshop.helper.ServletHelper;
 
 @WebServlet("")
 public class HomeServlet extends HttpServlet{
@@ -29,10 +31,7 @@ public class HomeServlet extends HttpServlet{
 		List<Book> listNewBooks = bookDao.listNewBooks();
 		
 		request.setAttribute("LIST_NEW_BOOKS", listNewBooks);
-		
-		String homePage = "frontend/index.jsp";
-		RequestDispatcher rd = request.getRequestDispatcher(homePage);
-		rd.forward(request, response);
+		request.getRequestDispatcher(JspPathHelper.INDEX).forward(request, response);
 	}
 
 }

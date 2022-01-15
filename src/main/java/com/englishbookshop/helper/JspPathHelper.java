@@ -1,10 +1,10 @@
 package com.englishbookshop.helper;
 
 public class JspPathHelper {
-	
+	public static final String INDEX = "frontend/index.jsp";
 	public static final String ADMIN_LOGIN = "admin-login.jsp";
-	
 	public static final String ADMIN_HOME = "dashboard.jsp";
+	
 	public static final String DASHBOARD = "dashboard.jsp";
 	
 	public static final String USER_LIST = "user-list.jsp";
@@ -25,6 +25,7 @@ public class JspPathHelper {
 	public static final String CUSTOMER_LIST = "customer-list.jsp";
 	public static final String CUSTOMER_CREATE = "customer-form-create.jsp";
 	public static final String CUSTOMER_EDIT = "customer-form-edit.jsp";
-	
+	public static final String CUSTOMER_REGISTER = "frontend/customer-form-register.jsp";
+	public static final String CUSTOMER_REGISTER_SUCCESS = "frontend/customer-register-success.jsp";
 
 }

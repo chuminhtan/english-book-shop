@@ -45,7 +45,6 @@ public class CustomerServices extends BaseServices {
 	}
 
 	public void createCustomer() throws ServletException, IOException {
-
 		// Check password and confirm-pass valid
 		Customer customer = readDataField();
 		String passwordConfirm = request.getParameter("password-confirm");
@@ -172,5 +171,33 @@ public class CustomerServices extends BaseServices {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		out.print(jsonMap);
+	}
+
+	public void registerCustomer() throws ServletException, IOException {
+		// Check password and confirm-pass valid
+		Customer customer = readDataField();
+		String passwordConfirm = request.getParameter("password-confirm");
+
+		request.setAttribute("CUSTOMER", customer);
+		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.CUSTOMER_REGISTER);
+
+		if (!customer.getPassword().equals(passwordConfirm)) {
+			String message = "Password confirm is incorrect";
+			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);
+			rd.forward(request, response);
+			return;
+		}
+
+		Customer existCustomer = customerDao.findByEmail(customer.getEmail());
+
+		if (existCustomer != null) {
+			String message = "The email already exists";
+			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);
+			rd.forward(request, response);
+			return;
+		}
+
+		customerDao.create(customer);
+		response.sendRedirect(JspPathHelper.CUSTOMER_REGISTER_SUCCESS);
 	}
 }

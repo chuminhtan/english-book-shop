@@ -1,4 +1,4 @@
-package com.englishbookshop.controller.frontend;
+package com.englishbookshop.controller.frontend.book;
 
 import com.englishbookshop.service.BookServices;
 
@@ -9,16 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/search")
-public class SearchBookServlet extends HttpServlet{
+@WebServlet("/view-book")
+public class ViewBookServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
-    public SearchBookServlet() {
+    public ViewBookServlet() {
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		BookServices bookServices = new BookServices(request, response);
-		bookServices.search();
+		bookServices.viewBookDetail();
 	}
 
 }

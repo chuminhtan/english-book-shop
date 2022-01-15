@@ -59,7 +59,7 @@
 									<button type="submit" class="btn btn-primary">Sign in</button>
 								</form>
 								<hr class="dropdown-divider">
-								<a class="dropdown-item" href="#">Have account? Sign up</a> <a
+								<a class="dropdown-item" href="register">Have account? Sign up</a> <a
 									class="dropdown-item" href="#">Forgot password?</a>
 							</div>
 							<!--  dropdown-menu .// -->
