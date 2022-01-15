@@ -1,8 +1,12 @@
 package com.englishbookshop.service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +15,7 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.englishbookshop.dao.CustomerDAO;
 import com.englishbookshop.entity.Category;
@@ -19,6 +24,8 @@ import com.englishbookshop.entity.Users;
 import com.englishbookshop.helper.JspPathHelper;
 import com.englishbookshop.helper.ServletHelper;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class CustomerServices extends BaseServices {
 	private CustomerDAO customerDao;
@@ -199,5 +206,30 @@ public class CustomerServices extends BaseServices {
 
 		customerDao.create(customer);
 		response.sendRedirect(JspPathHelper.CUSTOMER_REGISTER_SUCCESS);
+	}
+
+	public void doLogin() throws IOException {
+		String jBody = CommonUtility.getBodyRequest(request);
+		
+		JsonObject jsonObject = new JsonParser().parse(jBody).getAsJsonObject();
+	
+		String email = jsonObject.get("email").getAsString();
+		String password = jsonObject.get("password").getAsString();
+    		
+		Map<String, String> result = new HashMap<>();
+		Customer customer = customerDao.checkLogin(email, password);
+
+		if (customer != null) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		String jsonMap = new Gson().toJson(result);
+
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		out.print(jsonMap);
 	}
 }

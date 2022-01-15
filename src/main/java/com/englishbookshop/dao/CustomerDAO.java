@@ -87,5 +87,26 @@ public class CustomerDAO extends JpaDAO<Customer> implements IGenericDAO<Custome
 		return super.update(customer);
 	}
 	
+	public Customer checkLogin(String email, String password) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("email", email);
+		
+		List<Customer> listCustomers = super.findWithNamedQuery(CUSTOMER_FIND_BY_EMAIL, parameters);
+		
+		if (listCustomers.size() != 1) {
+			return null;
+		}
+		
+		Customer customer = listCustomers.get(0);
+		
+		// Check password is correct
+		String hashPass = customer.getPassword();
+		boolean isCorrect = BCrypt.checkpw(password, hashPass);
 
+		if (isCorrect) {
+			return customer;
+		}
+		
+		return null;	
+	}
 }

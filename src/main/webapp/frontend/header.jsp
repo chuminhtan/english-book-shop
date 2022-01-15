@@ -47,16 +47,16 @@
 								</div>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<form class="px-4 py-3">
+								<form class="px-4 py-3" id="form-login">
 									<div class="form-group">
 										<label>Email address</label> <input type="email"
-											class="form-control" placeholder="email@example.com">
+											id="email-login" class="form-control" placeholder="email@example.com">
 									</div>
 									<div class="form-group">
 										<label>Password</label> <input type="password"
-											class="form-control" placeholder="Password">
+											id="password-login" class="form-control" placeholder="Password">
 									</div>
-									<button type="submit" class="btn btn-primary">Sign in</button>
+									<button type="submit" id ="submit-login" class="btn btn-primary">Sign in</button>
 								</form>
 								<hr class="dropdown-divider">
 								<a class="dropdown-item" href="register">Have account? Sign up</a> <a

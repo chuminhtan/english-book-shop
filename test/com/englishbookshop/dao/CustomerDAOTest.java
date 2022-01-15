@@ -122,4 +122,31 @@ public class CustomerDAOTest {
 		assertNotNull(updatedCus);
 	}
 
+	@Test
+	public void testCheckLoginSuccess() {
+		String email="nguyenvanc@gmail.com";
+		String password="123456";
+		
+		Customer customer = customerDao.checkLogin(email, password);
+		
+		if (customer != null) {
+			System.out.println(customer);
+		}
+		
+		assertNotNull(customer);
+	}
+	
+	@Test
+	public void testCheckLoginFail() {
+		String email="nguyenvanc@gmail.com";
+		String password="123456";
+		
+		Customer customer = customerDao.checkLogin(email, password);
+		
+		if (customer != null) {
+			System.out.println(customer);
+		}
+		
+		assertNull(customer);
+	}
 }
