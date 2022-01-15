@@ -15,7 +15,7 @@
 
 		<!-- Main -->
 		<div class="jumbotron">
-			<a href="." class="btn btn-primary"><i
+			<a href="javascript:history.go(-1)" class="btn btn-primary"><i
 				class="fas fa-arrow-left"></i> Back</a>
 			<h2 class="text-primary my-4 text-center">Create Category</h2>
 			<!-- FORM -->
@@ -27,7 +27,7 @@
 				</div>
 				<div class="d-flex justify-content-center">
 					<button type="submit" class="btn btn-success m-1">Submit</button>
-					<a href="." class="btn btn-warning m-1">Cancel</a>
+					<a href="javascript:history.go(-1)" class="btn btn-warning m-1">Cancel</a>
 				</div>
 			</form>
 			<c:if test="${ERROR_MESSAGE != null}">

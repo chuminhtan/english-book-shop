@@ -48,7 +48,7 @@
 				</div>
 				<div class="d-flex justify-content-center">
 					<button type="submit" class="btn btn-success m-1">Submit</button>
-					<a href="." class="btn btn-warning m-1">Cancel</a>
+					<a href="javascript:history.go(-1)" class="btn btn-warning m-1">Cancel</a>1">Cancel</a>
 				</div>
 			</form>
 			<c:if test="${MESSAGE_ERROR != null}">

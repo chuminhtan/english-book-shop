@@ -20,10 +20,8 @@
 	        Swal.fire({
 	            title: 'The default '+ type +' cannot be deleted',
 	            icon: 'info'
-
-	        })
-	        
-	        return
+	        })      
+	        return;
 	    }
 	    
 	    Swal.fire({

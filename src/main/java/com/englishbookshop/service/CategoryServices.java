@@ -68,7 +68,7 @@ public class CategoryServices extends BaseServices {
 
 		if (cat != null) {
 			request.setAttribute("CATEGORY", cat);
-			RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.CATEGORY_FORM_EDIT);
+			RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.CATEGORY_EDIT);
 			rd.forward(request, response);
 
 		} else {
@@ -101,7 +101,7 @@ public class CategoryServices extends BaseServices {
 			request.setAttribute("CATEGORY", catById);
 			request.setAttribute(ServletHelper.ERROR_MESSAGE,
 					"The name of category" + ServletHelper.MESSAGE_ALREADY_EXIST);
-			RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.CATEGORY_FORM_EDIT);
+			RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.CATEGORY_EDIT);
 			rd.forward(request, response);
 		}
 	}

@@ -15,9 +15,9 @@
 
 		<!-- Main -->
 		<div class="jumbotron">
-			<a href="." class="btn btn-outline-primary"><i
+			<a href="javascript:history.go(-1)" class="btn btn-outline-primary"><i
 				class="fas fa-arrow-left"></i> Back</a>
-			<h2 class="text-info mt-5">Create Book</h2>
+			<h2 class="text-primary my-4 text-center">Create Book</h2>
 			<!-- FORM -->
 			<form action="create-book" method="post"
 				enctype="multipart/form-data">
@@ -71,7 +71,7 @@
 
 				<div class="d-flex justify-content-center">
 					<button type="submit" class="btn btn-success m-1">Submit</button>
-					<a href="." class="btn btn-warning m-1">Cancel</a>
+					<a href="javascript:history.go(-1)" class="btn btn-warning m-1">Cancel</a>
 				</div>
 			</form>
 			<c:if test="${ERROR_MESSAGE != null}">

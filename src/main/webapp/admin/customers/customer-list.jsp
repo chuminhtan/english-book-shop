@@ -15,7 +15,7 @@
 
 		<!-- Main -->
 		<div class="jumbotron">
-			<a href="create-user" class="btn btn-primary"><i
+			<a href="create-customer" class="btn btn-primary"><i
 				class="fas fa-plus"></i> Create Customers</a>
 
 			<h2 class="text-primary my-4 text-center">List Of Customers</h2>
@@ -43,7 +43,7 @@
 								<td>${customer.city }</td>
 								<td>${customer.country }</td>
 								<td>${customer.registerDate }</td>
-								<td><a href="edit-user?id=${customer.customerId  }"
+								<td><a href="edit-customer?id=${customer.customerId  }"
 									class="btn btn-warning m-1"><i class="fas fa-edit"
 										data-toggle="tooltip" title="Edit"></i></a> <a
 									href="javascript:confirmDelete('customer',${customer.customerId  },'delete-customer')"
