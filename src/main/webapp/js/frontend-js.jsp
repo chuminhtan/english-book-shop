@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
 	const passLogin = document.getElementById("password-login");
 	const emailLogin = document.getElementById("email-login");
@@ -64,6 +65,7 @@
           		})
            }
     }
-    
-	document.getElementById("form-login").addEventListener("submit", sendLoginForm);
+	<c:if test="${LOGGED_CUSTOMER == null }">
+		document.getElementById("form-login").addEventListener("submit", sendLoginForm);
+	</c:if>
 </script>

@@ -9,12 +9,19 @@
 <jsp:include page="../css/styles.jsp" />
 </head>
 <body>
+	<jsp:include page="../frontend/header.jsp"></jsp:include>
+	<jsp:include page="../frontend/categories.jsp"></jsp:include>
 	<div class="container-fluid">
-		<jsp:include page="../frontend/header.jsp"></jsp:include>
-		<h3 class="text-info">Sorry, The page could not found.</h3>
-		<a href="javascript:history.go(-1)" class="btn btn-primary">Go
-			Back</a>
-		<jsp:include page="../frontend/footer.jsp"></jsp:include>
+		<!-- Main -->
+		<section class="section-content padding-y bg">
+			<!------------------------------New Books---------------------------------------------->
+			<div class="container text-center">
+				<h3 class="text-info">Sorry, The page could not found.</h3>
+				<br>
+				<a href="${pageContext.request.contextPath }" class="btn btn-primary">Home Page</a>
+			</div>
+			<jsp:include page="../frontend/footer.jsp"></jsp:include>
+		</section>
 	</div>
 </body>
 </html>

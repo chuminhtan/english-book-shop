@@ -9,21 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.englishbookshop.service.CustomerServices;
 
-@WebServlet("/customer-profile")
-public class CustomerProfileServlet extends HttpServlet {
+@WebServlet("/logout")
+public class CustomerLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public CustomerProfileServlet() {
+
+    public CustomerLogoutServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CustomerServices cusServices = new CustomerServices(request, response);
-		cusServices.showCustomerProfile();
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		cusServices.doLogout();
 	}
 
 }

@@ -13,7 +13,6 @@
 <body>
 	<div class="container-fluid">
 		<jsp:include page="header.jsp"></jsp:include>
-		<jsp:include page="categories.jsp"></jsp:include>
 
 		<p class="display-4 text-center text-primary">
 			<strong>${CATEGORY.name }</strong>

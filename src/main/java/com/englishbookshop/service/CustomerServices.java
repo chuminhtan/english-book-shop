@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.manager.JspHelper;
+
 import com.englishbookshop.dao.CustomerDAO;
 import com.englishbookshop.entity.Category;
 import com.englishbookshop.entity.Customer;
@@ -221,6 +223,9 @@ public class CustomerServices extends BaseServices {
 
 		if (customer != null) {
 			result.put("result", "success");
+			
+			HttpSession session = request.getSession();
+			session.setAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER, customer);
 		} else {
 			result.put("result", "fail");
 		}
@@ -231,5 +236,15 @@ public class CustomerServices extends BaseServices {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		out.print(jsonMap);
+	}
+
+	public void doLogout() throws IOException {
+		HttpSession session = request.getSession();
+		session.removeAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
+		response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
+	}
+	
+	public void showCustomerProfile() throws IOException, ServletException {
+		request.getRequestDispatcher(JspPathHelper.CUSTOMER_PROFILE).forward(request, response);
 	}
 }

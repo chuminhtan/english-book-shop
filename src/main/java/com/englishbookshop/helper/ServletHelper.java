@@ -14,4 +14,5 @@ public class ServletHelper {
 	public static final String MESSAGE_COULD_NOT_DELETE_DEFAULT = "Could not delete default ID";
 	
 	public static final String SESSION_USER_EMAIL = "USER_EMAIL";
+	public static final String SESSION_LOGGED_CUSTOMER = "LOGGED_CUSTOMER";
 }
