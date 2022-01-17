@@ -27,6 +27,8 @@ public class JspPathHelper {
 	public static final String CUSTOMER_EDIT = "customer-form-edit.jsp";
 	public static final String CUSTOMER_REGISTER = "frontend/customer-form-register.jsp";
 	public static final String CUSTOMER_REGISTER_SUCCESS = "frontend/customer-register-success.jsp";
-	public static final String CUSTOMER_PROFILE = "frontend/customer-profile.jsp";
+	public static final String CUSTOMER_PROFILE = "../frontend/customer/customer-profile.jsp";
 
+	public static final String REVIEW_LIST = "review-list.jsp";
+	public static final String REVIEW_EDIT = "review-form-edit.jsp";
 }

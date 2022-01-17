@@ -90,21 +90,6 @@
 		</div>
 		<jsp:include page="../admin-footer.jsp"></jsp:include>
 	</div>
-	<script>
-	const password = document.getElementById("password");
-	const passwordConfirm = document.getElementById("password-confirm");
-	const checkedChangePassword = document.getElementById("check-change-password");
-	checkedChangePassword.addEventListener("change", (e) => {
-		if (event.currentTarget.checked) {
-			password.disabled = false;
-			passwordConfirm.disabled = false;
-			} 
-		else {
-			password.disabled = true;
-			passwordConfirm.disabled = true;
-		}
-	});
-</script>
 </body>
 
 </html>

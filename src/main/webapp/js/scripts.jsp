@@ -1,16 +1,87 @@
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+	crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="${pageContext.request.contextPath}/js/jquery.richtext.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/js/jquery.richtext.min.js"></script>
 
+<!-- Show message with Sweet Alert -->
 <script>
+	const successMessage = (title) => {
+		const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'top-end',
+			  showConfirmButton: false,
+			  timer: 1000,
+			  timerProgressBar: true,
+			  didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  },
+
+			})
+
+			Toast.fire({
+			  icon: 'success',
+			  title: title
+			}).then((result) =>{
+				window.location.assign('${pageContext.request.contextPath}'); 
+	  	})
+
+	}
+
+	const errorMessage = (title) => {
+		const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'top-end',
+			  showConfirmButton: false,
+			  timer: 2000,
+			  timerProgressBar: true,
+			  didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  },
+
+			})
+
+			Toast.fire({
+			  icon: 'error',
+			  title: title
+			}).then((result) =>{
+				window.location.assign('${pageContext.request.contextPath}'); 
+	  	})
+	}
+
+	const infoMessage = (title) => {
+		const Toast = Swal.mixin({
+			  toast: true,
+			  position: 'top-end',
+			  showConfirmButton: false,
+			  timer: 2000,
+			  timerProgressBar: true,
+			  didOpen: (toast) => {
+			    toast.addEventListener('mouseenter', Swal.stopTimer)
+			    toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  },
+			})
+			
+			Toast.fire({
+			  icon: 'info',
+			  title: title
+			})
+	  	}
+
 	let message = '${MESSAGE}' 
 	if (message.length > 0) {
-		 Swal.fire({
-	         title: '${MESSAGE}',
-	         icon: 'info'
-     	})
+		infoMessage(message);
 	}
+
+	
 </script>
 
 <script>
@@ -75,3 +146,19 @@
 	});
 </script>
 
+<!-- Change Password -->
+<script>
+	const password = document.getElementById("password");
+	const passwordConfirm = document.getElementById("password-confirm");
+	const checkedChangePassword = document.getElementById("check-change-password");
+	checkedChangePassword.addEventListener("change", (e) => {
+		if (event.currentTarget.checked) {
+			password.disabled = false;
+			passwordConfirm.disabled = false;
+			} 
+		else {
+			password.disabled = true;
+			passwordConfirm.disabled = true;
+		}
+	})
+</script>

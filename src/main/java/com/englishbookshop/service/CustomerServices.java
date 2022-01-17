@@ -95,7 +95,8 @@ public class CustomerServices extends BaseServices {
 
 	public void updateCustomer() throws ServletException, IOException {
 		Customer cusForm = readDataField();
-		int id = Integer.parseInt(request.getParameter("id"));
+
+		int id =  Integer.parseInt(request.getParameter("id"));		
 		cusForm.setCustomerId(id);
 
 		request.setAttribute("CUSTOMER", cusForm);
@@ -245,6 +246,54 @@ public class CustomerServices extends BaseServices {
 	}
 	
 	public void showCustomerProfile() throws IOException, ServletException {
+		Customer loggedCus = (Customer) request.getSession().getAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
+		System.out.println("Logged Customer: " + loggedCus);
+		request.setAttribute("CUSTOMER", loggedCus);
 		request.getRequestDispatcher(JspPathHelper.CUSTOMER_PROFILE).forward(request, response);
+	}
+	
+	public void updateCustomerProfile() throws IOException, ServletException {
+		HttpSession session = request.getSession();
+		Customer loggedCus = (Customer)session.getAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
+		Customer cusForm = readDataField();
+		
+		int id = loggedCus.getCustomerId();
+		cusForm.setCustomerId(id);
+		cusForm.setEmail(loggedCus.getEmail());
+		request.setAttribute("CUSTOMER", cusForm);
+		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.CUSTOMER_PROFILE);
+
+		// Check actual customer is exist
+		Customer cusById = customerDao.get(cusForm.getCustomerId());
+
+		if (cusById == null) {
+			response.sendRedirect(request.getContextPath());
+			return;
+		}
+
+		// Case 1: No change password
+		if (cusForm.getPassword() == null) {
+			customerDao.updateNoPassword(cusForm);
+			request.setAttribute(ServletHelper.MESSAGE, "Profile updated successfully");
+			session.setAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER, cusForm);
+			rd.forward(request, response);
+			return;
+		}
+
+		// Case 2: Have change password
+		String passwordConfirm = request.getParameter("password-confirm");
+
+		// Check password value and password-confirm value is match.
+		if (!cusForm.getPassword().equals(passwordConfirm)) {
+			String message = "Password confirm is incorrect";
+			request.setAttribute(ServletHelper.ERROR_MESSAGE, message);
+			rd.forward(request, response);
+		} else {
+			customerDao.update(cusForm);
+			request.setAttribute(ServletHelper.MESSAGE, "Profile updated successfully");
+			session.setAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER, cusForm);
+			rd.forward(request, response);
+		}
+
 	}
 }

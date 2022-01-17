@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>500 - Server Error</title>
+<title>404 - The page could not found</title>
 <jsp:include page="../css/styles.jsp" />
 </head>
 <body>

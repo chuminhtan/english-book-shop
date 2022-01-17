@@ -25,44 +25,9 @@
         const result = await response.json();
 
         if (result.result === 'success') {
-        	const Toast = Swal.mixin({
-        		  toast: true,
-        		  position: 'top-end',
-        		  showConfirmButton: false,
-        		  timer: 2000,
-        		  timerProgressBar: true,
-        		  didOpen: (toast) => {
-        		    toast.addEventListener('mouseenter', Swal.stopTimer)
-        		    toast.addEventListener('mouseleave', Swal.resumeTimer)
-        		  },
-
-        		})
-
-        		Toast.fire({
-        		  icon: 'success',
-        		  title: 'Signed in successfully'
-        		}).then((result) =>{
-        			window.location.assign('${pageContext.request.contextPath}'); 
-            	})
-        		
+            	successMessage('Signed in successfully');
             } else {
-            	const Toast = Swal.mixin({
-          		  toast: true,
-          		  position: 'top-end',
-          		  showConfirmButton: false,
-          		  timer: 4000,
-          		  timerProgressBar: true,
-          		  didOpen: (toast) => {
-          		    toast.addEventListener('mouseenter', Swal.stopTimer)
-          		    toast.addEventListener('mouseleave', Swal.resumeTimer)
-          		  },
-
-          		})
-
-          		Toast.fire({
-          		  icon: 'error',
-          		  title: 'Login failed'
-          		})
+				errorMessage('Logged Fail');
            }
     }
 	<c:if test="${LOGGED_CUSTOMER == null }">

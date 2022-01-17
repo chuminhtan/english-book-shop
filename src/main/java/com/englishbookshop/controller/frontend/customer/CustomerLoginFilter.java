@@ -43,7 +43,7 @@ public class CustomerLoginFilter implements Filter {
 		System.out.println("Path: " + path);
 		System.out.println("LoggedIn: " + loggedIn);
 		
-		if (!loggedIn && path.startsWith("/customer-profile")) {
+		if (!loggedIn && path.startsWith("/customer")) {
 			httpResponse.sendRedirect(httpRequest.getContextPath());
 		} else {
 			chain.doFilter(request, response);			
