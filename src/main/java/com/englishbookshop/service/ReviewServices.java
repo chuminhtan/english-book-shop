@@ -103,5 +103,4 @@ public class ReviewServices extends BaseServices {
 		response.setCharacterEncoding("UTF-8");
 		out.print(resultJson);
 	}
-
 }

@@ -25,8 +25,10 @@
 					<div class="card-body">
 
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
-							<li class="breadcrumb-item"><a href="view-category?id=${BOOK.category.categoryId }">${BOOK.category.name }</a></li>
+							<li class="breadcrumb-item"><a
+								href="${pageContext.request.contextPath}">Home</a></li>
+							<li class="breadcrumb-item"><a
+								href="view-category?id=${BOOK.category.categoryId }">${BOOK.category.name }</a></li>
 							<li class="breadcrumb-item active">${BOOK.title }</li>
 						</ol>
 
@@ -51,8 +53,9 @@
 
 								<div class="rating-wrap mb-3">
 									<span class="badge badge-warning"> <i class="fa fa-star"></i>
-										3.8
-									</span> <small class="text-muted ml-2">45 reviews</small>
+										${BOOK.averageRating }
+									</span> <small class="text-muted ml-2">${BOOK.numOfRating }
+										reviews</small>
 								</div>
 								<!-- rating-wrap.// -->
 
@@ -104,44 +107,32 @@
 							<div class="col-md-9">
 								<header class="section-heading">
 									<h3>Customer Reviews</h3>
-									<div class="rating-wrap mb-3">
-										<span class="badge badge-warning"> <i
-											class="fa fa-star"></i> 3.8
-										</span> <small class="text-muted ml-2">45 reviews</small>
-									</div>
 								</header>
 
 								<!-- ========================= ONE REVIEW  ======================== -->
-								<article class="box mb-3">
-									<div class="icontext w-100">
-										<img
-											src="${pageContext.request.contextPath }/images/icons-person-female.png"
-											class="img-xs icon rounded-circle">
-										<div class="text">
-											<span class="date text-muted float-md-right">24.04.2020
-											</span>
-											<h6 class="mb-1">Alex Pushkin</h6>
-											<ul class="rating-stars">
-												<li style="width: 50%" class="stars-active"><i
-													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i> <i class="fa fa-star"></i>
-													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-													class="fa fa-star"></i></li>
-											</ul>
-											<span class="label-rating">3.5/5</span>
+								<c:forEach items="${BOOK.reviews}" var="review">
+									<article class="box mb-3">
+										<div class="w-100">
+											<div>
+												<span class="badge badge-warning"> <i
+													class="fa fa-star"></i> ${BOOK.averageRating}
+												</span> <span class="font-weight-bold ml-2">${review.headline }</span>
+											</div>
+											<small class="my-2 text-muted">by ${review.customer.fullName } on
+												${review.reviewTime }</small>
 										</div>
-									</div>
-									<!-- icontext.// -->
-									<div class="mt-3">
-										<p>Not good item for dummy text item Lorem ipsum dolor sit
-											amet, consectetur adipisicing elit, sed do eiusmod tempor
-											incididunt ut labore et dolore magna aliqua.</p>
-									</div>
-								</article>
-								<!-- ========================= ONE REVIEW .//END  ======================== -->
+										<div class="mt-3">
+											<small>${review.comment }</small>
+										</div>
+									</article>
+								</c:forEach>
+								<c:if test="${empty BOOK.reviews}">
+									<article class="box mb-3">
+										<small>No comments yet.</small>
+									</article>
+								</c:if>
 
+								<!-- ========================= ONE REVIEW .//END  ======================== -->
 							</div>
 							<!-- col.// -->
 						</div>

@@ -51,21 +51,16 @@
 														}</strong></span>
 											</div>
 											<div class="rating-wrap mb-3">
-												<ul class="rating-stars">
-													<li style="width: 80%" class="stars-active"><i
-														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-														class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i> <i class="fa fa-star"></i>
-														<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-														class="fa fa-star"></i></li>
-												</ul>
-												<div class="label-rating">7/10</div>
+												<span class="badge badge-warning"> <i
+													class="fa fa-star"></i> ${book.averageRating }
+												</span> <small class="text-muted ml-2">${book.numOfRating }
+													reviews</small>
 											</div>
 											<!-- rating-wrap.// -->
 											<br>
 											<p>
-												<a href="view-book?id=${book.bookId }" class="btn btn-outline-primary btn-block"> <span
+												<a href="view-book?id=${book.bookId }"
+													class="btn btn-outline-primary btn-block"> <span
 													class="text">Detail</span>
 												</a> <a href="#" class="btn btn-primary btn-block"><i
 													class="fas fa-shopping-cart"></i> Add To Cart </a>

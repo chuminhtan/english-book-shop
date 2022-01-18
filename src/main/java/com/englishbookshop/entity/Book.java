@@ -239,5 +239,27 @@ public class Book implements java.io.Serializable {
 	public String toString() {
 		return "Book [bookId=" + bookId + ", title=" + title + ", author=" + author + ", price=" + price + "]";
 	}
+	
+	@Transient
+	public float getAverageRating() {
+		float averageRating = 0.0f;
+		float sum = 0.0f;
+		
+		for (Review review : reviews) {
+			sum += review.getRating();
+		}
+		
+		if (reviews.size() == 0) {
+			return 0.0f;
+		}
+		averageRating = sum / reviews.size();
+		
+		return averageRating;
+	}
+	
+	@Transient
+	public int getNumOfRating() {
+		return reviews.size();
+	}
 
 }
