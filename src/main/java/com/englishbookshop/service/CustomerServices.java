@@ -211,10 +211,8 @@ public class CustomerServices extends BaseServices {
 		response.sendRedirect(JspPathHelper.CUSTOMER_REGISTER_SUCCESS);
 	}
 
-	public void doLogin() throws IOException {
-		String jBody = CommonUtility.getBodyRequest(request);
-		
-		JsonObject jsonObject = new JsonParser().parse(jBody).getAsJsonObject();
+	public void doLogin() throws IOException {	
+		JsonObject jsonObject = CommonUtility.getJsonObjectFromRequest(request);
 	
 		String email = jsonObject.get("email").getAsString();
 		String password = jsonObject.get("password").getAsString();

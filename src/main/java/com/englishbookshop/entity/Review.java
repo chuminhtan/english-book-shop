@@ -26,6 +26,8 @@ import com.englishbookshop.dao.ReviewDAO;
 @NamedQueries({
 	@NamedQuery(name=ReviewDAO.REVIEW_LIST_ALL, query="SELECT r FROM Review r ORDER BY r.reviewTime DESC"),
 	@NamedQuery(name=ReviewDAO.REVIEW_COUNT, query="SELECT COUNT(r.reviewId) FROM Review r"),
+	@NamedQuery(name=ReviewDAO.REVIEW_FIND_BY_CUSTOMER_AND_BOOK, query="SELECT r FROM Review r WHERE r.customer.customerId = :customerId "
+			+ "AND r.book.bookId = :bookId"),
 })
 public class Review implements java.io.Serializable {
 

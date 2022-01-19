@@ -34,7 +34,7 @@
 				<div class="form-group">
 					<label for="title">Title</label> <input type="text" name="title"
 						class="form-control" id="title" placeholder="Enter Title"
-						minlength="2" maxlength="100" required>
+						minlength="2" maxlength="200" required>
 				</div>
 				<div class="form-group">
 					<label for="author">Author</label> <input type="text" name="author"

@@ -4,11 +4,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.englishbookshop.entity.Customer;
+import com.englishbookshop.helper.ServletHelper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class CommonUtility {
-	public static String getBodyRequest(HttpServletRequest request) {
+	private static String getBodyRequest(HttpServletRequest request) {
 		String body = null;
 		StringBuilder stringBuilder = new StringBuilder();
 		BufferedReader bufferedReader = null;
@@ -38,5 +47,24 @@ public class CommonUtility {
 		}
 		body = stringBuilder.toString();
 		return body;
+	}
+	
+	public static JsonObject getJsonObjectFromRequest(HttpServletRequest request) {
+		String jBody = getBodyRequest(request);
+		JsonObject jsonObject = new JsonParser().parse(jBody).getAsJsonObject();
+		return jsonObject;
+	}
+	
+	public static void sendJsonRespone(Map<String, Object> result, HttpServletResponse response) throws IOException {
+		String jsonMap = new Gson().toJson(result);
+
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		out.print(jsonMap);
+	}
+	
+	public static Customer getCustomerLogged(HttpServletRequest request) {
+		return (Customer) request.getSession().getAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
 	}
 }

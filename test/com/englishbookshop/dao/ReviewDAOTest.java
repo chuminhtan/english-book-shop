@@ -93,5 +93,15 @@ public class ReviewDAOTest {
 		Review updatedReview = reviewDao.update(review);
 		assertEquals(updatedReview.getHeadline(), review.getHeadline());
 	}
+	
+	@Test
+	public void testFindByCustomerAndBook() {
+		int customerId = 2;
+		int bookId = 1;
+		
+		Review findedReview = reviewDao.findByCustomerAndBook(customerId, bookId);
+		System.out.println(findedReview);
+		assertNotNull(findedReview);
+	}
 
 }

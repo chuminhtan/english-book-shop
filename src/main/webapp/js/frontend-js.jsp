@@ -1,18 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
-	const passLogin = document.getElementById("password-login");
-	const emailLogin = document.getElementById("email-login");
-	 
+
  	const sendLoginForm = async (event) => {
         event.preventDefault();
+    	const passLogin = document.getElementById("password-login");
+    	const emailLogin = document.getElementById("email-login");
 
         let email = emailLogin.value;
         let password = passLogin.value;
-        console.log('Email: ', email);
-        console.log('Pass: ', password);
 
         const data = {email, password};
-        console.log('Data: ',data);
         const url = 'login';
         
         const response = await fetch(url, {
@@ -25,9 +22,9 @@
         const result = await response.json();
 
         if (result.result === 'success') {
-            	successMessage('Signed in successfully');
+            	successMessage('Signed in successfully', null);
             } else {
-				errorMessage('Logged Fail');
+				errorMessage('Logged Fail', null);
            }
     }
 	<c:if test="${LOGGED_CUSTOMER == null }">

@@ -94,7 +94,7 @@
 				<article class="card my-2">
 					<div class="card-body">
 						<h3>Description</h3>
-						<p class="content-justify">${BOOK.description }</p>
+						<div class="content-justify">${BOOK.description }</div>
 					</div>
 					<!-- card-body.// -->
 				</article>
@@ -115,11 +115,11 @@
 										<div class="w-100">
 											<div>
 												<span class="badge badge-warning"> <i
-													class="fa fa-star"></i> ${BOOK.averageRating}
+													class="fa fa-star"></i> ${review.rating}
 												</span> <span class="font-weight-bold ml-2">${review.headline }</span>
 											</div>
-											<small class="my-2 text-muted">by ${review.customer.fullName } on
-												${review.reviewTime }</small>
+											<small class="my-2 text-muted">by
+												${review.customer.fullName } on ${review.reviewTime }</small>
 										</div>
 										<div class="mt-3">
 											<small>${review.comment }</small>
@@ -135,7 +135,131 @@
 								<!-- ========================= ONE REVIEW .//END  ======================== -->
 							</div>
 							<!-- col.// -->
+							<c:if test="${LOGGED_CUSTOMER == null }">
+								<div class="col-md-3 text-center">
+									<div>
+										<button class="btn btn-primary" disabled>
+											<i class="fas fa-edit"></i> Write Review
+										</button>
+									</div>
+									<small>You must login to write a review.</small>
+								</div>
+
+							</c:if>
+							<c:if test="${LOGGED_CUSTOMER != null }">
+								<div id="div-contain-button-review" class="col-md-3 text-center">
+								</div>
+								<!-- ============================== MODAL - WRITE REVIEW ======================= -->
+
+								<!-- Modal -->
+								<div class="modal fade" id="modalWriteReview" tabindex="-1"
+									role="dialog" aria-labelledby="exampleModalCenterTitle"
+									aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered modal-lg"
+										role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Write
+													Review</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="mb-2">
+													<p class="font-weight-bold text-primary">${BOOK.title }</p>
+												</div>
+
+												<!-- =========== WRITE REVIEW FORM ==================== -->
+												<form id="form-review-by-customer">
+													<div class="form-row">
+														<div class="form-group col-md-6">
+															<label for="review-id">Your Name</label> <input
+																type="text" class="form-control"
+																value="${LOGGED_CUSTOMER.fullName }" readonly>
+														</div>
+														<div class="form-group col-md-6">
+															<label for="rating">Rating</label> <select id="rating"
+																class="form-control" name="rating">
+																<option value="1">&starf;</option>
+																<option value="2">&starf;&starf;</option>
+																<option value="3">&starf;&starf;&starf;</option>
+																<option value="4">&starf;&starf;&starf;&starf;</option>
+																<option value="5" selected>&starf;&starf;&starf;&starf;&starf;</option>
+															</select>
+														</div>
+													</div>
+													<div class="form-group">
+														<label for="headline">Headline</label> <input type="text"
+															name="headline" class="form-control" id="headline"
+															placeholder="Enter Headline" minlength="2"
+															maxlength="100" required value="${REVIEW.headline }">
+													</div>
+													<div class="form-group">
+														<label for="comment">Comment</label>
+														<textarea name="comment" class="form-control content"
+															id="comment" placeholder="Enter Comment" minlength="2"
+															maxlength="500" required>${REVIEW.comment }</textarea>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">Close</button>
+														<button type="submit" class="btn btn-primary"
+															id="save-changes">Save changes</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:if>
+							<!-- ============================== MODAL - WRITE REVIEW .//END ================= -->
+
+							<!-- ============================== MODAL - SEE REVIEW WAS WRITTEN  BY CUSTOMER======================= -->
+
+							<!-- Modal -->
+							<div class="modal fade" id="modalSeeReviewWritten" tabindex="-1"
+								role="dialog" aria-labelledby="exampleModalCenterTitle"
+								aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered modal-lg"
+									role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLongTitle">Your Review For This Book</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<div class="mb-2">
+												<p class="font-weight-bold text-primary">${BOOK.title }</p>
+											</div>
+											<article class="box mb-3">
+												<div class="w-100">
+													<div>
+														<span id="span-review-rating" class="badge badge-warning">
+															<i class="fa fa-star"></i>
+														</span> <span id="span-review-headline"
+															class="font-weight-bold ml-2"></span>
+													</div>
+													<small id="small-review-by" class="my-2 text-muted"></small>
+												</div>
+												<div id="div-review-comment" class="mt-3"></div>
+											</article>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">OK</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- ============================== MODAL - SEE REVIEW WAS WRITTEN  BY CUSTOMER.//END ================= -->
+
 						</div>
+						<!-- row.// -->
 					</div>
 				</div>
 				<!-- ==============================   RATING .//END  ============================== -->
@@ -145,5 +269,72 @@
 		<!-- End Main -->
 		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
+
+	<script>
+		// Check the customer has already a review for this book 
+		const checkReviewFromCustomer = async () => {
+			const divContain = document.getElementById('div-contain-button-review');
+			let url ='${pageContext.request.contextPath}/find-review-by-customer?bookId=${BOOK.bookId}'
+	        const response = await fetch(url, {
+		          method: 'GET',
+		          headers: {
+		        	 'Content-Type': 'application/x-www-form-urlencoded'
+		          }
+		        });
+			const resultRs = await response.json();
+			let btn='';
+			
+			console.log('resultRs: ', resultRs);
+			
+			if (resultRs.result === 'no') {
+				btn = `<button class="btn btn-primary" data-toggle="modal" data-target="#modalWriteReview"><i class="fas fa-edit"></i> Write Review</button>`
+
+			} else if (resultRs.result === 'yes'){
+				btn= `<button class="btn btn-primary" data-toggle="modal" data-target="#modalSeeReviewWritten"><i class="fas fa-eye"></i> Your Review</button>`
+				document.getElementById('span-review-rating').insertAdjacentHTML('beforeend', resultRs.rating);
+				document.getElementById('span-review-headline').insertAdjacentHTML('beforeend', resultRs.headline);
+				document.getElementById('small-review-by').innerHTML = "by ${LOGGED_CUSTOMER.fullName} on " + resultRs.reviewTime; 
+				document.getElementById('div-review-comment').insertAdjacentHTML('beforeend', resultRs.comment);
+			}
+			
+			divContain.insertAdjacentHTML("beforeend", btn);
+		}
+
+		<c:if test="${LOGGED_CUSTOMER != null}" >
+			checkReviewFromCustomer();
+		</c:if>
+
+		// Send Review Form
+		const sendReviewFormByCustomer = async (event) => {
+			   	event.preventDefault();
+			   	const bookId = ${BOOK.bookId};
+			   	let rating = document.getElementById('rating').value;
+		    	let headline = document.getElementById('headline').value;
+		    	let comment = document.getElementById('comment').value;
+
+		        const data = {bookId, rating, headline, comment};
+		        const url = 'write-review';
+		        
+		        const response = await fetch(url, {
+		          method: 'POST',
+		          headers: {
+		            'Content-Type': 'application/x-www-form-urlencoded'
+		          },
+		          body: JSON.stringify(data)
+		        });
+		        const result = await response.json();
+
+		        if (result.result === 'success') {
+		            	successMessage('Writing review successfully',null);
+		            	
+		        } else {
+						errorMessage('Writing review failed');
+		        }
+			};
+			
+		<c:if test="${LOGGED_CUSTOMER != null}" >
+			document.getElementById('form-review-by-customer').addEventListener('submit', sendReviewFormByCustomer);			
+		</c:if>
+	</script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 
 <!-- Show message with Sweet Alert -->
 <script>
-	const successMessage = (title) => {
+	const successMessage = (title, url) => {
 		const Toast = Swal.mixin({
 			  toast: true,
 			  position: 'top-end',
@@ -30,7 +30,12 @@
 			  icon: 'success',
 			  title: title
 			}).then((result) =>{
-				window.location.assign('${pageContext.request.contextPath}'); 
+
+				if (url === null) {
+					location.reload();
+				} else {
+					window.location.assign(url); 
+				}
 	  	})
 
 	}
@@ -53,7 +58,7 @@
 			  icon: 'error',
 			  title: title
 			}).then((result) =>{
-				window.location.assign('${pageContext.request.contextPath}'); 
+				location.reload();
 	  	})
 	}
 
@@ -144,21 +149,4 @@
 
 		$('.content').richText();
 	});
-</script>
-
-<!-- Change Password -->
-<script>
-	const password = document.getElementById("password");
-	const passwordConfirm = document.getElementById("password-confirm");
-	const checkedChangePassword = document.getElementById("check-change-password");
-	checkedChangePassword.addEventListener("change", (e) => {
-		if (event.currentTarget.checked) {
-			password.disabled = false;
-			passwordConfirm.disabled = false;
-			} 
-		else {
-			password.disabled = true;
-			passwordConfirm.disabled = true;
-		}
-	})
 </script>
