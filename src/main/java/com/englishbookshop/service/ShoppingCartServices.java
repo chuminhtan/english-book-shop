@@ -66,4 +66,27 @@ public class ShoppingCartServices extends BaseServices {
 		CommonUtility.sendJsonRespone(result, response);
 	}
 
+	public void removeBookFromCart() throws ServletException, IOException {
+		int bookId = Integer.parseInt(request.getParameter("bookId"));
+		
+		Book book = bookDao.get(bookId);
+		spCart.removeItem(book);
+		
+		request.setAttribute(ServletHelper.MESSAGE, "The book has deleted successfully");
+		request.getRequestDispatcher(JspPathHelper.SHOPPING_CART).forward(request, response);
+	}
+
+	public void updateCart() throws ServletException, IOException {
+		String[] arrBookIds = request.getParameterValues("bookId");
+		String[] arrQuantities = request.getParameterValues("quantities");
+		
+		int[] bookIds = CommonUtility.convertStringArrToIntArr(arrBookIds);
+		int[] quantities = CommonUtility.convertStringArrToIntArr(arrQuantities);
+		
+		spCart.updateCart(bookIds, quantities);
+		
+		request.setAttribute(ServletHelper.MESSAGE, "Your cart has been updated successfully");
+		request.getRequestDispatcher(JspPathHelper.SHOPPING_CART).forward(request, response);	
+	}
+
 }

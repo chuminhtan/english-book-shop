@@ -67,4 +67,14 @@ public class CommonUtility {
 	public static Customer getCustomerLogged(HttpServletRequest request) {
 		return (Customer) request.getSession().getAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
 	}
+	
+	public static int[] convertStringArrToIntArr(String[] strArray) {
+		int[] intArray = new int[strArray.length];
+		
+		for (int i = 0; i < strArray.length; i++) {
+			intArray[i] = Integer.parseInt(strArray[i]);
+		}
+		
+		return intArray;
+ 	}
 }

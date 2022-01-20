@@ -70,4 +70,12 @@ public class ShoppingCart {
 	public int getTotalItems() {
 		return cart.size();
 	}
+	
+	public void updateCart(int[] bookIds, int[] quantities) {
+		for (int i = 0; i<bookIds.length; i++) {
+			Book key = new Book(bookIds[i]);
+			int value = quantities[i];
+			cart.put(key,  value);
+		}
+	}
 }

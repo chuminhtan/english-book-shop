@@ -45,13 +45,13 @@
 							<c:if test="${cart.totalItems == 0}">
 								<div class="text-center">
 									<p>Your Cart Is Empty.</p>
-									<button class="btn btn-danger">Continue To Shopping</button>
+									<a href="${pageContext.request.contextPath }" class="btn btn-danger">Continue To Shopping</a>
 								</div>
 							</c:if>
 
 							<c:if test="${cart.totalItems > 0 }">
 
-
+								<form action="update-cart" method="post">
 								<table class="table table-borderless table-shopping-cart">
 									<thead class="text-muted">
 										<tr class="small text-uppercase">
@@ -78,7 +78,8 @@
 														</figcaption>
 													</figure>
 												</td>
-												<td><input type="number" value="${item.value }" min="1"
+												<input type="hidden" name="bookId" value="${item.key.bookId }"/>
+												<td><input type="number" value="${item.value }" name="quantities" min="1"
 													max="100" step="1"></td>
 												<td>
 													<div class="price-wrap">
@@ -99,7 +100,12 @@
 										</c:forEach>
 									</tbody>
 								</table>
+								
 								<!-- card-body.// -->
+								<div class="text-right">
+									<button type="submit" class="btn btn-primary"><i class="fas fa-sync"></i> Update</button>
+								</div>
+								</form>
 							</c:if>
 						</div>
 						<!-- card.// -->
@@ -138,11 +144,10 @@
 	</div>
 
 	<script>
-
-// Set Total Price for each item
-const totalPriceEachItem = () => {
-	
-}
+	const updateQuantity = (input) => {
+		console.log(input.value);
+		console.log(input.id);
+	}
 
 
 </script>
