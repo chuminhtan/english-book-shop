@@ -78,8 +78,8 @@
 								<div class="mb-3 d-flex">
 									<span class="price h4 align-self-center"">$230.00</span>
 								</div>
-								<a href="#" class="btn btn-primary"> <span class="text">Add
-										to cart</span> <i class="fas fa-shopping-cart"></i></a>
+								<button id="${BOOK.bookId }" class="btn btn-primary" onClick="addBookToCart(this)"><i
+													class="fas fa-shopping-cart"></i> Add To Cart </button>
 
 							</article>
 							<!-- product-info-aside .// -->

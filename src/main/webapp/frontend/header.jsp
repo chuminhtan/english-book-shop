@@ -32,8 +32,11 @@
 						<a href="view-cart"
 							class="badge badge-light text-dark p-2 mr-4 d-flex justify-content-center align-items-center">
 							<span class="text-primary">Cart</span><i class="fa fa-shopping-cart mr-2 ml-2"
-							style="font-size: 21px;"></i> <span class="badge badge-danger"
-							style="font-size: 14px;">91</span>
+							style="font-size: 21px;"></i> <span id="span-total-quantity" class="badge badge-danger"
+							style="font-size: 14px;">
+							<c:if test="${CART == null }">0</c:if>
+							${CART.totalQuantity }
+							</span>
 						</a>
 						<div class="widget-header dropdown">
 							<a href="#" data-toggle="dropdown" data-offset="20,10">

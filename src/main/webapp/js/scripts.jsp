@@ -30,12 +30,15 @@
 			  icon: 'success',
 			  title: title
 			}).then((result) =>{
-
+				if (url === 'nothing'){
+					return;
+				}
+				
 				if (url === null) {
 					location.reload();
-				} else {
+				} else{
 					window.location.assign(url); 
-				}
+				} 
 	  	})
 
 	}
@@ -150,3 +153,40 @@
 		$('.content').richText();
 	});
 </script>
+
+<!-- ADD BOOK TO CART -->
+<script>
+	const addBookToCart = async (btn) => {
+
+		let bookId = btn.id;
+		let url = '${pageContext.request.contextPath}/add-book-to-cart?bookId=' + bookId;
+
+		const response = await fetch(url, {
+		      method: 'GET',
+		      mode: 'cors',
+		      cache: 'no-cache',
+		      headers: {
+		            'Content-Type': 'application/json'
+		      },
+		      redirect: 'follow',
+		      referrerPolicy: 'no-referrer',
+		    });
+		const result = await response.json();
+
+		console.log(result);
+
+		if (result.result='OK') {
+		// Set quantity
+			let spanTotalQuantity = document.getElementById('span-total-quantity');
+			spanTotalQuantity.innerHTML = result.totalQuantity;
+
+			successMessage('Added Successfully','nothing');
+		}
+		console.log(response)
+		if(response.status == 500){
+			failMessage('Something Wrong. Please Try Again');
+		}
+
+	}
+	
+	</script>

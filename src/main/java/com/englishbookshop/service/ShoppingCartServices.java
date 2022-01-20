@@ -1,6 +1,8 @@
 package com.englishbookshop.service;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +16,23 @@ import com.englishbookshop.helper.JspPathHelper;
 import com.englishbookshop.helper.ServletHelper;
 
 public class ShoppingCartServices extends BaseServices {
-
+	private static BookDAO bookDao;
+	private static HttpSession session;
+	private static ShoppingCart spCart;
+	
 	public ShoppingCartServices(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
+		bookDao = new BookDAO();
+		session = request.getSession();
+		
+		Object spCartObj = session.getAttribute(ServletHelper.SESSION_CART);
+		
+		if (spCartObj == null) {
+			ShoppingCart shoppingCart = new ShoppingCart();
+			session.setAttribute(ServletHelper.SESSION_CART, shoppingCart); 
+		}
+		
+		spCart = (ShoppingCart) session.getAttribute(ServletHelper.SESSION_CART);
 	}
 	
 	public void showCart() throws ServletException, IOException {
@@ -27,19 +43,27 @@ public class ShoppingCartServices extends BaseServices {
 			ShoppingCart shoppingCart = new ShoppingCart();
 			session.setAttribute(ServletHelper.SESSION_CART, shoppingCart); 
 		}
+				
+		/*
+		 * Book book = bookDao.get(1); spCart.addItem(book);
+		 * 
+		 * Book book2 = bookDao.get(6); spCart.addItem(book2);
+		 */
+		request.getRequestDispatcher(JspPathHelper.SHOPPING_CART).forward(request, response);
+	}
+
+	public void addBookToCart() throws IOException {	
+		int bookId = Integer.parseInt(request.getParameter("bookId"));
 		
-		ShoppingCart spCart = (ShoppingCart) session.getAttribute(ServletHelper.SESSION_CART);
-		
-		BookDAO bookDao = new BookDAO();
-		
-		Book book = bookDao.get(1);
+		Book book = bookDao.get(bookId);
 		spCart.addItem(book);
 		
-		Book book2 = bookDao.get(6);
-		spCart.addItem(book2);
+		Map<String, Object> result = new HashMap<String, Object>();
 		
-
-		request.getRequestDispatcher(JspPathHelper.SHOPPING_CART).forward(request, response);
+		result.put("result", "OK");
+		result.put("totalQuantity", spCart.getTotalQuantity());
+		
+		CommonUtility.sendJsonRespone(result, response);
 	}
 
 }

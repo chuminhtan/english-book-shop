@@ -72,9 +72,9 @@
 																alt="${item.key.title }" class="img-sm">
 														</div>
 														<figcaption class="info">
-															<a href="#" class="title text-dark"><p class="content-justify">${item.key.title }</p></a>
-															<p class="text-muted small">Author:
-																${item.key.author }</p>
+															<a href="#" class="title text-dark"><p
+																	class="content-justify">${item.key.title }</p></a>
+															<p class="text-muted small">Author: ${item.key.author }</p>
 														</figcaption>
 													</figure>
 												</td>
@@ -91,7 +91,7 @@
 														</small>
 													</div> <!-- price-wrap .// -->
 												</td>
-												<td class="text-right"><a href="" class="btn btn-light">
+												<td class="text-right"><a href="remove-from-cart?bookId=${item.key.bookId }" class="btn btn-light">
 														<i class="fas fa-times"></i> Remove
 												</a></td>
 											</tr>
@@ -111,11 +111,10 @@
 							<div class="card-body">
 								<dl class="dlist-align">
 									<dt>Total:</dt>
-									<dd class="text-right text-primary b">
-										<strong> <fmt:formatNumber
+									<h4 class="text-right text-primary b">
+										<fmt:formatNumber
 												value="${cart.totalAmount }" type="currency" />
-f										</strong>
-									</dd>
+										
 								</dl>
 								<hr>
 								<c:if test="${cart.totalItems != 0}">
@@ -138,11 +137,7 @@ f										</strong>
 		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
 
-	<script src="../js/bootstrap-input-spinner.js"></script>
 	<script>
-
-// Create inputSpinner Jquery
-$("input[type='number']").inputSpinner();
 
 // Set Total Price for each item
 const totalPriceEachItem = () => {

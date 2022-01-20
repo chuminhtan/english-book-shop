@@ -74,9 +74,9 @@
 												<p>
 													<a href="view-book?id=${book.bookId }"
 														class="btn btn-outline-primary btn-block"> <span
-														class="text">Detail</span>
-													</a> <a href="#" class="btn btn-primary btn-block"><i
-														class="fas fa-shopping-cart"></i> Add To Cart </a>
+														class="text">Detail</span></a>
+													<button id="${book.bookId }" class="btn btn-primary btn-block" onClick="addBookToCart(this)"><i
+													class="fas fa-shopping-cart"></i> Add To Cart </button>
 												</p>
 											</div>
 											<!-- info-aside.// -->
