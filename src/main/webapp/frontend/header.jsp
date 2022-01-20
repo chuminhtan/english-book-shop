@@ -29,7 +29,7 @@
 				<!-- col.// -->
 				<div class="col-lg-5 col-xl-4 col-sm-12">
 					<div class="d-flex widgets-wrap float-md-right align-items-center">
-						<a href="#"
+						<a href="view-cart"
 							class="badge badge-light text-dark p-2 mr-4 d-flex justify-content-center align-items-center">
 							<span class="text-primary">Cart</span><i class="fa fa-shopping-cart mr-2 ml-2"
 							style="font-size: 21px;"></i> <span class="badge badge-danger"

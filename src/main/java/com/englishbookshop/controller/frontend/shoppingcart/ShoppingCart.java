@@ -9,6 +9,11 @@ import com.englishbookshop.entity.Book;
 public class ShoppingCart {
 	private Map<Book, Integer> cart = new HashMap<>();
 	
+	public Map<Book, Integer> getCart() {
+		return cart;
+	}
+
+	
 	public void addItem(Book book) {
 		if (cart.containsKey(book)) {
 			int quantity = cart.get(book) + 1;
@@ -60,5 +65,9 @@ public class ShoppingCart {
 	
 	public void clear() {
 		cart.clear();
+	}
+	
+	public int getTotalItems() {
+		return cart.size();
 	}
 }

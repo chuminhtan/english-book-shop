@@ -15,4 +15,5 @@ public class ServletHelper {
 	
 	public static final String SESSION_USER_EMAIL = "USER_EMAIL";
 	public static final String SESSION_LOGGED_CUSTOMER = "LOGGED_CUSTOMER";
+	public static final String SESSION_CART = "CART";
 }
