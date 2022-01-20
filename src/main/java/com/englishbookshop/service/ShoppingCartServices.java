@@ -89,4 +89,10 @@ public class ShoppingCartServices extends BaseServices {
 		request.getRequestDispatcher(JspPathHelper.SHOPPING_CART).forward(request, response);	
 	}
 
+	public void clearCart() throws ServletException, IOException {
+		spCart.clear();
+		request.setAttribute(ServletHelper.MESSAGE, "Your cart has been cleared successfully");
+		request.getRequestDispatcher(JspPathHelper.SHOPPING_CART).forward(request, response);	
+	}
+
 }

@@ -103,6 +103,7 @@
 								
 								<!-- card-body.// -->
 								<div class="text-right">
+									<a href="clear-cart" class="btn btn-outline-danger"><i class="fas fa-times"></i> Clear Cart</a>
 									<button type="submit" class="btn btn-primary"><i class="fas fa-sync"></i> Update</button>
 								</div>
 								</form>
