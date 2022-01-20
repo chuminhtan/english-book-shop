@@ -29,18 +29,15 @@ import com.englishbookshop.dao.BookDAO;
  */
 @Entity
 @Table(name = "book", catalog = "bookshopdb", uniqueConstraints = @UniqueConstraint(columnNames = "title"))
-@NamedQueries({
-	@NamedQuery(name = BookDAO.BOOK_LIST_ALL, query = "SELECT b FROM Book b"),
-	@NamedQuery(name = BookDAO.BOOK_FIND_BY_TITLE, query = "SELECT b FROM Book b WHERE b.title = :title"),
-	@NamedQuery(name = BookDAO.BOOK_COUNT, query="SELECT COUNT(b.bookId) FROM Book b"),
-	@NamedQuery(name = BookDAO.BOOK_FIND_BY_CATEGORY, query="SELECT b FROM Book b JOIN Category c ON b.category.categoryId = c.categoryId"
-			+ " WHERE c.categoryId = :categoryId"),
-	@NamedQuery(name = BookDAO.BOOK_LIST_NEW_BOOKS, query="SELECT b FROM Book b ORDER BY b.publishDate DESC"),
-	@NamedQuery(name = BookDAO.BOOK_SEARCH, query="SELECT b FROM Book b WHERE b.title LIKE '%' || :keyword || '%' "
-			+ "OR b.author LIKE '%' || :keyword || '%'"
-			+ "OR b.description LIKE '%' || :keyword || '%'"),
-	@NamedQuery(name = BookDAO.BOOK_COUNT_BY_CATEGORY, query="SELECT COUNT(b.bookId) FROM Book b WHERE b.category.categoryId = :categoryId")
-})
+@NamedQueries({ @NamedQuery(name = BookDAO.BOOK_LIST_ALL, query = "SELECT b FROM Book b"),
+		@NamedQuery(name = BookDAO.BOOK_FIND_BY_TITLE, query = "SELECT b FROM Book b WHERE b.title = :title"),
+		@NamedQuery(name = BookDAO.BOOK_COUNT, query = "SELECT COUNT(b.bookId) FROM Book b"),
+		@NamedQuery(name = BookDAO.BOOK_FIND_BY_CATEGORY, query = "SELECT b FROM Book b JOIN Category c ON b.category.categoryId = c.categoryId"
+				+ " WHERE c.categoryId = :categoryId"),
+		@NamedQuery(name = BookDAO.BOOK_LIST_NEW_BOOKS, query = "SELECT b FROM Book b ORDER BY b.publishDate DESC"),
+		@NamedQuery(name = BookDAO.BOOK_SEARCH, query = "SELECT b FROM Book b WHERE b.title LIKE '%' || :keyword || '%' "
+				+ "OR b.author LIKE '%' || :keyword || '%'" + "OR b.description LIKE '%' || :keyword || '%'"),
+		@NamedQuery(name = BookDAO.BOOK_COUNT_BY_CATEGORY, query = "SELECT COUNT(b.bookId) FROM Book b WHERE b.category.categoryId = :categoryId") })
 public class Book implements java.io.Serializable {
 
 	private Integer bookId;
@@ -58,33 +55,38 @@ public class Book implements java.io.Serializable {
 	private Date lastUpdateTime;
 	private Set<Review> reviews = new HashSet<Review>(0);
 	private Set<OrderDetail> orderDetails = new HashSet<OrderDetail>(0);
-	
+
+	public Book(int bookId) {
+		super();
+		this.bookId = bookId;
+	}
+
 	@Transient
 	public String getShortDescription() {
 		StringBuilder strBuilder = new StringBuilder(description);
-		
+
 		int start = -1;
 		int end = -1;
-		
+
 		while (true) {
 			start = strBuilder.indexOf("<");
 			end = strBuilder.indexOf(">");
-			
+
 			if (start == -1 || end == -1) {
 				break;
 			}
-			
+
 			strBuilder.delete(start, end + 1);
 		}
-		
+
 		return strBuilder.substring(0, 150).toString() + "...";
 	}
-	
+
 	@Transient
 	public String getImageBase64() {
 		return Base64.getEncoder().encodeToString(this.image);
 	}
-	
+
 	@Transient
 	public void setImageBase64(String imageBase64) {
 		this.imageBase64 = imageBase64;
@@ -234,32 +236,56 @@ public class Book implements java.io.Serializable {
 	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Book [bookId=" + bookId + ", title=" + title + ", author=" + author + ", price=" + price + "]";
 	}
-	
+
 	@Transient
 	public float getAverageRating() {
 		float averageRating = 0.0f;
 		float sum = 0.0f;
-		
+
 		for (Review review : reviews) {
 			sum += review.getRating();
 		}
-		
+
 		if (reviews.size() == 0) {
 			return 0.0f;
 		}
 		averageRating = sum / reviews.size();
-		
+
 		return averageRating;
 	}
-	
+
 	@Transient
 	public int getNumOfRating() {
 		return reviews.size();
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((bookId == null) ? 0 : bookId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Book other = (Book) obj;
+		if (bookId == null) {
+			if (other.bookId != null)
+				return false;
+		} else if (!bookId.equals(other.bookId))
+			return false;
+		return true;
+	}
 }
