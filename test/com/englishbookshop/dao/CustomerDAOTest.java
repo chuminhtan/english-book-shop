@@ -149,4 +149,20 @@ public class CustomerDAOTest {
 		
 		assertNull(customer);
 	}
+	
+	@Test
+	public void testCountOrdersByCustomer() {
+		int customerId = 2;
+		long numOfOrders = customerDao.countOrdersByCustomer(customerId);
+		System.out.println(numOfOrders);
+		assertTrue(numOfOrders > 0);
+	}
+	
+	@Test
+	public void testCountReviewsByCustomer() {
+		int customerId = 2;
+		long numOfReviews = customerDao.countReviewsByCustomer(customerId);
+		System.out.println(numOfReviews);
+		assertTrue(numOfReviews > 0);
+	}
 }

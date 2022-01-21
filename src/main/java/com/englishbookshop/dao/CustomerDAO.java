@@ -15,6 +15,9 @@ public class CustomerDAO extends JpaDAO<Customer> implements IGenericDAO<Custome
 	public static final String CUSTOMER_COUNT = "Customer.count";
 	public static final String CUSTOMER_FIND_BY_EMAIL = "Customer.findByEmail";
 	public static final String CUSTOMER_UPDATE_NO_PASSWORD = "Customer.updateNoPassword";
+	public static final String CUSTOMER_COUNT_ORDERS_BY_CUSTOMER = "Customer.countOrdersByCustomer";
+	public static final String CUSTOMER_COUNT_REVIEWS_BY_CUSTOMER = "Customer.countReviewsByCustomer";
+	
 	@Override
 	public Customer get(Object id) {	
 		return super.find(Customer.class, id);
@@ -108,5 +111,17 @@ public class CustomerDAO extends JpaDAO<Customer> implements IGenericDAO<Custome
 		}
 		
 		return null;	
+	}
+	
+	public long countOrdersByCustomer(int customerId) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("customerId", customerId);
+		return super.countWithNamedQuery(CUSTOMER_COUNT_ORDERS_BY_CUSTOMER, parameters);
+	}
+	
+	public long countReviewsByCustomer(int customerId) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("customerId", customerId);
+		return super.countWithNamedQuery(CUSTOMER_COUNT_REVIEWS_BY_CUSTOMER, parameters);
 	}
 }

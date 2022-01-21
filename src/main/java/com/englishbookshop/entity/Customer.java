@@ -39,6 +39,9 @@ import com.englishbookshop.dao.UserDAO;
 			+ "c.city = :city,"
 			+ "c.zipCode = :zipCode,"
 			+ "c.country = :country WHERE c.customerId = :customerId"),
+	@NamedQuery(name = CustomerDAO.CUSTOMER_COUNT_ORDERS_BY_CUSTOMER, query = "SELECT COUNT(o) FROM BookOrder o WHERE o.customer.customerId = :customerId"),
+	@NamedQuery(name = CustomerDAO.CUSTOMER_COUNT_REVIEWS_BY_CUSTOMER, query = "SELECT COUNT(r) FROM Review r WHERE r.customer.customerId = :customerId"),
+	
 })
 public class Customer implements java.io.Serializable {
 

@@ -96,7 +96,7 @@ public class CustomerServices extends BaseServices {
 	public void updateCustomer() throws ServletException, IOException {
 		Customer cusForm = readDataField();
 
-		int id =  Integer.parseInt(request.getParameter("id"));		
+		int id = Integer.parseInt(request.getParameter("id"));
 		cusForm.setCustomerId(id);
 
 		request.setAttribute("CUSTOMER", cusForm);
@@ -165,7 +165,19 @@ public class CustomerServices extends BaseServices {
 
 		Customer existCustomer = customerDao.get(id);
 
-		if (existCustomer != null) {
+		long numOfOrders = customerDao.countOrdersByCustomer(id);
+		long numOfReviews = customerDao.countReviewsByCustomer(id);
+		
+		if (numOfOrders > 0) {
+			resultResponse.put("result", ServletHelper.RESPONSE_FAIL);
+			resultResponse.put("MESSAGE", "Could not delete customer with ID " + id + " because he/she placed orders");
+			
+		} else if (numOfOrders > 0) {
+			resultResponse.put("result", ServletHelper.RESPONSE_FAIL);
+			resultResponse.put("MESSAGE", "Could not delete customer with ID " + id + " because he/she reviewed books.");
+		} 
+		
+		else if (existCustomer != null) {
 			customerDao.delete(id);
 
 			resultResponse.put("result", ServletHelper.RESPONSE_OK);
@@ -211,24 +223,24 @@ public class CustomerServices extends BaseServices {
 		response.sendRedirect(JspPathHelper.CUSTOMER_REGISTER_SUCCESS);
 	}
 
-	public void doLogin() throws IOException {	
+	public void doLogin() throws IOException {
 		JsonObject jsonObject = CommonUtility.getJsonObjectFromRequest(request);
-	
+
 		String email = jsonObject.get("email").getAsString();
 		String password = jsonObject.get("password").getAsString();
-    		
+
 		Map<String, String> result = new HashMap<>();
 		Customer customer = customerDao.checkLogin(email, password);
 
 		if (customer != null) {
 			result.put("result", "success");
-			
+
 			HttpSession session = request.getSession();
 			session.setAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER, customer);
 		} else {
 			result.put("result", "fail");
 		}
-		
+
 		String jsonMap = new Gson().toJson(result);
 
 		PrintWriter out = response.getWriter();
@@ -242,19 +254,19 @@ public class CustomerServices extends BaseServices {
 		session.removeAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
 		response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
 	}
-	
+
 	public void showCustomerProfile() throws IOException, ServletException {
 		Customer loggedCus = (Customer) request.getSession().getAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
 		System.out.println("Logged Customer: " + loggedCus);
 		request.setAttribute("CUSTOMER", loggedCus);
 		request.getRequestDispatcher(JspPathHelper.CUSTOMER_PROFILE).forward(request, response);
 	}
-	
+
 	public void updateCustomerProfile() throws IOException, ServletException {
 		HttpSession session = request.getSession();
-		Customer loggedCus = (Customer)session.getAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
+		Customer loggedCus = (Customer) session.getAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
 		Customer cusForm = readDataField();
-		
+
 		int id = loggedCus.getCustomerId();
 		cusForm.setCustomerId(id);
 		cusForm.setEmail(loggedCus.getEmail());
