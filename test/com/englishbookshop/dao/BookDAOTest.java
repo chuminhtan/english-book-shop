@@ -210,4 +210,13 @@ public class BookDAOTest{
 		
 		assertTrue(listBooks.size() > 0);
 	}
+	
+	@Test
+	public void testCountOrdersByBook() {
+		int bookId = 8;
+		
+		long numOfOrder = bookDao.countOrdersByBook(bookId);
+		System.out.println(numOfOrder);
+		assertTrue(numOfOrder > 0);
+	}
 }

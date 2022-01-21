@@ -182,10 +182,14 @@ public class BookServices extends BaseServices {
 		Book bookWithId = bookDao.get(bookId);
 		Map<String,Object> result = new HashMap<>();
 		
+		long numOfOrders = bookDao.countOrdersByBook(bookId);
+		
 		if (bookId == 1) {
 			result.put(ServletHelper.MESSAGE, ServletHelper.MESSAGE_COULD_NOT_DELETE_DEFAULT);
 		} else if (bookWithId == null) {
 			result.put(ServletHelper.MESSAGE, ServletHelper.MESSAGE_DOES_NOT_EXIST);
+		} else if (numOfOrders > 0) {			
+			result.put(ServletHelper.MESSAGE, "Could not delete the book because it has already existed in some orders.");
 		} else {
 			bookDao.delete(bookId);
 			result.put(ServletHelper.MESSAGE, "The book with ID "+ bookId +" has been deleted");

@@ -37,7 +37,12 @@ import com.englishbookshop.dao.BookDAO;
 		@NamedQuery(name = BookDAO.BOOK_LIST_NEW_BOOKS, query = "SELECT b FROM Book b ORDER BY b.publishDate DESC"),
 		@NamedQuery(name = BookDAO.BOOK_SEARCH, query = "SELECT b FROM Book b WHERE b.title LIKE '%' || :keyword || '%' "
 				+ "OR b.author LIKE '%' || :keyword || '%'" + "OR b.description LIKE '%' || :keyword || '%'"),
-		@NamedQuery(name = BookDAO.BOOK_COUNT_BY_CATEGORY, query = "SELECT COUNT(b.bookId) FROM Book b WHERE b.category.categoryId = :categoryId") })
+		@NamedQuery(name = BookDAO.BOOK_COUNT_BY_CATEGORY, query = "SELECT COUNT(b.bookId) FROM Book b WHERE b.category.categoryId = :categoryId"),
+		@NamedQuery(name = BookDAO.BOOK_COUNT_ORDERS_BY_BOOK, query = "SELECT COUNT(od.bookOrder) "
+				+ "FROM OrderDetail od "
+				+ "WHERE od.book.bookId = :bookId")
+})
+		
 public class Book implements java.io.Serializable {
 
 	private Integer bookId;
