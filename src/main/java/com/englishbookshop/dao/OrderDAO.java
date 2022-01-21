@@ -6,7 +6,9 @@ import java.util.List;
 import com.englishbookshop.entity.BookOrder;
 
 public class OrderDAO extends JpaDAO<BookOrder> implements IGenericDAO<BookOrder> {
-
+	
+	public static final String ORDER_LIST_ALL = "Order.listAll";
+	
 	@Override
 	public BookOrder create(BookOrder order) {
 		order.setOrderDate(new Date());
@@ -16,15 +18,13 @@ public class OrderDAO extends JpaDAO<BookOrder> implements IGenericDAO<BookOrder
 	}
 
 	@Override
-	public BookOrder update(BookOrder t) {
-		// TODO Auto-generated method stub
-		return null;
+	public BookOrder update(BookOrder order) {
+		return super.update(order);
 	}
 
 	@Override
-	public BookOrder get(Object obj) {
-		// TODO Auto-generated method stub
-		return null;
+	public BookOrder get(Object orderId) {
+		return super.find(BookOrder.class, orderId);
 	}
 
 	@Override
@@ -35,8 +35,7 @@ public class OrderDAO extends JpaDAO<BookOrder> implements IGenericDAO<BookOrder
 
 	@Override
 	public List<BookOrder> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return super.findWithNamedQuery(ORDER_LIST_ALL);
 	}
 
 	@Override

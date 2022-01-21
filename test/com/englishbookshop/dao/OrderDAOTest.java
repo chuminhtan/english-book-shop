@@ -3,6 +3,7 @@ package com.englishbookshop.dao;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.AfterClass;
@@ -31,28 +32,37 @@ public class OrderDAOTest {
 		BookOrder order = new BookOrder();
 		
 		Customer customer = new Customer();
-		customer.setCustomerId(1);
+		customer.setCustomerId(2);
 		
 		order.setCustomer(customer);
-		order.setRecipientName("Nguyen Van A");
+		order.setRecipientName("Nguyen Van B");
 		order.setRecipientPhone("123456789");
 		order.setShippingAddress("123 South Street, New York");
 		
 		Set<OrderDetail> orderDetails = new HashSet<OrderDetail>();
-		OrderDetail orderDetail = new OrderDetail();
 		
+		OrderDetail orderDetail = new OrderDetail();
 		Book book = new Book(6);
 		orderDetail.setBook(book);
 		orderDetail.setBookOrder(order);
 		orderDetail.setQuantity(2);
 		orderDetail.setSubtotal(60f);
 		
+		OrderDetail orderDetail2 = new OrderDetail();
+		Book book2 = new Book(8);
+		orderDetail2.setBook(book2);
+		orderDetail2.setBookOrder(order);
+		orderDetail2.setQuantity(3);
+		orderDetail2.setSubtotal(120f);
+		
 		orderDetails.add(orderDetail);
+		orderDetails.add(orderDetail2);
 		
 		order.setOrderDetails(orderDetails);
+		
 		BookOrder savedOrder = orderDao.create(order);
 		
-		assertNotNull(savedOrder);
+		assertNotNull(savedOrder.getOrderId() > 0 && savedOrder.getOrderDetails().size() > 0);
 		
 	}
 
@@ -63,7 +73,10 @@ public class OrderDAOTest {
 
 	@Test
 	public void testGet() {
-		fail("Not yet implemented");
+		int orderId = 6;
+		BookOrder bookOrder = orderDao.get(orderId);
+		System.out.println(bookOrder);
+		assertTrue(bookOrder.getOrderId() == 6);
 	}
 
 	@Test
@@ -73,7 +86,13 @@ public class OrderDAOTest {
 
 	@Test
 	public void testListAll() {
-		fail("Not yet implemented");
+		List<BookOrder> orderLists = orderDao.listAll();
+		
+		for (BookOrder order : orderLists) {
+			System.out.println(order);
+		}
+		
+		assertTrue(orderLists.size() > 0);
 	}
 
 	@Test
