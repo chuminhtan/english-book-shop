@@ -33,4 +33,6 @@ public class JspPathHelper {
 	public static final String REVIEW_EDIT = "review-form-edit.jsp";
 	
 	public static final String SHOPPING_CART = "frontend/shopping-cart.jsp";
+	
+	public static final String ORDER_LIST = "order-list.jsp";
 }

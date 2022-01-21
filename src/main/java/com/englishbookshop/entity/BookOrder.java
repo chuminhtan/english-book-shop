@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.englishbookshop.dao.OrderDAO;
 
@@ -200,6 +201,15 @@ public class BookOrder implements java.io.Serializable {
 				+ recipientPhone + ", paymentMethod=" + paymentMethod + ", total=" + total + ", numOfDetail="+ orderDetails.size() + "]";
 	}
 
-
+	@Transient
+	public int getBookCopies() {
+		int total = 0;
+		
+		for (OrderDetail orderDetail: this.orderDetails) {
+			total += orderDetail.getQuantity();
+		}
+		
+		return total;
+	}
 
 }
