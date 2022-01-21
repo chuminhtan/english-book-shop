@@ -32,4 +32,20 @@ public class OrderServices extends BaseServices {
 		rd.forward(request, response);
 	}
 
+	public void showOrderDetail() throws ServletException, IOException {
+		int orderId = Integer.parseInt(request.getParameter("id"));
+		
+		BookOrder order = orderDao.get(orderId);
+		
+		request.setAttribute("ORDER", order);
+		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.ORDER_DETAIL);
+		rd.forward(request, response);
+		
+	}
+
+	public void deleteOrder() {
+		
+		
+	}
+
 }

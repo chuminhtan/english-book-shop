@@ -1,4 +1,4 @@
-package com.englishbookshop.controller.admin.order;
+package com.englishbookshop.controller.order;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
