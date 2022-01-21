@@ -8,6 +8,7 @@ import com.englishbookshop.entity.BookOrder;
 public class OrderDAO extends JpaDAO<BookOrder> implements IGenericDAO<BookOrder> {
 	
 	public static final String ORDER_LIST_ALL = "Order.listAll";
+	public static final String ORDER_COUNT = "Order.count";
 	
 	@Override
 	public BookOrder create(BookOrder order) {
@@ -28,8 +29,8 @@ public class OrderDAO extends JpaDAO<BookOrder> implements IGenericDAO<BookOrder
 	}
 
 	@Override
-	public void delete(Object obj) {
-		// TODO Auto-generated method stub
+	public void delete(Object orderId) {
+		super.delete(BookOrder.class, orderId);
 		
 	}
 
@@ -40,8 +41,7 @@ public class OrderDAO extends JpaDAO<BookOrder> implements IGenericDAO<BookOrder
 
 	@Override
 	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return super.countWithNamedQuery(ORDER_COUNT);
 	}
 
 }

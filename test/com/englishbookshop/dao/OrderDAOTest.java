@@ -3,6 +3,7 @@ package com.englishbookshop.dao;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -67,8 +68,51 @@ public class OrderDAOTest {
 	}
 
 	@Test
-	public void testUpdateBookOrder() {
-		fail("Not yet implemented");
+	public void testUpdateRecipientName() {
+		BookOrder order = orderDao.get(6);
+		
+		String newRecipientName = "New Name";
+		order.setRecipientName(newRecipientName);
+		
+		BookOrder updatedOrder = orderDao.update(order);
+		assertTrue(updatedOrder.getRecipientName().equals(updatedOrder.getRecipientName()));
+	}
+	
+	@Test
+	public void testUpdateOrderDetails() {
+		BookOrder order = orderDao.get(7);
+		
+		Iterator<OrderDetail> iterator = order.getOrderDetails().iterator();
+		
+		int expectedQuantity = 10;
+		int actualQuantity = 0;
+		
+		float expectedSubtotal = 300f;
+		float actualSubtotal = 0f;
+		
+		while(iterator.hasNext()) {
+			
+			OrderDetail orderDetail = iterator.next();
+			if (orderDetail.getBook().getBookId() == 6) {
+				orderDetail.setQuantity(expectedQuantity);
+				orderDetail.setSubtotal(expectedSubtotal);
+			}
+		}
+		
+		BookOrder updatedOrder = orderDao.update(order);
+		Iterator<OrderDetail> iterator2 = updatedOrder.getOrderDetails().iterator();
+		
+		while(iterator2.hasNext()) {
+			
+			OrderDetail orderDetail = iterator2.next();
+			if (orderDetail.getBook().getBookId() == 6) {
+				actualQuantity =  orderDetail.getQuantity();
+				actualSubtotal =  orderDetail.getSubtotal();
+			}
+		}
+		
+		assertEquals(expectedQuantity, actualQuantity);
+		assertEquals(expectedSubtotal, actualSubtotal, 0.0f);
 	}
 
 	@Test
@@ -80,8 +124,13 @@ public class OrderDAOTest {
 	}
 
 	@Test
-	public void testDeleteObject() {
-		fail("Not yet implemented");
+	public void testDeleteOrder() {
+		int orderId = 6;
+		orderDao.delete(orderId);
+		
+		BookOrder bookOrder = orderDao.get(orderId);
+		
+		assertNull(bookOrder);
 	}
 
 	@Test
@@ -97,7 +146,8 @@ public class OrderDAOTest {
 
 	@Test
 	public void testCount() {
-		fail("Not yet implemented");
+		long numOfOrders = orderDao.count();
+		assertTrue(numOfOrders == 2);
 	}
 
 }
