@@ -219,4 +219,13 @@ public class BookDAOTest{
 		System.out.println(numOfOrder);
 		assertTrue(numOfOrder > 0);
 	}
+	
+	@Test
+	public void testCountReviewsByBook() {
+		int bookId = 1;
+		
+		long numOfReviews = bookDao.countReviewsByBook(bookId);
+		System.out.println(numOfReviews);
+		assertTrue(numOfReviews > 0);
+	}
 }

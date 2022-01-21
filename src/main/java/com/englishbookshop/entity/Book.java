@@ -40,7 +40,10 @@ import com.englishbookshop.dao.BookDAO;
 		@NamedQuery(name = BookDAO.BOOK_COUNT_BY_CATEGORY, query = "SELECT COUNT(b.bookId) FROM Book b WHERE b.category.categoryId = :categoryId"),
 		@NamedQuery(name = BookDAO.BOOK_COUNT_ORDERS_BY_BOOK, query = "SELECT COUNT(od.bookOrder) "
 				+ "FROM OrderDetail od "
-				+ "WHERE od.book.bookId = :bookId")
+				+ "WHERE od.book.bookId = :bookId"),
+@NamedQuery(name = BookDAO.BOOK_COUNT_REVIEWS_BY_BOOK, query = "SELECT COUNT(r) "
+		+ "FROM Review r "
+		+ "WHERE r.book.bookId = :bookId")
 })
 		
 public class Book implements java.io.Serializable {

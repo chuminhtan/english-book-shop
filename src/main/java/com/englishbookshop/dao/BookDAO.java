@@ -19,6 +19,7 @@ public class BookDAO extends JpaDAO<Book> implements IGenericDAO<Book> {
 	public static final String BOOK_SEARCH = "Book.search";
 	public static final String BOOK_COUNT_BY_CATEGORY = "Book.countByCategory";
 	public static final String BOOK_COUNT_ORDERS_BY_BOOK = "Book.countOrdersByBook";
+	public static final String BOOK_COUNT_REVIEWS_BY_BOOK = "Book.countReviewsByBook";
 	
 	public BookDAO() {
 	}
@@ -97,5 +98,12 @@ public class BookDAO extends JpaDAO<Book> implements IGenericDAO<Book> {
 		parameters.put("bookId", bookId);
 		
 		return super.countWithNamedQuery(BOOK_COUNT_ORDERS_BY_BOOK, parameters);
+	}
+	
+	public long countReviewsByBook(int bookId) {
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("bookId", bookId);
+		
+		return super.countWithNamedQuery(BOOK_COUNT_REVIEWS_BY_BOOK, parameters);
 	}
 }

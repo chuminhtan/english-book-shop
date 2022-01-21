@@ -38,13 +38,13 @@ public class BookServices extends BaseServices {
 		catDao = new CategoryDAO();
 	}
 
-	public void listBooks(String typeMsg,String msg) throws IOException, ServletException {
+	public void listBooks(String typeMsg, String msg) throws IOException, ServletException {
 		List<Book> listBooks = bookDao.listAll();
 
 		request.setAttribute("LIST_BOOKS", listBooks);
-		
+
 		if (typeMsg != null) {
-			request.setAttribute(typeMsg, msg);			
+			request.setAttribute(typeMsg, msg);
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOK_LIST);
@@ -61,62 +61,62 @@ public class BookServices extends BaseServices {
 
 	public void createBook() throws ServletException, IOException {
 
-		String title = request.getParameter("title"); 
-		
+		String title = request.getParameter("title");
+
 		Book existBook = bookDao.findByTitle(title);
-		
+
 		if (existBook != null) {
 			listBooks(ServletHelper.MESSAGE, title + ServletHelper.MESSAGE_ALREADY_EXIST);
 			return;
 		}
-			
+
 		Book newBook = new Book();
 		readBookFields(newBook);
-		
+
 		newBook = bookDao.create(newBook);
-		
+
 		if (newBook.getBookId() > 0) {
 			listBooks(ServletHelper.MESSAGE, title + ServletHelper.MESSAGE_CREATE_SUCCESS);
 		}
 	}
-	
+
 	public void updateBook() throws IOException, ServletException {
-		int bookId = Integer.parseInt(request.getParameter("book-id"));	
-		String title = request.getParameter("title"); 
-		
+		int bookId = Integer.parseInt(request.getParameter("book-id"));
+		String title = request.getParameter("title");
+
 		Book bookWithTitle = bookDao.findByTitle(title);
-		
+
 		if (bookWithTitle != null && bookWithTitle.getBookId() != bookId) {
 			listBooks(ServletHelper.MESSAGE, "The book with title " + title + ServletHelper.MESSAGE_ALREADY_EXIST);
 			return;
 		}
-		
+
 		Book bookWithId = bookDao.get(bookId);
-		
+
 		if (bookWithId == null) {
 			listBooks(ServletHelper.MESSAGE, "The book with id " + bookId + ServletHelper.MESSAGE_DOES_NOT_EXIST);
 			return;
 		}
-		
+
 		Book bookNeedUpdate = new Book();
 		bookNeedUpdate.setBookId(bookId);
 		readBookFields(bookNeedUpdate);
-		
+
 		if (bookNeedUpdate.getImage() == null) {
 			bookNeedUpdate.setImage(bookWithId.getImage());
 		}
-		
+
 		bookNeedUpdate = bookDao.update(bookNeedUpdate);
 		System.out.println("Book After Update: " + bookNeedUpdate);
-		
+
 		listBooks(ServletHelper.MESSAGE, "The book with title " + title + ServletHelper.MESSAGE_UPDATE_SUCCESSFULLY);
 	}
 
-	public void showEditForm() throws ServletException, IOException{
+	public void showEditForm() throws ServletException, IOException {
 		int bookId = Integer.parseInt(request.getParameter("id"));
-		
+
 		Book existBook = bookDao.get(bookId);
-		
+
 		if (existBook == null) {
 			listBooks(ServletHelper.MESSAGE, "The book with id " + bookId + ServletHelper.MESSAGE_DOES_NOT_EXIST);
 			return;
@@ -124,13 +124,13 @@ public class BookServices extends BaseServices {
 		List<Category> listCategories = catDao.listAll();
 		request.setAttribute("LIST_CATEGORIES", listCategories);
 		request.setAttribute("BOOK", existBook);
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOK_EDIT_FORM);
 		dispatcher.forward(request, response);
 	}
-	
+
 	private void readBookFields(Book book) throws ServletException, IOException {
-		String title = request.getParameter("title"); 
+		String title = request.getParameter("title");
 		Integer categoryId = Integer.parseInt(request.getParameter("category"));
 		String author = request.getParameter("author");
 		String isbn = request.getParameter("isbn");
@@ -138,7 +138,7 @@ public class BookServices extends BaseServices {
 		Float price = Float.parseFloat(request.getParameter("price"));
 		String publishDateRequest = request.getParameter("publish-date");
 		System.out.println("publishDate: " + publishDateRequest);
-		
+
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date publishDate;
 		try {
@@ -147,7 +147,7 @@ public class BookServices extends BaseServices {
 			e.printStackTrace();
 			throw new ServletException("Error parsing publish date dd/MM/yyyy");
 		}
-		
+
 		Category category = new Category();
 		category.setCategoryId(categoryId);
 
@@ -158,7 +158,7 @@ public class BookServices extends BaseServices {
 		book.setDescription(description);
 		book.setPrice(price);
 		book.setPublishDate(publishDate);
-		
+
 		Part part = request.getPart("image");
 
 		if (part != null && part.getSize() > 0) {
@@ -169,7 +169,7 @@ public class BookServices extends BaseServices {
 			InputStream inputStream = part.getInputStream();
 			inputStream.read(imageBytes);
 			inputStream.close();
-			
+
 			book.setImage(imageBytes);
 		} else {
 			book.setImage(null);
@@ -178,54 +178,59 @@ public class BookServices extends BaseServices {
 
 	public void deleteBook() throws IOException {
 		int bookId = Integer.parseInt(request.getParameter("id"));
-		
+
 		Book bookWithId = bookDao.get(bookId);
-		Map<String,Object> result = new HashMap<>();
-		
+		Map<String, Object> result = new HashMap<>();
+
 		long numOfOrders = bookDao.countOrdersByBook(bookId);
-		
+		long numOfReviews = bookDao.countReviewsByBook(bookId);
+
 		if (bookId == 1) {
 			result.put(ServletHelper.MESSAGE, ServletHelper.MESSAGE_COULD_NOT_DELETE_DEFAULT);
 		} else if (bookWithId == null) {
 			result.put(ServletHelper.MESSAGE, ServletHelper.MESSAGE_DOES_NOT_EXIST);
-		} else if (numOfOrders > 0) {			
-			result.put(ServletHelper.MESSAGE, "Could not delete the book because it has already existed in some orders.");
+		} else if (numOfReviews > 0) {
+			result.put(ServletHelper.MESSAGE,
+					"Could not delete the book because it has already existed in some reviews.");
+		} else if (numOfOrders > 0) {
+			result.put(ServletHelper.MESSAGE,
+					"Could not delete the book because it has already existed in some orders.");
 		} else {
 			bookDao.delete(bookId);
-			result.put(ServletHelper.MESSAGE, "The book with ID "+ bookId +" has been deleted");
+			result.put(ServletHelper.MESSAGE, "The book with ID " + bookId + " has been deleted");
 		}
-		
+
 		String resultJson = new Gson().toJson(result);
-		
+
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		out.print(resultJson);
 	}
-	
+
 	public void listBooksByCategory() throws ServletException, IOException {
 		int categoryId = Integer.parseInt(request.getParameter("id"));
-		
+
 //		List<Book> listBooks = bookDao.findByCategory(categoryId);
 		Category category = catDao.get(categoryId);
 		List<Book> listBooks = new ArrayList<>(category.getBooks());
-		
+
 		for (Book b : listBooks) {
 			System.out.println(b);
 		}
-		
+
 		request.setAttribute("LIST_BOOKS", listBooks);
 		request.setAttribute("CATEGORY", category);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOKS_LIST_BY_CATEGORY);
 		dispatcher.forward(request, response);
 	}
 
-	public void viewBookDetail() throws IOException, ServletException{
-		int bookId = Integer.parseInt(request.getParameter("id"));		
-		Book book = bookDao.get(bookId);	
-		
+	public void viewBookDetail() throws IOException, ServletException {
+		int bookId = Integer.parseInt(request.getParameter("id"));
+		Book book = bookDao.get(bookId);
+
 		request.setAttribute("BOOK", book);
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOK_DETAIL);
 		dispatcher.forward(request, response);
 	}
@@ -233,16 +238,16 @@ public class BookServices extends BaseServices {
 	public void search() throws ServletException, IOException {
 		String keyword = request.getParameter("keyword");
 		List<Book> listBooks = null;
-		
+
 		if (keyword.isEmpty()) {
 			listBooks = bookDao.listAll();
 		} else {
-			listBooks = bookDao.search(keyword);			
+			listBooks = bookDao.search(keyword);
 		}
 
 		request.setAttribute("KEYWORD", keyword);
-		request.setAttribute("LIST_BOOKS", listBooks);			
-	
+		request.setAttribute("LIST_BOOKS", listBooks);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOK_SEARCH);
 		dispatcher.forward(request, response);
 	}
