@@ -121,6 +121,17 @@ a, a:hover {
 	z-index: 1;
 }
 
+.js-check.box {
+    width: 100%;
+    border-width: 3px;
+}
+.js-check.active {
+    border-color: #3167eb;
+}
+.js-check {
+    position: relative;
+}
+
 .label-rating {
 	margin-left: 7px;
 	display: inline-block;

@@ -48,4 +48,13 @@ public class OrderServices extends BaseServices {
 		
 	}
 
+	public void showCheckout() throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.ORDER_CHECKOUT);
+		rd.forward(request, response);
+	}
+
+	public void placeOrder() {
+		
+	}
+
 }

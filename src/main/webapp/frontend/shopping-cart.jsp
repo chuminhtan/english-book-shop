@@ -125,9 +125,9 @@
 								</dl>
 								<hr>
 								<c:if test="${cart.totalItems != 0}">
-									<a href="#" class="btn btn-danger btn-block text-white">
-										Make Purchase </a>
-									<a href="#" class="btn btn-primary btn-block">Continue
+									<a href="checkout" class="btn btn-danger btn-block text-white">
+										Checkout </a>
+									<a href="${pageContext.request.contextPath }" class="btn btn-primary btn-block">Continue
 										Shopping</a>
 								</c:if>
 							</div>
