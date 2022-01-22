@@ -78,7 +78,7 @@
 						<article class="card mb-4">
 							<div class="card-body">
 								<h4 class="card-title mb-4">Shipping Infomation</h4>
-								<form action="">
+								<form action="checkout" method="post">
 									<div class="row">
 										<div class="form-group col-sm-6">
 											<label>Recipient Name</label> <input type="text" value="${LOGGED_CUSTOMER.fullName }"

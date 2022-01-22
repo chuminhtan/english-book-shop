@@ -19,7 +19,9 @@ import com.englishbookshop.helper.ServletHelper;
 
 @WebFilter("/*")
 public class CustomerLoginFilter implements Filter {
-
+	private static final String[] loginRequiredURL = new String[] {
+			"/checkout", "/place-order-success"
+			};
     public CustomerLoginFilter() {
     }
 
@@ -43,7 +45,9 @@ public class CustomerLoginFilter implements Filter {
 		System.out.println("Path: " + path);
 		System.out.println("LoggedIn: " + loggedIn);
 		
-		if (!loggedIn && path.startsWith("/customer")) {
+		boolean isPathNeedLogin = path.startsWith("/customer") || path.endsWith("/checkout") || path.endsWith("place-order-success");
+		
+		if (!loggedIn && isPathNeedLogin) {
 			httpResponse.sendRedirect(httpRequest.getContextPath());
 		} else {
 			chain.doFilter(request, response);			

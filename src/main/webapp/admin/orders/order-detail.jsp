@@ -16,7 +16,8 @@
 		<!-- Main -->
 		<div class="container">
 			<div class="jumbotron">
-
+			<a href="javascript:history.back()" class="btn btn-outline-primary"><i
+				class="fas fa-arrow-left"></i> Back</a>
 				<h2 class="text-primary my-4 text-center">Details of Order ID
 					${ORDER.orderId }</h2>
 				<!-- ================ TABLE OVERVIEW ======================= -->

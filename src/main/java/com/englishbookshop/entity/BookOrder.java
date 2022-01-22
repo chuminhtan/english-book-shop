@@ -42,7 +42,7 @@ public class BookOrder implements java.io.Serializable {
 	private String recipientName;
 	private String recipientPhone;
 	private String paymentMethod;
-	private float total;
+	private double total;
 	private String status;
 	private Set<OrderDetail> orderDetails = new HashSet<OrderDetail>(0);
 
@@ -50,7 +50,7 @@ public class BookOrder implements java.io.Serializable {
 	}
 
 	public BookOrder(Customer customer, Date orderDate, String shippingAddress, String recipientName,
-			String recipientPhone, String paymentMethod, float total, String status) {
+			String recipientPhone, String paymentMethod, double total, String status) {
 		this.customer = customer;
 		this.orderDate = orderDate;
 		this.shippingAddress = shippingAddress;
@@ -62,7 +62,7 @@ public class BookOrder implements java.io.Serializable {
 	}
 
 	public BookOrder(Customer customer, Date orderDate, String shippingAddress, String recipientName,
-			String recipientPhone, String paymentMethod, float total, String status, Set<OrderDetail> orderDetails) {
+			String recipientPhone, String paymentMethod, double total, String status, Set<OrderDetail> orderDetails) {
 		this.customer = customer;
 		this.orderDate = orderDate;
 		this.shippingAddress = shippingAddress;
@@ -143,11 +143,11 @@ public class BookOrder implements java.io.Serializable {
 	}
 
 	@Column(name = "total", nullable = false, precision = 12, scale = 0)
-	public float getTotal() {
+	public double getTotal() {
 		return this.total;
 	}
 
-	public void setTotal(float total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 
