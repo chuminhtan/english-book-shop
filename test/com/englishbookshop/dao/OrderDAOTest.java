@@ -149,5 +149,28 @@ public class OrderDAOTest {
 		long numOfOrders = orderDao.count();
 		assertTrue(numOfOrders == 2);
 	}
+	
+	@Test
+	public void testListByCustomer() {
+		int customerId = 4;
+		List<BookOrder> orderLists = orderDao.listByCustomer(customerId);
+		
+		for(BookOrder order : orderLists) {
+			System.out.println(order);
+		}
+		
+		assertTrue(orderLists.size() > 0);
+	}
+	
+	@Test
+	public void testFindByIdAndCustomer() {
+		int orderId = 7;
+		int customerId = 2;
+		
+		BookOrder order = orderDao.get(orderId, customerId);
+		System.out.println(order);
+		
+		assertNotNull(order);
+	}
 
 }

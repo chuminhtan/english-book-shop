@@ -31,7 +31,11 @@ import com.englishbookshop.dao.OrderDAO;
 @Table(name = "book_order", catalog = "bookshopdb")
 @NamedQueries({
 	@NamedQuery(name = OrderDAO.ORDER_LIST_ALL, query = "SELECT o FROM BookOrder o ORDER BY o.orderDate DESC"),
-	@NamedQuery(name = OrderDAO.ORDER_COUNT, query = "SELECT COUNT(*) FROM BookOrder")
+	@NamedQuery(name = OrderDAO.ORDER_COUNT, query = "SELECT COUNT(*) FROM BookOrder"),
+	@NamedQuery(name = OrderDAO.ORDER_LIST_BY_CUSTOMER, query = "SELECT o FROM BookOrder o WHERE o.customer.customerId = :customerId"),
+	@NamedQuery(name = OrderDAO.ORDER_FIND_BY_ID_AND_CUSTOMER, query = "SELECT o FROM BookOrder o WHERE "
+			+ "o.customer.customerId = :customerId AND "
+			+ "o.orderId = :orderId")
 })
 public class BookOrder implements java.io.Serializable {
 
@@ -44,7 +48,7 @@ public class BookOrder implements java.io.Serializable {
 	private String paymentMethod;
 	private double total;
 	private String status;
-	private Set<OrderDetail> orderDetails = new HashSet<OrderDetail>(0);
+	private Set<OrderDetail> orderDetails  = new HashSet<OrderDetail>(0);
 
 	public BookOrder() {
 	}
@@ -211,5 +215,7 @@ public class BookOrder implements java.io.Serializable {
 		
 		return total;
 	}
+	
+	
 
 }

@@ -1,4 +1,4 @@
-package com.englishbookshop.controller.frontend.shoppingcart;
+package com.englishbookshop.controller.frontend.order;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.englishbookshop.helper.JspPathHelper;
-import com.englishbookshop.service.ShoppingCartServices;
+import com.englishbookshop.service.OrderServices;
 
-@WebServlet("/view-cart")
-public class ViewCartServlet extends HttpServlet {
+@WebServlet("/customer/view-orders")
+public class ViewOrdersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ViewCartServlet() {
+    public ViewOrdersServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ShoppingCartServices spCartServices = new ShoppingCartServices(request, response);
-		spCartServices.showCart();
+		OrderServices orderServices = new OrderServices(request, response);
+		orderServices.listOrdersByCustomer();
 	}
 
 }

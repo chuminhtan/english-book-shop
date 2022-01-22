@@ -45,7 +45,6 @@
 							<c:if test="${cart.totalItems == 0}">
 								<div class="text-center">
 									<p>Your Cart Is Empty.</p>
-									<a href="${pageContext.request.contextPath }" class="btn btn-danger">Continue To Shopping</a>
 								</div>
 							</c:if>
 
@@ -83,7 +82,7 @@
 													max="100" step="1"></td>
 												<td>
 													<div class="price-wrap">
-														<var class="price text-danger">
+														<var class="price text-primary">
 															<fmt:formatNumber value="${item.key.price*item.value }"
 																type="currency" />
 														</var>
@@ -103,8 +102,8 @@
 								
 								<!-- card-body.// -->
 								<div class="text-right">
-									<a href="clear-cart" class="btn btn-outline-danger"><i class="fas fa-times"></i> Clear Cart</a>
-									<button type="submit" class="btn btn-primary"><i class="fas fa-sync"></i> Update</button>
+									<button type="submit" class="btn btn-primary mx-2"><i class="fas fa-sync"></i> Update</button>
+									<a href="clear-cart" class="btn btn-outline-danger mx-2"><i class="fas fa-times"></i> Remove All</a>
 								</div>
 								</form>
 							</c:if>
@@ -123,13 +122,13 @@
 												value="${cart.totalAmount }" type="currency" />
 										
 								</dl>
-								<hr>
 								<c:if test="${cart.totalItems != 0}">
-									<a href="checkout" class="btn btn-danger btn-block text-white">
+								<hr>
+									<a href="checkout" class="btn btn-info btn-block text-white">
 										Checkout </a>
+								</c:if>
 									<a href="${pageContext.request.contextPath }" class="btn btn-primary btn-block">Continue
 										Shopping</a>
-								</c:if>
 							</div>
 							<!-- card-body.// -->
 						</div>

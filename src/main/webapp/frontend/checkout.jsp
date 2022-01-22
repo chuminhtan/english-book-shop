@@ -143,7 +143,7 @@
 								<hr>
 								<p class="small mb-3 text-muted">By clicking you are agree
 									with terms of condition</p>
-								<button type="submit" class="btn btn-danger btn-block"> Place Order </button>
+								<button type="submit" class="btn btn-info btn-block"> Place Order </button>
 								</form>
 							</div>
 							<!-- card-body.// -->

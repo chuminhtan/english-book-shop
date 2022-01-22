@@ -45,7 +45,7 @@ public class CustomerLoginFilter implements Filter {
 		System.out.println("Path: " + path);
 		System.out.println("LoggedIn: " + loggedIn);
 		
-		boolean isPathNeedLogin = path.startsWith("/customer") || path.endsWith("/checkout") || path.endsWith("place-order-success");
+		boolean isPathNeedLogin = path.startsWith("/customer") || path.endsWith("/place-order-success");
 		
 		if (!loggedIn && isPathNeedLogin) {
 			httpResponse.sendRedirect(httpRequest.getContextPath());

@@ -16,12 +16,12 @@
 		<!-- Main -->
 		<div class="container">
 			<div class="jumbotron">
-			<a href="javascript:history.back()" class="btn btn-outline-primary"><i
-				class="fas fa-arrow-left"></i> Back</a>
+				<a href="javascript:history.back()" class="btn btn-outline-primary"><i
+					class="fas fa-arrow-left"></i> Back</a>
 				<h2 class="text-primary my-4 text-center">Details of Order ID
 					${ORDER.orderId }</h2>
 				<!-- ================ TABLE OVERVIEW ======================= -->
-				<h4>Overview</h4>
+				<h4 class="text-primary">Overview</h4>
 				<div class="table-responsive mb-2">
 					<table class="table table-hover table-striped">
 						<tbody>
@@ -61,19 +61,18 @@
 					</table>
 				</div>
 				<!-- =================== TABLE OVERVIEW .//END ================== -->
-
 				<!-- =================== TABLE ODERED BOOKS ====================== -->
-				<h4>Ordered Books</h4>
+				<h4 class="text-primary">Ordered Books</h4>
 				<div class="table-responsive">
 					<table class="table table-hover table-striped">
-						<thead class="thead-dark">
+						<thead>
 							<tr>
-								<th scope="col">Index</th>
-								<th scope="col">Book Title</th>
-								<th scope="col">Author</th>
-								<th scope="col">Price</th>
-								<th scope="col">Quantity</th>
-								<th scope="col">Sub Total</th>
+								<th scope="col" class="text-primary">Index</th>
+								<th scope="col" class="text-primary">Book Title</th>
+								<th scope="col" class="text-primary">Author</th>
+								<th scope="col" class="text-primary">Price</th>
+								<th scope="col" class="text-primary">Quantity</th>
+								<th scope="col" class="text-primary">Sub Total</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -91,9 +90,10 @@
 								</tr>
 							</c:forEach>
 							<tr>
-								<td colspan="4">TOTAL:</td>
-								<td>${ORDER.bookCopies }</td>
-								<td>${ORDER.total}</td>
+								<td colspan="4" class="text-danger font-weight-bold text-center">TOTAL:</td>
+								<td class="text-danger font-weight-bold">${ORDER.bookCopies }</td>
+								<td class="text-danger font-weight-bold"><fmt:formatNumber
+										value="${ORDER.total}" type="currency" /></td>
 							</tr>
 						</tbody>
 					</table>

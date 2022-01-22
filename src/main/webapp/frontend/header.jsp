@@ -29,7 +29,7 @@
 				<!-- col.// -->
 				<div class="col-lg-5 col-xl-4 col-sm-12">
 					<div class="d-flex widgets-wrap float-md-right align-items-center">
-						<a href="view-cart"
+						<a href="${pageContext.request.contextPath }/view-cart"
 							class="badge badge-light text-dark p-2 mr-4 d-flex justify-content-center align-items-center">
 							<span class="text-primary">Cart</span><i class="fa fa-shopping-cart mr-2 ml-2"
 							style="font-size: 21px;"></i> <span id="span-total-quantity" class="badge badge-danger"
@@ -86,7 +86,7 @@
 								<!-- ============= Dropdown when logged_customer is NOT null ============= -->
 								<c:if test="${LOGGED_CUSTOMER != null }">
 									<a class="dropdown-item py-3 px-4" href="${pageContext.request.contextPath }/customer/customer-profile"><i class="fas fa-user text-primary"></i><span class="ml-3">Profile setting</span></a>
-									<a class="dropdown-item py-3 px-4" href="${pageContext.request.contextPath }/customer/customer-orders"><i class="fas fa-file-alt text-primary"></i><span class="ml-3">My orders</span></a>
+									<a class="dropdown-item py-3 px-4" href="${pageContext.request.contextPath }/customer/view-orders"><i class="fas fa-file-alt text-primary"></i><span class="ml-3">My orders</span></a>
 									<a class="dropdown-item py-3 px-4" href="${pageContext.request.contextPath }/customer/logout"><i class="fas fa-power-off text-primary"></i><span class="ml-3">Logout</span></a>
 								</c:if>
 								<!-- ============= Dropdown when logged_customer is null .//END============= -->

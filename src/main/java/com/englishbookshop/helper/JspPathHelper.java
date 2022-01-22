@@ -37,5 +37,9 @@ public class JspPathHelper {
 	public static final String ORDER_LIST = "order-list.jsp";
 	public static final String ORDER_DETAIL = "order-detail.jsp";
 	public static final String ORDER_CHECKOUT = "frontend/checkout.jsp";
+	public static final String ORDER_CHECKOUT_MESSAGE = "frontend/checkout-message.jsp";
 	public static final String ORDER_SUCCESS = "frontend/place-order-success.jsp";
+	public static final String ORDER_VIEW = "../frontend/customer/view-orders.jsp";
+	public static final String ORDER_VIEW_DETAILS = "../frontend/customer/view-order-details.jsp";
+
 }

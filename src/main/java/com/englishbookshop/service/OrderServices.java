@@ -60,12 +60,17 @@ public class OrderServices extends BaseServices {
 		HttpSession session = request.getSession();
 
 		ShoppingCart spCart = (ShoppingCart) session.getAttribute(ServletHelper.SESSION_CART);
-
-		if (spCart == null || spCart.getTotalItems() == 0) {
-			response.sendRedirect(request.getContextPath() + "/view-cart");
+		Customer customer = (Customer) session.getAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
+		
+		if (customer == null) {
+			request.setAttribute("MESSAGE_LOGIN", "");
+			request.getRequestDispatcher(JspPathHelper.ORDER_CHECKOUT_MESSAGE).forward(request, response);
+		} else if (spCart == null || spCart.getTotalItems() == 0) {
+			request.setAttribute("MESSAGE_CART", "");
+			request.getRequestDispatcher(JspPathHelper.ORDER_CHECKOUT_MESSAGE).forward(request, response);
 		} else {
 
-			RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.SHOPPING_CART);
+			RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.ORDER_CHECKOUT);
 			rd.forward(request, response);
 		}
 	}
@@ -112,6 +117,28 @@ public class OrderServices extends BaseServices {
 		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.ORDER_SUCCESS);
 		rd.forward(request, response);
 
+	}
+
+	public void listOrdersByCustomer() throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Customer customer = (Customer) session.getAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
+		
+		List<BookOrder> listOrders = orderDao.listByCustomer(customer.getCustomerId());
+		
+		request.setAttribute("LIST_ORDERS", listOrders);
+		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.ORDER_VIEW);
+		rd.forward(request, response);
+	}
+
+	public void showOrderDetailToCustomer() throws ServletException, IOException {
+		int orderId = Integer.parseInt(request.getParameter("id"));
+		Customer customer = (Customer) request.getSession().getAttribute(ServletHelper.SESSION_LOGGED_CUSTOMER);
+		
+		BookOrder order = orderDao.get(orderId, customer.getCustomerId());
+
+		request.setAttribute("ORDER", order);
+		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.ORDER_VIEW_DETAILS);
+		rd.forward(request, response);
 	}
 
 }

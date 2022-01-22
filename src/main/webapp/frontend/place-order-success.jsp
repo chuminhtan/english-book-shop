@@ -18,12 +18,19 @@
 			<div class="container">
 				<div class="jumbotron text-center">
 
-						<img src="${pageContext.request.contextPath }/images/icon-ok.png" alt="success" width="80"/>
+					<img src="${pageContext.request.contextPath }/images/icon-ok.png"
+						alt="success" width="80" />
 
-					<p>Thank you! Your order #${CREATED_ORDER.orderId } has been received. We will contact to you soon.</p>
-					<a class="btn btn-primary" href="${pageContext.request.contextPath }">Continue To Shopping</a>
+					<p>Thank you! Your order #${CREATED_ORDER.orderId } has been
+						received. We will contact to you soon.</p>
+
+					<a class="btn btn-info"
+						href="${pageContext.request.contextPath }/customer/order?id=${CREATED_ORDER.orderId }">See
+						Order Details #${CREATED_ORDER.orderId }</a> <a
+						class="btn btn-primary" href="${pageContext.request.contextPath }">Continue
+						To Shopping</a>
 					<!-- FORM -->
-					
+
 				</div>
 			</div>
 		</section>
