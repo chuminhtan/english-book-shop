@@ -23,6 +23,7 @@ import javax.swing.text.DateFormatter;
 import com.englishbookshop.dao.BookDAO;
 import com.englishbookshop.dao.CategoryDAO;
 import com.englishbookshop.entity.Book;
+import com.englishbookshop.entity.BookJson;
 import com.englishbookshop.entity.Category;
 import com.englishbookshop.helper.JspPathHelper;
 import com.englishbookshop.helper.ServletHelper;
@@ -250,5 +251,36 @@ public class BookServices extends BaseServices {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOK_SEARCH);
 		dispatcher.forward(request, response);
+	}
+
+	public void apiListAll() throws IOException {
+		List<Book> listOfBooks = bookDao.listAll();
+		List<BookJson> listOfBookJsons = new ArrayList<BookJson>();
+		
+		Gson gson = new Gson();
+		
+		for (Book book : listOfBooks) {
+			BookJson bookJson = new BookJson();
+			bookJson.setBookId(book.getBookId());
+			bookJson.setTitle(book.getTitle());
+			bookJson.setAuthor(book.getAuthor());
+			bookJson.setImageBase64(book.getImageBase64());
+			bookJson.setNumOfReviews(book.getNumOfRating());
+			bookJson.setRating(book.getAverageRating());
+			bookJson.setPrice(book.getPrice());
+			
+			listOfBookJsons.add(bookJson);
+		}
+		String json = gson.toJson(listOfBookJsons);
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		out.print(json);
+	}
+
+	public void apiListByCategory() {
+		// TODO Auto-generated method stub
+		
 	}
 }

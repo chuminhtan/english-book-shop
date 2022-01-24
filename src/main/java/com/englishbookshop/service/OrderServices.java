@@ -14,8 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import com.englishbookshop.controller.frontend.shoppingcart.ShoppingCart;
 import com.englishbookshop.controller.order.OrderDetailServlet;
+import com.englishbookshop.dao.CategoryDAO;
 import com.englishbookshop.dao.OrderDAO;
 import com.englishbookshop.entity.BookOrder;
+import com.englishbookshop.entity.Category;
 import com.englishbookshop.entity.Customer;
 import com.englishbookshop.entity.OrderDetail;
 import com.englishbookshop.helper.JspPathHelper;
@@ -23,10 +25,12 @@ import com.englishbookshop.helper.ServletHelper;
 
 public class OrderServices extends BaseServices {
 	private OrderDAO orderDao;
+	private CategoryDAO categoryDao;
 
 	public OrderServices(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 		orderDao = new OrderDAO();
+		categoryDao = new CategoryDAO();
 	}
 
 	public void listAll(String message) throws ServletException, IOException {
@@ -139,6 +143,18 @@ public class OrderServices extends BaseServices {
 		request.setAttribute("ORDER", order);
 		RequestDispatcher rd = request.getRequestDispatcher(JspPathHelper.ORDER_VIEW_DETAILS);
 		rd.forward(request, response);
+	}
+
+	public void showEditFormForAdmin() throws ServletException, IOException {
+		int orderId = Integer.parseInt(request.getParameter("id"));
+		
+		List<Category> listCategories = categoryDao.listAll();
+		BookOrder order = orderDao.get(orderId);
+		
+		request.setAttribute("ORDER", order);
+		request.setAttribute("LIST_CATEGORIES", listCategories);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.ORDER_EDIT);
+		dispatcher.forward(request, response);	
 	}
 
 }
