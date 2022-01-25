@@ -1,4 +1,6 @@
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
@@ -57,7 +59,7 @@
 			Toast.fire({
 			  icon: 'error',
 			  title: title
-			}).then((result) =>{
+			}).then((result)=>{
 
 				if (url == 'nothing') {
 					return;
@@ -68,7 +70,7 @@
 	  	})
 	}
 
-	const infoMessage = (title) => {
+	const infoMessage = (title, url) => {
 		const Toast = Swal.mixin({
 			  toast: true,
 			  position: 'top-end',
@@ -84,7 +86,16 @@
 			Toast.fire({
 			  icon: 'info',
 			  title: title
-			})
+			}).then((result)=>{
+				if (url == 'nothing') {
+					return;
+					
+				} else if (url='reload') {
+					location.reload();
+				} else {
+					window.location.assign(url);
+				}
+			});
 	  	}
 
 	let message = '${MESSAGE}' 
@@ -96,7 +107,32 @@
 </script>
 
 <script>
-	function confirmDelete(type, id, action) {
+const deleteWithGet = async (action, id) => {
+    const url = action + '?id=' + id;
+    const result = await sendGetData(url, id);
+
+	if (result.URL != undefined) {
+		infoMessage(result.MESSAGE, result.URL);
+		return;
+	} 
+	infoMessage(result.MESSAGE, 'reload');
+}
+
+const sendGetData = async (url, id) => {
+    const response = await fetch(url, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+    });
+    return response.json();
+}	
+
+async function confirmDelete(type, id, action){
 		
 	    if (id == 1) {
 	        Swal.fire({
@@ -107,47 +143,21 @@
 	    }
 	    
 	    Swal.fire({
-	        title: 'Are you sure you want to delete?',
+	        title: 'Would you like to delete this ' + type +'?',
 	        text: 'The ' + type + ' with ID ' + id + ' will be deleted',
 	        icon: 'question',
 	        showCancelButton: true,
 	        confirmButtonColor: '#3085d6',
 	        cancelButtonColor: '#d33',
 	        confirmButtonText: 'Yes, delete it!'
-	    }).then((result) => {
+	    }).then((result)=>{
 	        if (result.isConfirmed) {
-	            deleteWithGet(action, id)
+	            deleteWithGet(action, id);
 	        }
-	    })
-	}
-
-	async function deleteWithGet(action, id) {
-	    const url = action + '?id=' + id;
-	    const result = await sendGetData(url, id);
-
-        Swal.fire({
-	            title: result.MESSAGE,
-	            icon: 'info',
-        }).then((result) => {
-        	  if (Swal.DismissReason.backdrop) {
-        		  window.location.reload();
-        	  }
-        	})	
-	}
-
-	async function sendGetData(url, id) {
-	    const response = await fetch(url, {
-	        method: 'GET',
-	        mode: 'cors',
-	        cache: 'no-cache',
-	        headers: {
-	            'Content-Type': 'application/json'
-	        },
-	        redirect: 'follow',
-	        referrerPolicy: 'no-referrer',
 	    });
-	    return response.json();
-	}	
+}
+
+
 </script>
 
 <script>

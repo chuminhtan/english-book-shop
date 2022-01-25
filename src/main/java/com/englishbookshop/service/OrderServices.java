@@ -1,6 +1,7 @@
 package com.englishbookshop.service;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -26,6 +27,7 @@ import com.englishbookshop.entity.Customer;
 import com.englishbookshop.entity.OrderDetail;
 import com.englishbookshop.helper.JspPathHelper;
 import com.englishbookshop.helper.ServletHelper;
+import com.google.gson.Gson;
 
 public class OrderServices extends BaseServices {
 	private OrderDAO orderDao;
@@ -62,8 +64,20 @@ public class OrderServices extends BaseServices {
 
 	}
 
-	public void deleteOrder() {
-
+	public void deleteOrder() throws IOException {
+		int orderId = Integer.parseInt(request.getParameter("id"));
+		
+		Map<String, Object> result = new HashMap<>();
+		BookOrder order = orderDao.get(orderId);
+		
+		if (order == null) {
+			result.put(ServletHelper.MESSAGE, "The order with ID " + orderId+ " not found");	
+		} else {
+			orderDao.delete(orderId);
+			result.put(ServletHelper.MESSAGE, "The order with ID " + orderId+ " has been deleted");
+			result.put("URL", request.getRequestURI());
+		}
+		CommonUtility.sendJsonRespone(result, response);
 	}
 
 	public void showCheckout() throws ServletException, IOException {
