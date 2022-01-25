@@ -255,6 +255,31 @@ public class BookServices extends BaseServices {
 
 	public void apiListAll() throws IOException {
 		List<Book> listOfBooks = bookDao.listAll();
+		sendListBooksWithJson(listOfBooks);
+	}
+
+	public void apiListByCategory() throws IOException {
+		int categoryId = Integer.parseInt(request.getParameter("id"));
+		Category category = catDao.get(categoryId);
+		List<Book> listOfBooks = new ArrayList<>(category.getBooks());
+		
+		sendListBooksWithJson(listOfBooks);
+	}
+	
+	public void apiListByKeyword() throws IOException {
+		String keyword = request.getParameter("keyword");
+		List<Book> listBooks = null;
+
+		if (keyword.isEmpty()) {
+			listBooks = bookDao.listAll();
+		} else {
+			listBooks = bookDao.search(keyword);
+		}
+		
+		sendListBooksWithJson(listBooks);
+	}
+	
+	private void sendListBooksWithJson(List<Book> listOfBooks) throws IOException {
 		List<BookJson> listOfBookJsons = new ArrayList<BookJson>();
 		
 		Gson gson = new Gson();
@@ -277,10 +302,5 @@ public class BookServices extends BaseServices {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		out.print(json);
-	}
-
-	public void apiListByCategory() {
-		// TODO Auto-generated method stub
-		
 	}
 }

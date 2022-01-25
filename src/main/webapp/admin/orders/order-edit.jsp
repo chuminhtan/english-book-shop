@@ -89,28 +89,35 @@
 							aria-labelledby="myLargeModalLabel" aria-hidden="true">
 							<div class="modal-dialog modal-lg">
 								<div class="modal-content p-3">
-
+									<div class="d-flex justify-content-between">
+										<h4 class="modal-title text-primary">Add Book</h4>
+										<button type="button" class="close text-danger"
+											data-dismiss="modal" aria-label="Close">
+											<i class="fas fa-times"></i>
+										</button>
+									</div>
 									<!-- Search Box -->
-									<div class="form-group row">
+									<div class="form-group row mt-3">
 										<label for="staticEmail"
-											class="col-sm-2 col-form-label text-primary">Search</label>
+											class="col-sm-2 col-form-label">Search</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" id="search-book"
-												placeholder="Enter title, author, ...">
+											<input type="text" class="form-control" id="input-search-book"
+												placeholder="Enter id, title, author, ...">
 										</div>
 										<div class="col-sm-2">
-											<button class="btn btn-primary">
-												<i class="fas fa-search"></i>
+											<button type="button" class="btn btn-primary">
+												<i class="fas fa-search" onClick="searchBook()"></i>
 											</button>
 										</div>
 									</div>
+									<hr>
 									<!-- Search Box .//END-->
 									<!-- Categories -->
 									<h4 class="text-center my-2">Book Categories</h4>
 									<div id="div-categories"
 										class="row d-flex justify-content-center">
 										<button type="button" id="0"
-											class="btn btn-outline-primary m-1 active"
+											class="btn btn-outline-primary m-1"
 											onClick="getBooksWithCategory(this)">All Book</button>
 										<c:forEach items="${LIST_CATEGORIES}" var="category">
 											<button type="button" id="${category.categoryId}"
@@ -125,8 +132,6 @@
 									<!-- LIST OF BOOKS -->
 
 									<div id="div-books"></div>
-
-									</main>
 								</div>
 								<!-- Books .//END-->
 							</div>
@@ -139,6 +144,7 @@
 						<thead>
 							<tr>
 								<th scope="col" class="text-primary">Index</th>
+								<th scope="col" class="text-primary">Image</th>
 								<th scope="col" class="text-primary">ID</th>
 								<th scope="col" class="text-primary">Book Title</th>
 								<th scope="col" class="text-primary">Author</th>
@@ -148,46 +154,8 @@
 								<th scope="col" class="text-primary">Remove</th>
 							</tr>
 						</thead>
-						<tbody id="tbody-book-ordered">
-							<c:forEach var="orderDetail" items="${ORDER.orderDetails }"
-								varStatus="status">
-								<tr id="${orderDetail.book.bookId}">
-									<td>${status.index + 1 }</td>
-									<th>${orderDetail.book.bookId}</th>
-									<td><a target="_blank"
-										href="${pageContext.request.contextPath }/view-book?id=${orderDetail.book.bookId}">
-											${orderDetail.book.title }</a></td>
-									<td>${orderDetail.book.author }</td>
+						<tbody  id="tbody-book-ordered">
 
-									<!-- price -->
-									<td><fmt:formatNumber value="${orderDetail.book.price }"
-											type="currency" /></td>
-
-									<!-- quantity -->
-									<td><input id="input-quantity-${orderDetail.book.bookId }"
-										price="${orderDetail.book.price}" type="number"
-										value="${orderDetail.quantity }" name="quantities" min="1"
-										max="100" step="1" onChange="changeQuantity(this)"></td>
-
-									<!-- subtotal -->
-									<td id="td-subtotal-${orderDetail.book.bookId }"
-										name="subtotal"><fmt:formatNumber
-											value="${orderDetail.subtotal }" type="currency" /></td>
-
-									<td class="text-center">
-										<button type="button" id="${orderDetail.book.bookId}"
-											class="btn btn-danger" onClick="removeFromCart(this.id)">
-											<i class="fas fa-times"></i>
-										</button>
-									</td>
-								</tr>
-							</c:forEach>
-							<tr>
-								<td colspan="5" class="text-info font-weight-bold text-center">TOTAL:</td>
-								<td id="totalQuantity" class="text-info font-weight-bold">${ORDER.bookCopies }</td>
-								<td id="totalAmount" class="text-info font-weight-bold"><fmt:formatNumber
-										value="${ORDER.total}" type="currency" /></td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -205,7 +173,25 @@
 	</div>
 
 	<script>
+	// CREATE LIST OF BOOK FROM CART
+	let cart = [];
+	let receivedBooks = [];
 	
+	<c:forEach var="orderDetail" items="${ORDER.orderDetails }" varStatus="status">
+		cart.push({
+			index: ${status.index},
+			bookId: ${orderDetail.book.bookId},
+			imageBase64: '${orderDetail.book.imageBase64 }',
+			title: '${orderDetail.book.title }',
+			author: '${orderDetail.book.author }',
+			price: parseFloat(${orderDetail.book.price }),
+			subtotal: ${orderDetail.subtotal},
+			quantity: ${orderDetail.quantity}
+			});
+	</c:forEach>
+	console.log(cart);
+	
+	// UPATE TOTAL
 	const updateTotal = () => {
 		// Update quantity
 		let quantities = document.getElementsByName('quantities');
@@ -220,7 +206,67 @@
 		subtotals.forEach(e => totalAmount += parseFloat(e.textContent.substring(1)))
 		document.getElementById("totalAmount").innerHTML = '$' + totalAmount.toFixed(2);
 	};
+	
+	// SHOW ORDERED BOOKS
+	const showDetailBooksFromCart = () => {	
+		
+		let trHtml = `<tr id="%bookId%">
+			<td>%status%</td>
+			<td><img src="data:image/png; base64,%imageBase64%" alt="%title%" width="65"></td>
+			<th>%bookId%</th>
+			<input type="hidden" value="%bookId%" name="id">
+			<td><a target="_blank"
+				href="${pageContext.request.contextPath }/view-book?id=%bookId%">%title%</a></td>
+			<td>%author%</td>
+			<!-- price -->
+			<td>$%price%</td>
 
+			<!-- quantity -->
+			<td><input id="input-quantity-%bookId%"
+				price="%price%" type="number"
+				value="%quantity%" name="quantities" min="1"
+				max="100" step="1" onChange="changeQuantity(this)"></td>
+
+			<!-- subtotal -->
+			<td id="td-subtotal-%bookId%"
+				name="subtotal">$%subtotal%</td>
+
+			<td class="text-center">
+				<button type="button" id="%bookId%"
+					class="btn btn-danger" onClick="removeFromCart(this.id)">
+					<i class="fas fa-times"></i>
+				</button>
+			</td>
+		</tr>`;
+
+		let tbodyOrderDetail = document.getElementById('tbody-book-ordered');
+		tbodyOrderDetail.innerHTML ='';
+		
+		for(let i = 0; i < cart.length; i++) {
+			let orderDetail = cart[i];
+			let newTrHtml = trHtml.replaceAll('%bookId%', orderDetail.bookId);
+			newTrHtml = newTrHtml.replaceAll('%title%',orderDetail.title);
+			newTrHtml = newTrHtml.replace('%status%',i+1);
+			newTrHtml = newTrHtml.replace('%imageBase64%',orderDetail.imageBase64);
+			newTrHtml = newTrHtml.replace('%author%',orderDetail.author);
+			newTrHtml = newTrHtml.replaceAll('%price%',orderDetail.price.toFixed(2));
+			newTrHtml = newTrHtml.replaceAll('%quantity%',orderDetail.quantity);
+			newTrHtml = newTrHtml.replaceAll('%subtotal%',orderDetail.subtotal.toFixed(2));
+
+			tbodyOrderDetail.insertAdjacentHTML("beforeend", newTrHtml);
+		}
+
+		let lastHtml = `<tr><td colspan="6" class="text-info font-weight-bold text-center">TOTAL:</td>
+			<td id="totalQuantity" class="text-info font-weight-bold"></td>
+			<td id="totalAmount" class="text-info font-weight-bold"></td><td></td></tr>`
+			
+			tbodyOrderDetail.insertAdjacentHTML("beforeend", lastHtml);
+		updateTotal();
+	}
+	
+	showDetailBooksFromCart();
+
+	// REMOVE BOOK FROM CART
 	const removeFromCart = (bookId) => {
 		const trCollections = document.getElementsByTagName("tr");
 		/*
@@ -231,35 +277,73 @@
 	     */
 	    let tr = Array.from(trCollections).filter(element => element.id == bookId)[0];
 	    tr.remove();
-
+		
 	    updateTotal();
 	}
 
+	// CHANGE QUANTITY
 	const changeQuantity = (inQuantity) => {
 
 		// Calculate new value
 		const price = parseFloat(inQuantity.getAttribute('price'));
 		let quantity = parseInt(inQuantity.value);
-		let subtotal = price*quantity;
+		let subtotal = parseInt(price*quantity);
 
 
 		// Update value 
-		const bookId = inQuantity.id.split('-')[2];
+		let bookId = parseInt(inQuantity.id.split('-')[2]);
+	
+
+		for(let i = 0; i < cart.length; i++) {
+			if (cart[i].bookId == bookId) {
+				cart[i].quantity = quantity;
+			}
+		}
+
 		const tdSubtotal = document.getElementById('td-subtotal-' + bookId);
 		tdSubtotal.innerHTML = '$'+ subtotal.toFixed(2);
 
 		updateTotal();
 	};
 
-	// Get BOOKS
-		const sendRequestGetBooks = async (categoryId) => {
-		let url = '';
+	// ADD BOOK TO CARD
+	const addBook = (btn) => {
+		const bookId = parseInt(btn.id);
 
-		if (categoryId == 0) {
-			url = '${pageContext.request.contextPath}/admin/api/book/list-all';
-		} else {
-			url = '${pageContext.request.contextPath}/admin/api/book/list-by-category?id=' + categoryId;
+		let isExist = false;
+		for(let i = 0; i < cart.length; i++) {
+			if (cart[i].bookId == bookId) {
+				infoMessage('The book already exists in the shopping cart');
+				isExist = true;
+				break;
+			}
 		}
+
+		if (isExist == false) {
+			receivedBooks.forEach(book => {
+				if (book.bookId == bookId) {
+					cart.push({
+						index: cart.length + 1,
+						bookId: bookId,
+						imageBase64: book.imageBase64,
+						title: book.title,
+						author: book.author,
+						price: book.price,
+						subtotal: book.price,
+						quantity: 1
+						});
+				}
+
+				showDetailBooksFromCart();
+
+				successMessage('The book has added to shopping cart successfully.', 'nothing');
+			});
+		}
+		
+	};
+
+	// GET BOOKS
+	const sendRequestGetBooks = async (url) => {
 
 		const response = await fetch(url, {
 			   method: 'GET',
@@ -268,16 +352,20 @@
 			     'Content-Type': 'application/json'
 			   },
 		});
-		const data = await response.json();
-		return data
+		const listBooks = await response.json();
+
+		// Set listBooks for receivedBooks variable
+		receivedBooks = listBooks;
+		console.log('ReceivedBooks: ', receivedBooks);
+		return listBooks;
 	};
 
+	// SHOW BOOKS
 	const showBooks = (listBooks) => {
-
 		let htmlBook = `
 			<article class="card card-product-list my-3">
 			<div class="row no-gutters">
-				<aside class="col-md-3">
+				<aside class="col-md-2">
 					<a target="_blank"
 						href="${pageContext.request.contextPath }/view-book?id=%bookId%"
 						class="img-wrap"> <img
@@ -286,7 +374,7 @@
 					</a>
 				</aside>
 				<!-- col.// -->
-				<div class="col-md-6">
+				<div class="col-md-7">
 					<div class="info-main">
 						<a target="_blank"
 							href="${pageContext.request.contextPath }/view-book?id=%bookId%"
@@ -309,13 +397,8 @@
 						<!-- rating-wrap.// -->
 						<br>
 						<p>
-							<a target="_blank"
-								href="${pageContext.request.contextPath }/view-book?id=%bookId%"
-								class="btn btn-outline-primary btn-block"> <span
-								class="text">Detail</span>
-							</a>
-							<button id="%bookId%" class="btn btn-primary btn-block"
-								onclick="addBookToCart(this)">
+							<button type="button" id="%bookId%" class="btn btn-primary btn-block"
+								onclick="addBook(this)">
 								<i class="fas fa-shopping-cart"></i> Add To Cart
 							</button>
 						</p>
@@ -327,10 +410,11 @@
 			<!-- row.// -->
 		</article>`
 		
-		const divBooks = document.getElementById("div-books");
+		let divBooks = document.getElementById("div-books");
+		divBooks.innerHTML='';
 		
 		listBooks.forEach((book) => {
-			console.log(book)
+
 			let newHtmlBook = htmlBook.replace('%title%', book.title);
 			newHtmlBook = newHtmlBook.replaceAll('%bookId%', book.bookId);
 			newHtmlBook = newHtmlBook.replace('%imageBase64%', book.imageBase64);
@@ -339,12 +423,13 @@
 			newHtmlBook = newHtmlBook.replace('%rating%', book.rating);
 			newHtmlBook = newHtmlBook.replace('%numOfReviews%', book.numOfReviews);
 
-			divBooks.insertAdjacentHTML("afterend", newHtmlBook);
+			divBooks.insertAdjacentHTML("beforeend", newHtmlBook);
 		})
 	};
 
-	
-	const getBooksWithCategory = async (btnCategory) =>{
+
+	// GET BOOK WITH CATEGORY
+	const getBooksWithCategory = async (btnCategory)=>{
 		const listButtons = document.getElementById("div-categories").children;
 
 		Array.from(listButtons).forEach(e => {
@@ -354,11 +439,42 @@
 		});
 		btnCategory.classList.add('active');
 
-		let categoryId = btnCategory.id;
-		let listBooks = await sendRequestGetBooks(categoryId);
+		let url ='';
+		const categoryId = btnCategory.id;
+		
+		if (categoryId == 0) {
+			url = '${pageContext.request.contextPath }/admin/api/book/list-all';
+		} else {
+			url = '${pageContext.request.contextPath }/admin/api/book/list-by-category?id=' + categoryId;
+		}
+		
+		let listBooks = await sendRequestGetBooks(url);
 		showBooks(listBooks);
 	};
 
+	// GET BOOK WITH KEYWORD
+	
+	const searchBook = async () => {
+		
+		let inputSearch = document.getElementById('input-search-book');
+		let keyword = inputSearch.value.trim();
+
+		if (keyword === '') {
+			return;
+		}
+		url = '${pageContext.request.contextPath }/admin/api/book/list-by-keyword?keyword=' + keyword;
+		
+		let listBooks = await sendRequestGetBooks(url);
+		console.log(listBooks);
+		showBooks(listBooks);
+	};
+	
+	$(document).keypress(
+			  function(event){
+			    if (event.which == '13') {
+			      event.preventDefault();
+			    }
+	});
 	
 	</script>
 </body>
