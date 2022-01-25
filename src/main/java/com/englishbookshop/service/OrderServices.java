@@ -1,9 +1,11 @@
 package com.englishbookshop.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -14,8 +16,10 @@ import javax.servlet.http.HttpSession;
 
 import com.englishbookshop.controller.frontend.shoppingcart.ShoppingCart;
 import com.englishbookshop.controller.order.OrderDetailServlet;
+import com.englishbookshop.dao.BookDAO;
 import com.englishbookshop.dao.CategoryDAO;
 import com.englishbookshop.dao.OrderDAO;
+import com.englishbookshop.entity.Book;
 import com.englishbookshop.entity.BookOrder;
 import com.englishbookshop.entity.Category;
 import com.englishbookshop.entity.Customer;
@@ -26,11 +30,13 @@ import com.englishbookshop.helper.ServletHelper;
 public class OrderServices extends BaseServices {
 	private OrderDAO orderDao;
 	private CategoryDAO categoryDao;
+	private BookDAO bookDao;
 
 	public OrderServices(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 		orderDao = new OrderDAO();
 		categoryDao = new CategoryDAO();
+		bookDao = new BookDAO();
 	}
 
 	public void listAll(String message) throws ServletException, IOException {
@@ -156,5 +162,65 @@ public class OrderServices extends BaseServices {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.ORDER_EDIT);
 		dispatcher.forward(request, response);	
 	}
+
+	public void editOrderForAdmin() throws ServletException, IOException {
+		BookOrder bookOrder = readOrderDataForm();
+		Set<OrderDetail> orderDetails = readOrderDetailsDataForm(bookOrder);
+		
+		bookOrder.setOrderDetails(orderDetails);
+		bookOrder.setTotal();
+		
+		orderDao.update(bookOrder);
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		result.put("result", "OK");	
+		result.put("message", "Update Successfully");	
+		CommonUtility.sendJsonRespone(result, response);
+	}
+	
+	private BookOrder readOrderDataForm() {
+		int orderId = Integer.parseInt(request.getParameter("order-id"));
+		
+		BookOrder bookOrder = orderDao.get(orderId);
+		
+		String recipientName = request.getParameter("recipient-name");
+		String recipientPhone = request.getParameter("recipient-phone");
+		String shippingAddress = request.getParameter("shipping-address");
+		String status = request.getParameter("status");
+		
+		bookOrder.setRecipientName(recipientName);
+		bookOrder.setRecipientPhone(recipientPhone);
+		bookOrder.setShippingAddress(shippingAddress);
+		bookOrder.setStatus(status);
+		
+		return bookOrder;
+	}
+	
+	private Set<OrderDetail> readOrderDetailsDataForm(BookOrder bookOrder){
+		Set<OrderDetail> orderDetails = new HashSet<OrderDetail>();
+		
+		String[] strIds = request.getParameterValues("id");
+		String[] strQuantities = request.getParameterValues("quantity");
+		
+		for (int i = 0; i < strIds.length; i++) {
+			
+			OrderDetail orderDetail = new OrderDetail();
+			int bookId = Integer.parseInt(strIds[i]);
+			int quantity = Integer.parseInt(strQuantities[i]);
+			
+			Book book = bookDao.get(bookId);
+			orderDetail.setBook(book);
+			orderDetail.setBookOrder(bookOrder);
+			orderDetail.setQuantity(quantity);
+			orderDetail.setSubtotal(quantity * book.getPrice());
+			
+			orderDetails.add(orderDetail);
+		}
+		
+		return orderDetails;
+		
+	}
+	
 
 }

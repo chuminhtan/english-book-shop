@@ -3,6 +3,7 @@ package com.englishbookshop.entity;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -216,6 +217,15 @@ public class BookOrder implements java.io.Serializable {
 		return total;
 	}
 	
-	
-
+	@Transient
+	public void setTotal() {
+		double total = 0.0;
+		Iterator<OrderDetail> iterator = this.orderDetails.iterator();
+		while(iterator.hasNext()) {
+			OrderDetail orderDetail = iterator.next();
+			total += orderDetail.getSubtotal();
+		}
+		
+		this.total = total;
+	}
 }

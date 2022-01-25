@@ -100,10 +100,10 @@
 				</div>
 				<!-- =================== TABLE ODERED BOOKS .//END ====================== -->
 				<div class="text-center">
-					<a href="edit-order?id=${order.orderId }"
+					<a href="edit-order?id=${ORDER.orderId }"
 						class="btn btn-warning m-1"><i class="fas fa-edit"
 						data-toggle="tooltip" title="Edit"></i> Edit Order</a> <a
-						href="javascript:confirmDelete('order',${order.orderId },'delete-order')"
+						href="javascript:confirmDelete('order',${ORDER.orderId },'delete-order')"
 						class="btn btn-danger m-1" data-toggle="tooltip" title="Delete"><i
 						class="fas fa-trash-alt"></i> Delete Order</a>
 				</div>

@@ -1,4 +1,4 @@
-package com.englishbookshop.controller.frontend.order;
+package com.englishbookshop.controller.order;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -25,6 +25,8 @@ public class EditOrderServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		OrderServices orderServices = new OrderServices(request, response);
+		orderServices.editOrderForAdmin();
 	}
 
 }

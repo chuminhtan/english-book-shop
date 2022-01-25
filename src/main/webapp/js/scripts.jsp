@@ -1,7 +1,4 @@
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
@@ -17,7 +14,7 @@
 			  toast: true,
 			  position: 'top-end',
 			  showConfirmButton: false,
-			  timer: 1000,
+			  timer: 1500,
 			  timerProgressBar: true,
 			  didOpen: (toast) => {
 			    toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -43,7 +40,7 @@
 
 	}
 
-	const errorMessage = (title) => {
+	const errorMessage = (title, url) => {
 		const Toast = Swal.mixin({
 			  toast: true,
 			  position: 'top-end',
@@ -61,7 +58,13 @@
 			  icon: 'error',
 			  title: title
 			}).then((result) =>{
+
+				if (url == 'nothing') {
+					return;
+					
+				} else {
 				location.reload();
+				}
 	  	})
 	}
 
