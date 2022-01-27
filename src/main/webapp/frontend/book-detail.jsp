@@ -41,19 +41,20 @@
 				<div class="card my-2">
 					<div class="row no-gutters">
 						<aside
-							class="col-md-4 d-flex justify-content-center align-items-center">
+							class="col-md-3 d-flex justify-content-center align-items-center">
 							<a href="view-book?id=${BOOK.bookId }" class="img-wrap"> <img
 								src="data:image/png; base64, ${BOOK.imageBase64 }"
-								alt="${BOOK.title }">
+								alt="${BOOK.title }" style="max-width: 100%;">
 							</a>
 						</aside>
-						<main class="col-md-8 border-left">
+						<main class="col-md-9 border-left">
 							<article class="content-body">
 								<h2 class="title">${BOOK.title }</h2>
 
 								<div class="rating-wrap mb-3">
 									<span class="badge badge-warning"> <i class="fa fa-star"></i>
-										${BOOK.averageRating }
+										<fmt:formatNumber type="number" pattern="#.#"
+											value="${BOOK.averageRating }" />
 									</span> <small class="text-muted ml-2">${BOOK.numOfRating }
 										reviews</small>
 								</div>
@@ -75,11 +76,16 @@
 
 								<hr>
 								<!-- row.// -->
-								<div class="mb-3 d-flex">
-									<span class="price h4 align-self-center"">$230.00</span>
+								<div class="mb-3 d-flex align-items-center">
+									<div class="p-2 bg-danger rounded">
+										<span class="text-white font-weight-bold h4"><fmt:formatNumber value="${BOOK.price}" type="currency" /></span>
+									</div>
+									<button id="${BOOK.bookId }" class="btn btn-primary ml-5 py-2 px-4"
+										onClick="addBookToCart(this)">
+										<i class="fas fa-shopping-cart"></i> Add To Cart
+									</button>
 								</div>
-								<button id="${BOOK.bookId }" class="btn btn-primary" onClick="addBookToCart(this)"><i
-													class="fas fa-shopping-cart"></i> Add To Cart </button>
+
 
 							</article>
 							<!-- product-info-aside .// -->
@@ -226,7 +232,8 @@
 									role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLongTitle">Your Review For This Book</h5>
+											<h5 class="modal-title" id="exampleModalLongTitle">Your
+												Review For This Book</h5>
 											<button type="button" class="close" data-dismiss="modal"
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>

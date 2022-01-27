@@ -16,72 +16,103 @@
 		<!-- Main -->
 		<section class="section-content padding-y bg">
 			<div class="container">
-				<div class="jumbotron">
-					<h2 class="text-primary my-4 text-center">Register New Account</h2>
-					<!-- FORM -->
-					<form action="register" method="post">
-						<div class="form-group">
-							<label for="email">E-mail</label> <input type="text" name="email"
-								class="form-control" placeholder="Enter Email" minlength="2"
-								maxlength="100" value="${CUSTOMER.email }">
-						</div>
-						<div class="form-group">
-							<label for="full-name">Full Name</label> <input type="text"
-								name="full-name" class="form-control" id="author"
-								placeholder="Enter Full Name" minlength="2" maxlength="100"
-								value="${CUSTOMER.fullName }" required>
-						</div>
-						<div class="form-group">
-							<label for="password">Password</label> <input type="password"
-								placeholder="Enter Password" class="form-control"
-								name="password" minlength="2" maxlength="100" required value="">
-						</div>
-						<div class="form-group">
-							<label for="password-confirm">Confirm Password</label> <input
-								placeholder="Confirm Password" type="password"
-								class="form-control" name="password-confirm" minlength="2"
-								maxlength="100" required value="">
-						</div>
-						<div class="form-group">
-							<label for="phone">Phone Number</label> <input type="text"
-								placeholder="Enter Phone Number" class="form-control"
-								name="phone" minlength="10" maxlength="20" required
-								value="${CUSTOMER.phone }">
-						</div>
-						<div class="form-group">
-							<label for="address">Address</label> <input type="text"
-								placeholder="Enter Address" class="form-control" name="address"
-								minlength="10" maxlength="100" required
-								value="${CUSTOMER.address }">
-						</div>
-						<div class="form-group">
-							<label for="city">City</label> <input type="text"
-								placeholder="Enter City" class="form-control" name="city"
-								minlength="5" maxlength="50" required value="${CUSTOMER.city }">
-						</div>
-						<div class="form-group">
-							<label for="zip-code">Zip Code</label> <input type="text"
-								placeholder="Enter Zip Code" class="form-control"
-								name="zip-code" minlength="2" maxlength="20" required
-								value="${CUSTOMER.zipCode }">
-						</div>
-						<div class="form-group">
-							<label for="country">Country</label> <input type="text"
-								placeholder="Enter Country" class="form-control" name="country"
-								minlength="2" maxlength="20" required
-								value="${CUSTOMER.country }">
-						</div>
-						<div class="d-flex justify-content-center">
-							<button type="submit" class="btn btn-success m-1">Submit</button>
-							<a href="javascript:history.go(-1)" class="btn btn-warning m-1">Cancel</a>
-						</div>
-					</form>
-					<c:if test="${ERROR_MESSAGE != null}">
-						<div class="alert alert-danger mt-3" role="alert">
-							<c:out value="${ERROR_MESSAGE}"></c:out>
-						</div>
-					</c:if>
-				</div>
+
+				<!-- ==================== CARD ============================== -->
+				<article class="card">
+					<div class="card-body">
+						<p class="display-6 font-weight-bold text-info mb-5 text-center">Register New
+							Account</p>
+						<!-- form -->
+						<form action="${pageContext.request.contextPath }/register"
+							method="POST">
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<label for="inputFullName"
+										class="text-primary font-weight-bold">Full Name</label> <input
+										type="text" class="form-control" id="inputFullName"
+										name="full-name" placeholder="Your Name"
+										value="${CUSTOMER.fullName }">
+								</div>
+								<div class="form-group col-md-2">
+									<label for="inputPhone" class="text-primary font-weight-bold">Phone</label>
+									<input type="text" class="form-control" id="inputPhone"
+										name="phone" placeholder="Your Phone"
+										value="${CUSTOMER.phone }">
+								</div>
+
+								<div class="form-group col-md-6">
+									<label for="inputAddress2"
+										class="text-primary font-weight-bold">Address</label> <input
+										type="text" class="form-control" id="inputAddress2"
+										name="address" placeholder="Apartment, studio, or floor"
+										value="${CUSTOMER.address }">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="inputCity" class="text-primary font-weight-bold">City</label>
+									<input type="text" placeholder="City" class="form-control"
+										id="inputCity" name="city" value="${CUSTOMER.city }">
+								</div>
+								<div class="form-group col-md-2">
+									<label for="inputZip" class="text-primary font-weight-bold">Zip</label>
+									<input type="text" class="form-control" id="inputZip"
+										name="zip-code" placeholder="Zip Code"
+										value="${CUSTOMER.zipCode }" required>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="input-country"
+										class="text-primary font-weight-bold">Country</label> <input
+										type="text" input-country" class="form-control"
+										placeholder="Country" name="country"
+										value="${CUSTOMER.country }" required>
+								</div>
+							</div>
+
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<div class="form-group">
+										<label for="email" class="text-primary font-weight-bold">Email</label>
+										<input placeholder="Email" type="email" id="email"
+											class="form-control" name="email" minlength="2"
+											maxlength="100" value="${CUSTOMER.email }" required>
+									</div>
+								</div>
+								<div class="form-group col-md-4">
+									<div class="form-group">
+										<label for="password" class="text-primary font-weight-bold">New
+											Password</label> <input type="password" placeholder="Enter Password"
+											id="password" class="form-control" name="password"
+											minlength="2" maxlength="100" required>
+									</div>
+
+								</div>
+								<div class="form-group col-md-4">
+									<div class="form-group">
+										<label for="password-confirm"
+											class="text-primary font-weight-bold">Confirm New
+											Password</label> <input placeholder="Confirm Password"
+											type="password" id="password-confirm" class="form-control"
+											name="password-confirm" minlength="2" maxlength="100"
+											value="" required>
+									</div>
+								</div>
+							</div>
+							<div class="d-flex justify-content-center">
+								<button type="submit" class="btn btn-success m-1">Register</button>
+								<a href="${pageContext.request.contextPath }" class="btn btn-warning m-1">Cancel</a>
+							</div>
+						</form>
+						<!-- form.// -->
+						<c:if test="${ERROR_MESSAGE != null}">
+							<div class="alert alert-danger mt-3" role="alert">
+								<c:out value="${ERROR_MESSAGE}"></c:out>
+							</div>
+						</c:if>
+					</div>
+					<!-- card-body .// -->
+
+				</article>
 			</div>
 		</section>
 		<!-- End Main -->

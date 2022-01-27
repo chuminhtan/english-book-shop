@@ -98,9 +98,10 @@
 			});
 	  	}
 
+	
 	let message = '${MESSAGE}' 
 	if (message.length > 0) {
-		infoMessage(message);
+		infoMessage(message, 'nothing');
 	}
 
 	

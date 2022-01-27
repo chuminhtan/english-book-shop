@@ -212,6 +212,7 @@ public class BookServices extends BaseServices {
 	public void listBooksByCategory() throws ServletException, IOException {
 		int categoryId = Integer.parseInt(request.getParameter("id"));
 
+		
 //		List<Book> listBooks = bookDao.findByCategory(categoryId);
 		Category category = catDao.get(categoryId);
 		List<Book> listBooks = new ArrayList<>(category.getBooks());
@@ -219,9 +220,8 @@ public class BookServices extends BaseServices {
 		for (Book b : listBooks) {
 			System.out.println(b);
 		}
-
-		request.setAttribute("LIST_BOOKS", listBooks);
 		request.setAttribute("CATEGORY", category);
+		request.setAttribute("LIST_BOOKS", listBooks);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOKS_LIST_BY_CATEGORY);
 		dispatcher.forward(request, response);
 	}
@@ -302,5 +302,17 @@ public class BookServices extends BaseServices {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		out.print(json);
+	}
+
+	public void viewAllBooks() throws ServletException, IOException {
+		List<Book> listBooks = bookDao.listAll();
+		Category category = new Category();
+		category.setName("ALL");
+		category.setCategoryId(0);
+		
+		request.setAttribute("LIST_BOOKS", listBooks);
+		request.setAttribute("CATEGORY", category);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(JspPathHelper.BOOKS_LIST_BY_CATEGORY);
+		dispatcher.forward(request, response);
 	}
 }

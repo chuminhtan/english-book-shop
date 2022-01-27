@@ -78,7 +78,7 @@ public class ShoppingCartServices extends BaseServices {
 
 	public void updateCart() throws ServletException, IOException {
 		String[] arrBookIds = request.getParameterValues("bookId");
-		String[] arrQuantities = request.getParameterValues("quantities");
+		String[] arrQuantities = request.getParameterValues("quantity");
 		
 		int[] bookIds = CommonUtility.convertStringArrToIntArr(arrBookIds);
 		int[] quantities = CommonUtility.convertStringArrToIntArr(arrQuantities);

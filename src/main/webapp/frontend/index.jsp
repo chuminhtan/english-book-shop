@@ -19,7 +19,7 @@
 			<div class="container mb-5">
 				<div class="row d-flex justify-content-center">
 					<main class="col-md-10">
-						<p class="display-4  text-info">
+						<p class="display-6 text-info font-weight-bold">
 							<strong>New Books</strong>
 						</p>
 						<c:forEach var="book" items="${LIST_NEW_BOOKS }">
@@ -35,8 +35,8 @@
 			<div class="container my-5">
 				<div class="row d-flex justify-content-center">
 					<main class="col-md-10">
-						<p class="display-4  text-info">
-							<strong>Best-selling Books</strong>
+						<p class="display-6  text-info font-weight-bold">
+							<strong>Best-Selling Books</strong>
 						</p>
 						<c:forEach var="book" items="${LIST_BEST_SELLING_BOOKS }">
 							<jsp:directive.include file="book-group.jsp" />
@@ -50,7 +50,7 @@
 			<div class="container my-4">
 				<div class="row d-flex justify-content-center">
 					<main class="col-md-10">
-						<p class="display-4  text-info">
+						<p class="display-6  text-info font-weight-bold">
 							<strong>Most-Favored Books</strong>
 						</p>
 						<!-- ============================ COMPONENT ================================= -->

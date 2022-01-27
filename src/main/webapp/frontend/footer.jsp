@@ -13,8 +13,7 @@
 					<h6 class="text-uppercase fw-bold mb-4">
 						<i class="fas fa-gem me-3"></i>Company name
 					</h6>
-					<p>Here you can use rows and columns to organize your footer
-						content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					<p>The English Book Shop is a website that specializes in selling books about foreign languages and programming.</p>
 				</div>
 				<!-- Grid column -->
 
@@ -23,16 +22,16 @@
 					<!-- Links -->
 					<h6 class="text-uppercase fw-bold mb-4">Products</h6>
 					<p>
-						<a href="#!" class="text-reset">Angular</a>
+						<a href="${pageContext.request.contextPath }/view-category?id=5" class="text-reset">IELTS</a>
 					</p>
 					<p>
-						<a href="#!" class="text-reset">React</a>
+						<a href="${pageContext.request.contextPath }/view-category?id=2" class="text-reset">Java</a>
 					</p>
 					<p>
-						<a href="#!" class="text-reset">Vue</a>
+						<a href="${pageContext.request.contextPath }/view-category?id=10" class="text-reset">Python</a>
 					</p>
 					<p>
-						<a href="#!" class="text-reset">Laravel</a>
+						<a href="${pageContext.request.contextPath }/view-category?id=10"  class="text-reset">Software</a>
 					</p>
 				</div>
 				<!-- Grid column -->
@@ -40,18 +39,15 @@
 				<!-- Grid column -->
 				<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 					<!-- Links -->
-					<h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+					<h6 class="text-uppercase fw-bold mb-4">Resources</h6>
 					<p>
-						<a href="#!" class="text-reset">Pricing</a>
+						<a target="_blank" href="https://www.codejava.net/" class="text-reset">codejava.net</a>
 					</p>
 					<p>
-						<a href="#!" class="text-reset">Settings</a>
+						<a target="_blank" href="https://www.javatpoint.com/" class="text-reset">javapoint.com</a>
 					</p>
 					<p>
-						<a href="#!" class="text-reset">Orders</a>
-					</p>
-					<p>
-						<a href="#!" class="text-reset">Help</a>
+						<a target="_blank" href="https://www.baeldung.com/" class="text-reset">baeldung.com</a>
 					</p>
 				</div>
 				<!-- Grid column -->
