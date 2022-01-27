@@ -1,5 +1,6 @@
 package com.englishbookshop.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,9 @@ public class BookDAO extends JpaDAO<Book> implements IGenericDAO<Book> {
 	public static final String BOOK_COUNT_BY_CATEGORY = "Book.countByCategory";
 	public static final String BOOK_COUNT_ORDERS_BY_BOOK = "Book.countOrdersByBook";
 	public static final String BOOK_COUNT_REVIEWS_BY_BOOK = "Book.countReviewsByBook";
-	
+	public static final String BOOK_lIST_MOST_FAVORED = "Book.listMostFavoredBooks";
+	public static final String ORDER_DETAIL_LIST_BEST_SELLING = "Order.listBestSelling";
+
 	public BookDAO() {
 	}
 
@@ -112,6 +115,18 @@ public class BookDAO extends JpaDAO<Book> implements IGenericDAO<Book> {
 		return super.findWithNamedQuery(ORDER_DETAIL_LIST_BEST_SELLING,0,4);
 	}
 	
-	public static final String ORDER_DETAIL_LIST_BEST_SELLING = "Order.listBestSelling";
+	public List<Book> listMostFavoredBooks() {
+		
+		List<Book> listBooks = new ArrayList<Book>();
+		
+		List<Object[]> result = super.findWithNamedQueryObjects(BOOK_lIST_MOST_FAVORED, 0, 4);
+		
+		for (Object[] obj: result) {
+			Book book = (Book) obj[0];
+			listBooks.add(book);
+		}
+		 return listBooks;
+	}
+	
 
 }

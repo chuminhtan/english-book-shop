@@ -230,7 +230,7 @@ public class BookDAOTest{
 	}
 	
 	@Test
-	public void testSellingBook() {
+	public void testSellingBooks() {
 		List<Book> listBestSellingBooks = bookDao.listBestSellingBooks();
 		
 		for(Book b: listBestSellingBooks) {
@@ -238,5 +238,14 @@ public class BookDAOTest{
 		}
 		
 		assertTrue(listBestSellingBooks.size() > 0);
+	}
+	
+	@Test
+	public void testListMostFavoredBooks() {
+		List<Book> listMostFavoredBooks = bookDao.listMostFavoredBooks();
+		for (Book b: listMostFavoredBooks) {
+			System.out.println(b);
+		}
+		assertTrue(listMostFavoredBooks.size() == 4);
 	}
 }

@@ -3,12 +3,14 @@ package com.englishbookshop.dao;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.englishbookshop.entity.Customer;
+import com.github.javafaker.Faker;
 
 public class CustomerDAOTest {
 	private static CustomerDAO customerDao;
@@ -164,5 +166,31 @@ public class CustomerDAOTest {
 		long numOfReviews = customerDao.countReviewsByCustomer(customerId);
 		System.out.println(numOfReviews);
 		assertTrue(numOfReviews > 0);
+	}
+	
+	@Test
+	public void createMultipleCustomers() {
+		Faker faker = new Faker(new Locale("en-US"));
+
+		String name = faker.name().fullName(); // Miss Samanta Schmidt
+		String firstName = faker.name().firstName(); // Emory
+		String lastName = faker.name().lastName(); // Barton
+
+		String streetAddress = faker.address().streetAddress() + ", " + faker.address().city() + ", " + faker.address().country();
+		
+		for (int i = 0; i < 10 ; i++) {
+			Customer customer = new Customer();
+			customer.setEmail(faker.internet().emailAddress());
+			customer.setPassword("123456");
+			customer.setFullName(faker.name().fullName());
+			customer.setPhone(faker.phoneNumber().cellPhone());
+			customer.setCity(faker.address().city());
+			customer.setCountry(faker.address().country());
+			customer.setZipCode(faker.address().zipCode());
+			customer.setAddress(faker.address().streetAddress());
+			
+			customer = customerDao.create(customer);
+			assertTrue(customer.getCustomerId() > 0);
+		}
 	}
 }

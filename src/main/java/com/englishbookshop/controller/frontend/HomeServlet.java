@@ -30,9 +30,11 @@ public class HomeServlet extends HttpServlet{
 		
 		List<Book> listNewBooks = bookDao.listNewBooks();
 		List<Book> listBestSellingBooks = bookDao.listBestSellingBooks();
+		List<Book> listMostFavoredBooks = bookDao.listMostFavoredBooks();
 		
 		request.setAttribute("LIST_BEST_SELLING_BOOKS", listBestSellingBooks);
 		request.setAttribute("LIST_NEW_BOOKS", listNewBooks);
+		request.setAttribute("LIST_MOST_FAVORED_BOOKS", listMostFavoredBooks);
 		request.getRequestDispatcher(JspPathHelper.INDEX).forward(request, response);
 	}
 

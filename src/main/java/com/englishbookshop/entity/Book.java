@@ -46,7 +46,10 @@ import com.englishbookshop.dao.OrderDAO;
 		+ "FROM Review r "
 		+ "WHERE r.book.bookId = :bookId"),
 @NamedQuery(name = BookDAO.ORDER_DETAIL_LIST_BEST_SELLING, query="SELECT od.book FROM OrderDetail od "
-		+ "GROUP BY od.book.bookId ORDER BY SUM(od.quantity) DESC")
+		+ "GROUP BY od.book.bookId ORDER BY SUM(od.quantity) DESC"),
+@NamedQuery(name = BookDAO.BOOK_lIST_MOST_FAVORED, query="SELECT r.book, COUNT(r.book.bookId) AS ReviewCount, AVG(r.rating) AS AvgRating FROM Review r"
+		+ " GROUP BY r.book.bookId HAVING AVG(r.rating) >= 4.0 "
+		+ "ORDER BY ReviewCount DESC, AvgRating DESC")
 })
 		
 public class Book implements java.io.Serializable {
