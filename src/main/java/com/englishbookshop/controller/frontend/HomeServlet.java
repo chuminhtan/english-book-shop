@@ -29,7 +29,9 @@ public class HomeServlet extends HttpServlet{
 		BookDAO bookDao = new BookDAO();
 		
 		List<Book> listNewBooks = bookDao.listNewBooks();
+		List<Book> listBestSellingBooks = bookDao.listBestSellingBooks();
 		
+		request.setAttribute("LIST_BEST_SELLING_BOOKS", listBestSellingBooks);
 		request.setAttribute("LIST_NEW_BOOKS", listNewBooks);
 		request.getRequestDispatcher(JspPathHelper.INDEX).forward(request, response);
 	}

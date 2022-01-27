@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.englishbookshop.entity.Book;
 import com.englishbookshop.entity.BookOrder;
 
 public class OrderDAO extends JpaDAO<BookOrder> implements IGenericDAO<BookOrder> {
@@ -13,6 +14,7 @@ public class OrderDAO extends JpaDAO<BookOrder> implements IGenericDAO<BookOrder
 	public static final String ORDER_COUNT = "Order.count";
 	public static final String ORDER_LIST_BY_CUSTOMER = "Order.listByCustomer";
 	public static final String ORDER_FIND_BY_ID_AND_CUSTOMER = "Order.findByIdAndCustomer";
+
 	
 	@Override
 	public BookOrder create(BookOrder order) {
@@ -68,5 +70,6 @@ public class OrderDAO extends JpaDAO<BookOrder> implements IGenericDAO<BookOrder
 		parameters.put("customerId", customerId);
 		return super.findWithNamedQuery(ORDER_LIST_BY_CUSTOMER, parameters);
 	}
+	
 
 }

@@ -29,7 +29,8 @@
 							<article class="card card-product-list my-3">
 								<div class="row no-gutters">
 									<aside class="col-md-3">
-										<a href="view-book?id=${book.bookId }" class="img-wrap"> <img
+										<a href="view-book?id=${book.bookId }" class="img-wrap"> <span
+											class="badge badge-danger"> NEW </span> <img
 											src="data:image/png; base64, ${book.imageBase64 }"
 											alt="${book.title }">
 										</a>
@@ -62,8 +63,12 @@
 												<a href="view-book?id=${book.bookId }"
 													class="btn btn-outline-primary btn-block"> <span
 													class="text">Detail</span>
-												</a> <button id="${book.bookId }" class="btn btn-primary btn-block" onClick="addBookToCart(this)"><i
-													class="fas fa-shopping-cart"></i> Add To Cart </button>
+												</a>
+												<button id="${book.bookId }"
+													class="btn btn-primary btn-block"
+													onClick="addBookToCart(this)">
+													<i class="fas fa-shopping-cart"></i> Add To Cart
+												</button>
 											</p>
 										</div>
 										<!-- info-aside.// -->
@@ -91,11 +96,12 @@
 					<main class="col-md-10">
 
 						<!-- ============================ COMPONENT ================================= -->
-						<c:forEach var="book" items="${LIST_BOOKS }">
+						<c:forEach var="book" items="${LIST_BEST_SELLING_BOOKS }">
 							<article class="card card-product-list my-3">
 								<div class="row no-gutters">
 									<aside class="col-md-3">
-										<a href="#" class="img-wrap"> <img
+										<a href="view-book?id=${book.bookId }" class="img-wrap"> <span
+											class="badge badge-success"> BEST-SELLING </span><img
 											src="data:image/png; base64, ${book.imageBase64 }"
 											alt="${book.title }">
 										</a>
@@ -103,22 +109,8 @@
 									<!-- col.// -->
 									<div class="col-md-6">
 										<div class="info-main">
-											<a href="#" class="h5 title"><strong
+											<a href="view-book?id=${book.bookId }" class="h5 title"><strong
 												class="content-justify">${book.title }</strong></a>
-											<div class="rating-wrap mb-3">
-												<ul class="rating-stars">
-													<li style="width: 80%" class="stars-active"><i
-														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-														class="fa fa-star"></i></li>
-													<li><i class="fa fa-star"></i> <i class="fa fa-star"></i>
-														<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-														class="fa fa-star"></i></li>
-												</ul>
-												<div class="label-rating">7/10</div>
-											</div>
-											<!-- rating-wrap.// -->
-
 											<p class="content-justify">${book.shortDescription}</p>
 										</div>
 										<!-- info-main.// -->
@@ -127,14 +119,27 @@
 									<aside class="col-sm-3">
 										<div class="info-aside">
 											<div class="price-wrap">
-												<span class="price h5 text-success">$${book.price } </span>
+												<span class="price h5"><strong>$${book.price
+														}</strong></span>
 											</div>
-											<br> <br>
+											<div class="rating-wrap mb-3">
+												<span class="badge badge-warning"> <i
+													class="fa fa-star"></i> ${book.averageRating }
+												</span> <small class="text-muted ml-2">${book.numOfRating }
+													reviews</small>
+											</div>
+											<!-- rating-wrap.// -->
+											<br>
 											<p>
-												<a href="#" class="btn btn-light btn-block"> <span
+												<a href="view-book?id=${book.bookId }"
+													class="btn btn-outline-primary btn-block"> <span
 													class="text">Detail</span>
-												</a> <a href="#" class="btn btn-primary btn-block"><i
-													class="fas fa-shopping-cart"></i> Add To Cart </a>
+												</a>
+												<button id="${book.bookId }"
+													class="btn btn-primary btn-block"
+													onClick="addBookToCart(this)">
+													<i class="fas fa-shopping-cart"></i> Add To Cart
+												</button>
 											</p>
 										</div>
 										<!-- info-aside.// -->
@@ -144,7 +149,6 @@
 								<!-- row.// -->
 							</article>
 						</c:forEach>
-
 
 						<!-- card-product .// -->
 						<!-- ============================ COMPONENT 3 .//END ================================= -->
@@ -168,10 +172,10 @@
 							<article class="card card-product-list my-3">
 								<div class="row no-gutters">
 									<aside class="col-md-3">
-										<a href="#" class="img-wrap"> <img
+										<a href="#" class="img-wrap"><span
+											class="badge badge-success"> BEST-SELLING </span> <img
 											src="data:image/png; base64, ${book.imageBase64 }"
-											alt="${book.title }">
-										</a>
+											alt="${book.title }"> </a>
 									</aside>
 									<!-- col.// -->
 									<div class="col-md-6">

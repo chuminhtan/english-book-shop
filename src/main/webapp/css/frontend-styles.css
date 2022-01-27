@@ -432,3 +432,9 @@ article:after, .form-group:after {
 .input-group-prepend, .input-group-append {
     display: flex;
 }
+
+[class*=img-wrap] .badge {
+    top: 12px;
+    left: 0px;
+    position: relative;
+}

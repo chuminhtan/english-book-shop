@@ -106,4 +106,12 @@ public class BookDAO extends JpaDAO<Book> implements IGenericDAO<Book> {
 		
 		return super.countWithNamedQuery(BOOK_COUNT_REVIEWS_BY_BOOK, parameters);
 	}
+	
+	public List<Book> listBestSellingBooks() {
+		
+		return super.findWithNamedQuery(ORDER_DETAIL_LIST_BEST_SELLING,0,4);
+	}
+	
+	public static final String ORDER_DETAIL_LIST_BEST_SELLING = "Order.listBestSelling";
+
 }
