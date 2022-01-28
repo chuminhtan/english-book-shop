@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>The English Book Shop</title>
+<title>English Book Shop</title>
 <jsp:include page="../css/styles.jsp" />
 </head>
 <body>
