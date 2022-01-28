@@ -36,7 +36,7 @@
 						class="fas fa-id-card-alt"></i> Customers
 				</a></li>
 			</ul>
-			<a class="btn btn-warning mx-2"
+			<a class="btn btn-info mx-2"
 				href="${pageContext.request.contextPath}/admin/logout" tabindex="-1"
 				aria-disabled="true">${sessionScope.USER_EMAIL} - Logout</a>
 		</div>

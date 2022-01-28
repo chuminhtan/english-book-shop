@@ -172,5 +172,16 @@ public class OrderDAOTest {
 		
 		assertNotNull(order);
 	}
+	
+	@Test
+	public void testListMostRecentSales() {
+		List<BookOrder> listOrders = orderDao.listMostRecentSales();
+		
+		for (BookOrder order : listOrders) {
+			System.out.println(order);
+		}
+		
+		assertTrue(listOrders.size() == 3);
+	}
 
 }

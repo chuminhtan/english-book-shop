@@ -60,5 +60,7 @@ public class ReviewDAO extends JpaDAO<Review> implements IGenericDAO<Review> {
 		return listReviews.get(0);
 	}
 	
-
+	public List<Review> listMostRecentReviews(){
+		return super.findWithNamedQuery(REVIEW_LIST_ALL,0,5);
+	}
 }

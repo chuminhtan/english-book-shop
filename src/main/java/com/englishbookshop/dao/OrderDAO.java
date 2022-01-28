@@ -71,5 +71,8 @@ public class OrderDAO extends JpaDAO<BookOrder> implements IGenericDAO<BookOrder
 		return super.findWithNamedQuery(ORDER_LIST_BY_CUSTOMER, parameters);
 	}
 	
+	public List<BookOrder> listMostRecentSales(){
+		return super.findWithNamedQuery(ORDER_LIST_ALL, 0, 5);
+	}
 
 }

@@ -104,4 +104,10 @@ public class ReviewDAOTest {
 		assertNotNull(findedReview);
 	}
 
+	@Test
+	public void testListRecentReviews() {
+		List<Review> listRecentReviews = reviewDao.listMostRecentReviews();
+		
+		assertTrue(listRecentReviews.size() == 5);
+	}
 }
