@@ -1,33 +1,23 @@
 package com.englishbookshop.service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.manager.JspHelper;
-
 import com.englishbookshop.dao.CustomerDAO;
-import com.englishbookshop.entity.Category;
 import com.englishbookshop.entity.Customer;
-import com.englishbookshop.entity.Users;
 import com.englishbookshop.helper.JspPathHelper;
 import com.englishbookshop.helper.ServletHelper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class CustomerServices extends BaseServices {
 	private CustomerDAO customerDao;
