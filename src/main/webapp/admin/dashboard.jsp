@@ -25,9 +25,9 @@
 					Book</a> <a class="btn btn-success mx-1"
 					href="${pageContext.request.contextPath }/admin/users/create-user">New
 					User</a> <a class="btn btn-success mx-1"
-					href="${pageContext.request.contextPath }/admin/users/create-category">New
+					href="${pageContext.request.contextPath }/admin/categories/create-category">New
 					Category</a> <a class="btn btn-success mx-1"
-					href="${pageContext.request.contextPath }/admin/users/create-customer">New
+					href="${pageContext.request.contextPath }/admin/customers/create-customer">New
 					Customer</a>
 			</div>
 			<div class="d-flex justify-content-between my-5">

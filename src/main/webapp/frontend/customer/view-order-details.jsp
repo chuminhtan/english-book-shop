@@ -128,7 +128,7 @@
 												</tr>
 											</c:forEach>
 											<tr>
-												<td colspan="4"
+												<td colspan="5"
 													class="text-danger font-weight-bold text-center">TOTAL:</td>
 												<td class="text-danger font-weight-bold">${ORDER.bookCopies }</td>
 												<td class="text-danger font-weight-bold"><fmt:formatNumber

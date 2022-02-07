@@ -332,10 +332,10 @@
 		        const result = await response.json();
 
 		        if (result.result === 'success') {
-		            	successMessage('Writing review successfully',null);
+		            	successMessage('Review has saved successfully',null);
 		            	
 		        } else {
-						errorMessage('Writing review failed');
+						errorMessage('Review could not save');
 		        }
 			};
 			

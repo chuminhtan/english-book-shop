@@ -5,7 +5,7 @@
 			href="${pageContext.request.contextPath }/admin/"> <img
 			src="${pageContext.request.contextPath }/images/smiling-sun.png"
 			width="30" height="30" class="d-inline-block align-top" alt="">
-			<strong>The English Book Shop</strong>
+			<strong>English Book Shop</strong>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
