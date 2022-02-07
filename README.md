@@ -3,7 +3,7 @@ This project is a website to buy English books. The website is developed by Boot
 
 ### Customer Functionalities
 <p align="center">
-  <img src="blob/1.png" width="500" alt="">
+  <img src="blob/1.png" alt="">
   <img src="blob/2.png" width="500" alt="">
   <img src="blob/3.png" width="500" alt="">
   <img src="blob/4.png" width="500" alt="">
