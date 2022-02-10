@@ -65,7 +65,7 @@
 				</div>
 				<div class="form-group">
 					<label for="description">Description</label>
-					<textarea class="form-control" id="description" name="description"
+					<textarea class="form-control content" id="description" name="description"
 						rows="3"></textarea>
 				</div>
 
@@ -92,7 +92,6 @@
 			    imagePreview.src = URL.createObjectURL(file)
 			  }
 		}
-	
 	</script>
 </body>
 </html>

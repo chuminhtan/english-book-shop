@@ -6,8 +6,7 @@
 	integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
 	crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script
-	src="${pageContext.request.contextPath}/js/jquery.richtext.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.richtext.min.js"></script>
 
 <!-- Show message with Sweet Alert -->
 <script>
