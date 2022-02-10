@@ -167,11 +167,9 @@ public class JpaDAO<E> {
 	}
 
 	public void close() {
-		/*
 		if (entityManagerFactory != null) {
 			entityManagerFactory.close();
 		}
-		*/
 	}
 
 }
