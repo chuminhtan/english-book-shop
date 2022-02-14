@@ -11,7 +11,6 @@ This project is a website to buy English books. The website is developed by Boot
   <img src="blob/order_edit.png" alt="">
   <img src="blob/order_edit_add.png" alt="">
   <img src="blob/order_delete.png" alt="">
-  <img src="blob/a2.png" alt="">
 </p>
 
 
