@@ -1,5 +1,19 @@
 # english-book-shop
 This project is a website to buy English books. The website is developed by Bootstrap, jQuery, JSP, Servlet and Hibernate.
+### Admin Functionalitites
+<p align="center">
+  <img src="blob/a1.png" alt="">
+  <img src="blob/a2.png" alt="">
+  <img src="blob/book_create.png" alt="">
+  <img src="blob/book_edit.png" alt="">
+  <img src="blob/order_list.png" alt="">
+  <img src="blob/order_detail.png" alt="">
+  <img src="blob/order_edit.png" alt="">
+  <img src="blob/order_edit_add.png" alt="">
+  <img src="blob/order_delete.png" alt="">
+  <img src="blob/a2.png" alt="">
+</p>
+
 
 ### Customer Functionalities
 <p align="center">
@@ -12,10 +26,4 @@ This project is a website to buy English books. The website is developed by Boot
   <img src="blob/7.png"  alt="">
   <img src="blob/8.png" alt="">
   <img src="blob/9.png"  alt="">
-</p>
-
-### Admin
-<p align="center">
-  <img src="blob/a1.png" alt="">
-  <img src="blob/a2.png" alt="">
 </p>
