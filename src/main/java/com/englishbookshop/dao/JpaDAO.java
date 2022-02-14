@@ -7,6 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.stat.Statistics;
+
 import com.englishbookshop.helper.PersistenceProjectHelper;
 
 public class JpaDAO<E> {
@@ -77,6 +81,13 @@ public class JpaDAO<E> {
 
 		Query query = entityManager.createNamedQuery(queryName);
 		List<E> list = query.getResultList();
+		
+		SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
+		Statistics stats = sessionFactory.getStatistics();
+		long queryCount = stats.getQueryExecutionCount();
+		long collectionFetchCount = stats.getCollectionFetchCount();
+		System.out.println("QueryCount: " + queryCount);
+		System.out.println("CollectionFetchCount: " + collectionFetchCount);
 		entityManager.close();
 
 		return list;
@@ -91,6 +102,7 @@ public class JpaDAO<E> {
 		query.setMaxResults(maxResult);
 
 		List<E> list = query.getResultList();
+
 		entityManager.close();
 		return list;
 	}

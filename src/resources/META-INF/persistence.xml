@@ -6,21 +6,31 @@
 	version="2.1">
 	<persistence-unit name="TheEnglishBookShop">
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bookshopdb?useSSL=false" />
-			<property name="javax.persistence.jdbc.user" value="bookshopuser" />
-			<property name="javax.persistence.jdbc.password" value="2810" />
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_78a2177b9d2e3da?useSSL=false" />
+			<property name="javax.persistence.jdbc.user"
+				value="baa7480c5327e5" />
+			<property name="javax.persistence.jdbc.password"
+				value="73290089" />
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.show_sql" value="true" />
-			
- 
-			<property name ="hibernate.c3p0.min_size" value="5" />
-			<property name="hibernate.c3p0.max_size" value="20"/>
-			<property name="hibernate.c3p0.timeout" value="120"/>
-			<property name="hibernate.c3p0.max_statements" value="5"/>
-			<property name="hibernate.c3p0.idle_test_period" value="3000"/>
+			<property name="hibernate.cache.use_second_level_cache"
+				value="true" />
+			<property name="hibernate.cache.region.factory_class"
+				value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
+            <property name="hibernate.session.events.log.LOG_QUERIES_SLOWER_THAN_MS" value="1" />
+            <property name="hibernate.generate_statistics" value="true" />
+
+			<property name="hibernate.c3p0.min_size" value="5" />
+			<property name="hibernate.c3p0.max_size" value="30" />
+			<property name="hibernate.c3p0.timeout" value="120" />
+			<property name="hibernate.c3p0.max_statements" value="50" />
+			<property name="hibernate.c3p0.idle_test_period"
+				value="3000" />
 
 		</properties>
-		
+
 	</persistence-unit>
 </persistence>

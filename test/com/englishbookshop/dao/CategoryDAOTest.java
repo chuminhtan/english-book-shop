@@ -10,6 +10,9 @@ import org.junit.Test;
 
 import com.englishbookshop.entity.Category;
 
+import net.sf.ehcache.CacheManager;
+
+
 public class CategoryDAOTest{
 
 	private static CategoryDAO categoryDAO;
@@ -46,8 +49,9 @@ public class CategoryDAOTest{
 	@Test
 	public void testGet() {
 		Category cat = categoryDAO.get(1);
-		
-		System.out.println(cat);
+		int size = CacheManager.ALL_CACHE_MANAGERS.get(0).getCache("com.englishbookshop.hibernate.cache.model.Category").getSize();
+
+		System.out.println(CacheManager.ALL_CACHE_MANAGERS.get(0).getCache("com.englishbookshop.entity.Category").getSize());
 		
 		assertNotNull(cat);
 	}

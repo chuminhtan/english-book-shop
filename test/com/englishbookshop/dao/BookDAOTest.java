@@ -17,8 +17,10 @@ import org.junit.Test;
 
 import com.englishbookshop.entity.Book;
 import com.englishbookshop.entity.Category;
+import com.mysql.cj.log.Log;
 
 import junit.runner.BaseTestRunner;
+import net.sf.ehcache.CacheManager;
 
 public class BookDAOTest{
 
@@ -130,9 +132,10 @@ public class BookDAOTest{
 		
 		for (Book book : listBooks) {
 			System.out.println(book.getTitle() + " - " + book.getAuthor());
-		
 		}
-		
+		int size = CacheManager.ALL_CACHE_MANAGERS.get(0).getCache("com.englishbookshop.entity.Book").getSize();
+
+		System.out.println(size);
 		assertFalse(listBooks.isEmpty());
 	}
 	
